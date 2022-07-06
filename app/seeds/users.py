@@ -1,18 +1,68 @@
-from app.models import db, User
-
+from app.models import db, User, Workspace
 
 # Adds a demo user, you can add other users here if you want
-def seed_users():
-    demo = User(
-        username='Demo', email='demo@aa.io', password='password')
-    marnie = User(
-        username='marnie', email='marnie@aa.io', password='password')
-    bobbie = User(
-        username='bobbie', email='bobbie@aa.io', password='password')
 
-    db.session.add(demo)
-    db.session.add(marnie)
-    db.session.add(bobbie)
+
+def seed_users():
+    project1 = Workspace(
+        owner_id=1,
+        name='Project 1'
+    )
+
+    project2 = Workspace(
+        owner_id=4,
+        name='Project 2'
+    )
+
+    isabella = User(
+        first_name='Isabella',
+        last_name='Terrell',
+        email='Isabella@aa.io',
+        password='password',
+        user_members=[project1]
+    )
+    oskar = User(
+        first_name='Oskar',
+        last_name='Nixon',
+        email='Oskar@aa.io',
+        password='password',
+        user_members=[project1]
+    )
+    faye = User(
+        first_name='Faye',
+        last_name='Le',
+        email='Faye@aa.io',
+        password='password',
+        user_members=[project1]
+    )
+    buddy = User(
+        first_name='Buddy',
+        last_name='Vu',
+        email='Buddy@aa.io',
+        password='password',
+        user_members=[project2]
+    )
+    tarun = User(
+        first_name='Tarun',
+        last_name='Swan',
+        email='Tarun@aa.io',
+        password='password',
+        user_members=[project2]
+    )
+    abbigail = User(
+        first_name='Abbigail',
+        last_name='Salter',
+        email='Abbigail@aa.io',
+        password='password',
+        user_members=[project2]
+    )
+
+    db.session.add(isabella)
+    db.session.add(oskar)
+    db.session.add(faye)
+    db.session.add(buddy)
+    db.session.add(tarun)
+    db.session.add(abbigail)
 
     db.session.commit()
 
