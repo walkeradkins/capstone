@@ -29,6 +29,7 @@ class Workspace(db.Model):
             'id': self.id,
             'ownerId': self.owner_id,
             'name': self.name,
+            'lists': [list.to_dict() for list in self.lists],
             "members": [member.to_dict_no_workspace() for member in self.workspace_members]
         }
 
@@ -38,3 +39,6 @@ class Workspace(db.Model):
             "ownerId": self.owner_id,
             "name": self.name,
         }
+
+    def __repr__(self):
+        return f"< WorkspaceId: {self.id}, OwnerId: {self.owner_id}, Name: {self.name}, Channel Members: {self.workspace_members} "

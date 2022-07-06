@@ -25,7 +25,7 @@ def undo():
     undo_users()
     # undo_workspaces()
     undo_lists()
-    seed_cards()
+    undo_cards()
     # Add other undo functions here
 
 
