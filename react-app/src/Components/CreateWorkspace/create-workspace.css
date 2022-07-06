@@ -1,0 +1,13 @@
+.create__workspace {
+  border: none;
+  padding: 2em;
+  cursor: pointer;
+  background-color: rgb(233, 233, 233);
+  transition: 0.2s;
+  color: black;
+  border-radius: .25em;
+}
+
+.create__workspace:hover {
+  background-color: rgb(219, 219, 219);
+}

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import LoginForm from './Components/auth/LoginForm';
 import SignUpForm from './Components/auth/SignUpForm';
 import NavBar from './Components/NavBar';
@@ -12,6 +12,7 @@ import { Home } from './Pages'
 
 function App() {
   const [loaded, setLoaded] = useState(false);
+  const user = useSelector(state => state.session.user)
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -42,7 +43,7 @@ function App() {
           <User />
         </ProtectedRoute>
         <ProtectedRoute path='/' exact={true} >
-          <Home />
+          <Home user={user} />
         </ProtectedRoute>
       </Switch>
     </BrowserRouter>
