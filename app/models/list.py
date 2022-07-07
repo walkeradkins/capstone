@@ -21,4 +21,5 @@ class List(db.Model):
             'id': self.id,
             'workspaceId': self.workspace_id,
             'title': self.title,
+            'cards': [card.to_dict() for card in self.cards]
         }

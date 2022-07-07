@@ -1,0 +1,42 @@
+.list__wrapper {
+  box-sizing: border-box;
+  display: inline-block;
+  height: 100%;
+  margin: 0 4px;
+  vertical-align: top;
+  white-space: nowrap;
+  width: 272px;
+}
+
+.list__content {
+  background-color: #ebecf0;
+  border-radius: 3px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  max-height: 100%;
+  position: relative;
+  white-space: normal;
+  width: 100%!important;
+}
+
+.list__header {
+  bottom: 0;
+  cursor: pointer;
+  left: 0;
+  right: 0;
+  top: 0;
+}
+
+.list__new-card {
+  border-radius: 3px;
+  color: #5e6c84;
+  display: block;
+  flex: 1 0 auto;
+  margin: 2px 0 8px 8px;
+  padding: 4px 8px;
+  position: relative;
+  text-decoration: none;
+  -webkit-user-select: none;
+  user-select: none;
+}

@@ -6,6 +6,10 @@
   /* padding: 0 */
 }
 
+body:not(.pro-sidebar > .pro-sidebar-inner > .pro-sidebar-layout) {
+  overflow-y: hidden;
+}
+
 .btn-hidden {
   background-color: gray;
   color: rgb(73, 73, 73)

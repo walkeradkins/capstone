@@ -1,0 +1,9 @@
+.workspace__main {
+  display: flex;
+  background-size: cover;
+  background-position: center;
+}
+
+.list__container {
+  display: flex;
+}

@@ -75,7 +75,7 @@ export const deleteWorkspace = (id) => async dispatch => {
 }
 const initialState = {};
 
-export default function reducer(state = initialState, action) {
+export default function workspaceReducer(state = initialState, action) {
   switch (action.type) {
     case ALL_WORKSPACES:
       const workspaces = {}
