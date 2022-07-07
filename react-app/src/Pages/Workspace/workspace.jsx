@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { getAllWorkspaces } from "../../store/workspaces";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router";
-import { WorkspaceName } from "../../Components";
+import { WorkspaceName, Sidebar } from "../../Components";
 
 const Workspace = ({ user }) => {
   const { workspaceId } = useParams();
@@ -21,7 +21,12 @@ const Workspace = ({ user }) => {
 
   const workspace = workspaces[workspaceId];
 
-  return <WorkspaceName workspace={workspace} />;
+  return (
+    <div className='workspace'>
+      <Sidebar workspaces={Object.values(workspaces)} current={workspace}/>
+      <WorkspaceName workspace={workspace} />
+    </div>
+  );
 };
 
 export default Workspace;

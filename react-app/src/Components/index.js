@@ -2,5 +2,15 @@ import WorkspaceLink from './WorkspaceLink/workspace-link'
 import CreateWorkspace from './CreateWorkspace/create-workspace'
 import CreateWorkspaceForm from './CreateWorkspaceForm/create-workspace-form'
 import WorkspaceName from './WorkspaceName/workspace-name'
+import Sidebar from './Sidebar/sidebar'
+import MoreDropdown from './MoreDropdown/more-dropdown'
 
-export { WorkspaceLink, CreateWorkspace, CreateWorkspaceForm, WorkspaceName }
+
+export {
+  WorkspaceLink,
+  CreateWorkspace,
+  CreateWorkspaceForm,
+  WorkspaceName,
+  Sidebar,
+  MoreDropdown,
+}
