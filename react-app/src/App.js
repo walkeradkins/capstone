@@ -28,7 +28,7 @@ function App() {
 
   return (
     <BrowserRouter>
-      <NavBar />
+      <NavBar loaded={loaded}/>
       <Switch>
         <Route path='/login' exact={true}>
           <LoginForm />
@@ -48,6 +48,7 @@ function App() {
         <ProtectedRoute path='/b/:workspaceId' exact={true} >
           <Workspace user={user} />
         </ProtectedRoute>
+        <Route path='/' />
       </Switch>
     </BrowserRouter>
   );

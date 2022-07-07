@@ -1,7 +1,7 @@
 from flask import Blueprint, request
 from app.models import Workspace, User, members, List, db
 from app.forms import WorkspaceForm
-import datetime
+
 
 workspace_routes = Blueprint('workspaces', __name__)
 
@@ -53,4 +53,12 @@ def updateWorkspace(workspaceId):
     db.session.flush()
     db.session.commit()
 
+    return workspace.to_dict()
+
+@workspace_routes.route('/<int:id>', methods=['DELETE'], strict_slashes=False)
+def deleteWorkspace(id):
+    workspace = Workspace.query.get(id)
+    print('--------', workspace.to_dict())
+    db.session.delete(workspace)
+    db.session.commit()
     return workspace.to_dict()
