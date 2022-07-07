@@ -1,6 +1,6 @@
 from flask import Blueprint, jsonify
 from flask_login import login_required
-from app.models import User
+from app.models import User, Workspace, members
 
 user_routes = Blueprint('users', __name__)
 
@@ -15,5 +15,6 @@ def users():
 @user_routes.route('/<int:id>')
 @login_required
 def user(id):
-    user = User.query.get(id)
+    # user = User.query.get(id)
+    user = User.query.join(members).join(Workspace).filter(members.c.users == id).one()
     return user.to_dict()
