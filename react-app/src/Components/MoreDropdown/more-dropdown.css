@@ -1,0 +1,28 @@
+.more__container {
+  cursor:pointer;
+}
+
+.more__container:hover {
+  background-color: rgb(121, 121, 121);
+}
+
+.more__dropdown {
+  position: absolute;
+  width: 12em;
+  padding: 1em;
+  top: 2em;
+  right: -8.5em;
+  border-radius: .25em;
+  background-color: white;
+  border: 1px solid gainsboro;
+  box-shadow: 0 3px 7px rgba(33,33,33,.2);
+  display: flex;
+  color: black;
+  z-index: 2;
+  transition: 0.2s;
+}
+
+.more__dropdown:hover{
+  background-color: rgb(236, 236, 236);
+  cursor: pointer;
+}

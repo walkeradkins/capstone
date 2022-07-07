@@ -16,11 +16,11 @@ const Home = ({ user }) => {
   return (
     <>
       <h2>Home View</h2>
-      <CreateWorkspace user={user}/>
+      <CreateWorkspace user={user} />
       <ul>
         {workspaceArray.map((workspace) => (
           <li key={workspace.id}>
-            <WorkspaceLink workspace={workspace} user={user}/>
+            <WorkspaceLink workspace={workspace} user={user} />
           </li>
         ))}
       </ul>

@@ -1,0 +1,27 @@
+.input__inactive {
+  background-color: transparent;
+  color: black;
+  border-radius: .50em;
+  border: transparent 2px solid;
+  outline: none;
+  padding: 1em;
+  transition: 0.2s;
+  cursor: pointer;
+}
+
+.input__inactive:hover {
+  background-color: gainsboro;
+}
+
+.input__active {
+  background-color: white;
+  border: 2px solid rgb(0, 81, 255);
+  border-radius: .50em;
+  padding: 1em;
+  cursor: text;
+  user-select: all;
+}
+
+.input__active:focus {
+  outline: none;
+}

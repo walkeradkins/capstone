@@ -25,7 +25,7 @@ const CreateWorkspaceModal = ({ user }) => {
     }
     if (newWorkspace) {
       setName('')
-      history.push(`/user/${user.id}/${newWorkspace.id}`)
+      history.push(`/b/${newWorkspace.id}`)
     }
   }
 
