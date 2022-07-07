@@ -39,3 +39,18 @@ def new_workspace(userId):
         return workspace.to_dict()
 
     return {'errors': validation_errors_to_error_messages(form.errors)}, 401
+
+
+@workspace_routes.route('/<int:workspaceId>', methods=['PUT'], strict_slashes=False)
+def updateWorkspace(workspaceId):
+    workspace = Workspace.query.get(workspaceId)
+    new_workspace = request.json
+    print('-------', new_workspace)
+    name = workspace.name
+    name = new_workspace['name']
+    workspace.name = name
+    db.session.merge(workspace)
+    db.session.flush()
+    db.session.commit()
+
+    return workspace.to_dict()

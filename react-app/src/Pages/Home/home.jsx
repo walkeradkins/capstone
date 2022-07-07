@@ -11,7 +11,7 @@ const Home = ({ user }) => {
 
   useEffect(() => {
     dispatch(getAllWorkspaces(user.id));
-  }, [dispatch, user.id]);
+  }, []);
 
   return (
     <>
