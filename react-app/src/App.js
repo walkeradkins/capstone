@@ -48,6 +48,7 @@ function App() {
         <ProtectedRoute path='/b/:workspaceId' exact={true} >
           <Workspace user={user} />
         </ProtectedRoute>
+        <Route path='/' />
       </Switch>
     </BrowserRouter>
   );

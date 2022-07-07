@@ -5,8 +5,7 @@ import { updateWorkspace } from "../../store/workspaces";
 
 const WorkspaceName = ({ workspace }) => {
   const dispatch = useDispatch();
-  const { name, id } = workspace;
-  const [content, setContent] = useState(name);
+  const [content, setContent] = useState('');
   const [errors, setErrors] = useState([]);
   const [edit, setEdit] = useState(false);
 
@@ -16,6 +15,10 @@ const WorkspaceName = ({ workspace }) => {
     if (edit) return;
     setEdit(true);
   };
+
+  useEffect(() => {
+    setContent(name)
+  }, [dispatch])
 
   useEffect(() => {
     if (!edit) return;
@@ -52,6 +55,9 @@ const WorkspaceName = ({ workspace }) => {
     });
     return () => document.removeEventListener("click", closeEdit);
   }, [edit, content]);
+
+  if (!workspace) return null;
+  const { name, id } = workspace;
 
   return (
     <>

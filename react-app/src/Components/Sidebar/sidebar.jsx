@@ -6,7 +6,6 @@ import MoreDropdown from "../MoreDropdown/more-dropdown";
 import { useState } from "react";
 
 const Sidebar = ({ workspaces, current }) => {
-  console.log(current)
   return (
     <ProSidebar
     // collapsed={true}

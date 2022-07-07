@@ -54,3 +54,11 @@ def updateWorkspace(workspaceId):
     db.session.commit()
 
     return workspace.to_dict()
+
+@workspace_routes.route('/<int:id>', methods=['DELETE'], strict_slashes=False)
+def deleteWorkspace(id):
+    workspace = Workspace.query.get(id)
+    print('--------', workspace.to_dict())
+    db.session.delete(workspace)
+    db.session.commit()
+    return workspace.to_dict()

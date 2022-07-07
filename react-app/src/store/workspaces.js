@@ -1,6 +1,7 @@
 const ALL_WORKSPACES = 'workspaces/ALL_WORKSPACES';
 const CREATE_WORKSPACE = 'workspace/CREATE_WORKSPACE';
-const UPDATE_WORKSPACE = 'message/UPDATE_WORKSPACE'
+const UPDATE_WORKSPACE = 'workspace/UPDATE_WORKSPACE';
+const DELETE_WORKSPACE = 'workspace/DELETE_WORKSPACE';
 
 export const allWorkspaces = (workspaces) => ({
   type: ALL_WORKSPACES,
@@ -15,6 +16,11 @@ export const createWorkspace = (workspace) => ({
 export const updateOne = (updatedWorkspace) => ({
   type: UPDATE_WORKSPACE,
   updatedWorkspace
+});
+
+export const deleteOne = (deletedWorkspace) => ({
+  type: DELETE_WORKSPACE,
+  deletedWorkspace
 });
 
 export const getAllWorkspaces = (userId) => async dispatch => {
@@ -56,6 +62,17 @@ export const updateWorkspace = (payload, workspaceId) => async dispatch => {
   }
 }
 
+export const deleteWorkspace = (id) => async dispatch => {
+  const res = await fetch(`/api/workspaces/${id}`, {
+    method: 'DELETE'
+  });
+
+  if (res.ok) {
+    const deletedWorkspace = await res.json();
+    dispatch(deleteOne(deletedWorkspace));
+    return deletedWorkspace;
+  }
+}
 const initialState = {};
 
 export default function reducer(state = initialState, action) {
@@ -86,6 +103,10 @@ export default function reducer(state = initialState, action) {
         }
       }
       return updatedState;
+    case DELETE_WORKSPACE:
+      const newState = { ...state };
+      delete newState[action.deletedWorkspace.id];
+      return newState;
     default:
       return state;
   }

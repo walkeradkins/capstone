@@ -12,9 +12,9 @@ const Workspace = ({ user }) => {
 
   useEffect(() => {
     dispatch(getAllWorkspaces(user.id));
-    if (workspaceId) {
-      console.log(workspaceId);
-    }
+    // if (workspaceId) {
+    //   console.log(workspaceId);
+    // }
   }, [dispatch, user.id]);
 
   if (!Object.keys(workspaces).length) return null;
