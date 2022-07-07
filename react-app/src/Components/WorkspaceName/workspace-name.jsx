@@ -17,7 +17,6 @@ const WorkspaceName = ({ workspace }) => {
   };
 
   useEffect(() => {
-    console.log(edit);
     if (!edit) return;
 
     const closeEdit = (e) => {
@@ -40,6 +39,9 @@ const WorkspaceName = ({ workspace }) => {
     };
 
     document.addEventListener("click", closeEdit);
+    document.addEventListener("keypress", (e) => {
+      if (e.key === 'Enter') return closeEdit(e);
+    });
     return () => document.removeEventListener("click", closeEdit);
 
   }, [edit, content]);
