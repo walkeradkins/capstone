@@ -9,6 +9,7 @@
   transition: 0.2s;
   color: white;
   transition: color 85ms ease-in;
+  max-height: 5.5em;
 }
 
 .add-list__input {
@@ -44,6 +45,7 @@
 }
 
 .add-list__cancel {
+  background-color: #ebecf0;
   border: none;
   cursor: pointer;
 }

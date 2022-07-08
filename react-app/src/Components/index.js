@@ -10,6 +10,7 @@ import AddList from './AddList/add-list'
 import ListName from './ListName/list_name'
 import ListDelete from './ListDelete/list-delete'
 import CardItem from './CardItem/card-item'
+import AddCardInput from './AddCardInput/add-card-input'
 
 export {
   WorkspaceLink,
@@ -24,4 +25,5 @@ export {
   ListName,
   ListDelete,
   CardItem,
+  AddCardInput,
 }
