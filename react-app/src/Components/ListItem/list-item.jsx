@@ -1,28 +1,25 @@
 import { ListName } from "../../Components";
 import "./list-item.css";
-import { useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { CardItem, AddCardInput } from "../../Components";
+import { getAllCards } from "../../store/cards";
+import { getAllLists } from "../../store/lists";
 import { useEffect } from "react";
+import { useWorkspace } from "../../context/workspace-context";
+import { useState } from "react";
 
-const ListItem = ({ list, cards }) => {
-  const [add, setAdd] = useState(false)
+const ListItem = ({ list }) => {
+  const dispatch = useDispatch();
+  const { currentWorkspace } = useWorkspace();
+  const cards = useSelector((state) => state.cards);
+  const [item, setItem] = useState("");
 
-  const showInput = () => {
-    if (add) return;
-    setAdd(true);
-  }
+  console.log("list:: ", list.cards);
 
   useEffect(() => {
-    if (!add) return
-
-    const hideInput = () => {
-      setAdd(false)
-    }
-    document.addEventListener("click", hideInput);
-    return () => document.removeEventListener("click", hideInput);
-
-  }, [add])
+    dispatch(getAllCards(currentWorkspace));
+    dispatch(getAllLists(currentWorkspace));
+  }, [item]);
 
   return (
     <div className="list__wrapper">
@@ -30,17 +27,12 @@ const ListItem = ({ list, cards }) => {
         <div className="list__header">
           <ListName list={list} />
         </div>
-        <div className="pl">
-          <CardItem cards={cards} />
-        </div>
-        {add && <AddCardInput props={{add, setAdd, list}} />}
-        {!add &&
-        <div className="list__add-card-container" onClick={showInput}>
-          <span className="material-symbols-outlined">add</span>
-          <div className="list__new-card">
-            Add a card
+        {list.cards[0] && (
+          <div className="pl">
+            <CardItem cards={list.cards.map((id) => cards[id])} />
           </div>
-        </div>}
+        )}
+        <AddCardInput list={list} setItem={setItem} />
       </div>
     </div>
   );

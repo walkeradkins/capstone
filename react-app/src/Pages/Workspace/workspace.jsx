@@ -6,27 +6,23 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import { getAllCards } from "../../store/cards";
 import whatnext_background from "../../Assets/Images/whatnext_background.jpg";
-
 import { Sidebar, ListItem, WorkspaceHeader, AddList } from "../../Components";
+import { useWorkspace } from "../../context/workspace-context";
 
 const Workspace = ({ user }) => {
+  const { currentWorkspace, setCurrentWorkspace } = useWorkspace()
   const { workspaceId } = useParams();
   const dispatch = useDispatch();
   const workspaces = useSelector((state) => state.workspaces);
   const lists = useSelector((state) => state.lists);
-  const cards = useSelector((state) => state.cards);
   const listArray = Object.values(lists);
   const length = listArray.length
   const [showAdd, setShowAdd] = useState(false);
 
-  // useEffect(() => {
-
-  // }, [workspaceId, dispatch, lists]);
-
   useEffect(() => {
-    dispatch(getAllCards(workspaceId))
     dispatch(getAllWorkspaces(user.id));
     dispatch(getAllLists(workspaceId));
+    setCurrentWorkspace(workspaceId)
   }, []);
 
   useEffect(() => {
@@ -68,9 +64,7 @@ const Workspace = ({ user }) => {
             {listArray.map((list) => {
               return (
                 <div key={list.id}>
-                  <ListItem list={list} cards={
-                    list.cards.map(id =>
-                      cards[id])}/>
+                  <ListItem list={list} />
                 </div>
               );
             })}

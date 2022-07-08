@@ -5,4 +5,4 @@ from wtforms.validators import DataRequired
 
 class ListForm(FlaskForm):
     title = StringField('title', validators=[DataRequired()])
-    workspace_id = IntegerField('owner_id', validators=[DataRequired()])
+    workspace_id = IntegerField('workspace_id', validators=[DataRequired()])
