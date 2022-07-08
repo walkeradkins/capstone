@@ -30,7 +30,7 @@
 }
 
 .list__new-card {
-  border-radius: 3px;
+  /* border-radius: 3px;
   color: #5e6c84;
   display: block;
   flex: 1 0 auto;
@@ -39,5 +39,25 @@
   position: relative;
   text-decoration: none;
   -webkit-user-select: none;
-  user-select: none;
+  user-select: none; */
+}
+
+.list__add-card-container {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin: .5em;
+  padding: .25em;
+  font-size: .85em;
+  border-radius: .15em;
+  color: rgb(95, 95, 95);
+}
+
+.list__add-card-container:hover {
+  cursor: pointer;
+  background-color:rgb(216, 216, 216);
+}
+
+.list__new-card {
+  margin: 0 .5em;
 }

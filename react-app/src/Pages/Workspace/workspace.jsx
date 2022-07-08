@@ -16,10 +16,33 @@ const Workspace = ({ user }) => {
   const listArary = Object.values(lists);
   const [showAdd, setShowAdd] = useState(false);
 
+  const workspaceBackground = {
+    // backgroundImage = `url( ${whatnext_background} )`
+    // minHeight: '100%',
+    backgroundRepeat: 'no-repeat',
+    backgroundAttachment: 'fixed',
+    backgroundPosition: 'center',
+    backgroundSize: 'cover',
+  }
+
   useEffect(() => {
     dispatch(getAllWorkspaces(user.id));
     dispatch(getAllLists(workspaceId));
   }, [dispatch, user.id, workspaceId]);
+
+  useEffect(() => {
+    // document.body.style.backgroundImage = `url( ${whatnext_background} )`;
+    document.body.style.backgroundImage = `url( ${whatnext_background} )`;
+    document.body.style.backgroundRepeat= 'no-repeat';
+    document.body.style.backgroundAttachment= 'fixed';
+    document.body.style.backgroundPosition= 'center';
+    document.body.style.backgroundSize= 'cover';
+
+    return () => {
+      document.body.style.backgroundImage = ''
+      document.body.style.backgroundColor = 'white'
+    }
+  }, [workspaceId])
 
   if (!Object.keys(workspaces).length) return null;
 
@@ -33,7 +56,7 @@ const Workspace = ({ user }) => {
   return (
     <div
       className="workspace__wrapper"
-      style={{ backgroundImage: `url(${whatnext_background})` }}
+      // style={{ backgroundImage: `url(${whatnext_background})` }}
     >
       <div className="workspace__main">
         <Sidebar

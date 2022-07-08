@@ -24,3 +24,23 @@ def createList(id):
         db.session.add(new_list)
         db.session.commit()
         return new_list.to_dict()
+
+@list_routes.route('/<int:listId>', methods=['PUT'], strict_slashes=False)
+def updateWorkspace(listId):
+    list = List.query.get(listId)
+    new_list = request.json
+    title = list.title
+    title = new_list['title']
+    list.title = title
+    db.session.merge(list)
+    db.session.flush()
+    db.session.commit()
+
+    return list.to_dict()
+
+@list_routes.route('/<int:id>', methods=['DELETE'], strict_slashes=False)
+def deleteList(id):
+    list = List.query.get(id)
+    db.session.delete(list)
+    db.session.commit()
+    return {'id': id}

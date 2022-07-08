@@ -1,5 +1,7 @@
 const ALL_LISTS = 'lists/ALL_LISTS';
 const CREATE_LIST = 'lists/CREATE_LIST'
+const UPDATE_LIST = 'lists/UPDATE_LIST'
+const DELETE_LIST = 'lists/DELETE_LIST'
 
 export const allLists = (lists) => ({
   type: ALL_LISTS,
@@ -9,6 +11,16 @@ export const allLists = (lists) => ({
 export const createOne = (newList) => ({
   type: CREATE_LIST,
   newList
+});
+
+export const updateOne = (updatedList) => ({
+  type: UPDATE_LIST,
+  updatedList
+});
+
+export const deleteOne = (deletedList) => ({
+  type: DELETE_LIST,
+  deletedList
 });
 
 export const getAllLists = (id) => async dispatch => {
@@ -37,6 +49,34 @@ export const createList = (payload, id) => async dispatch => {
   }
 }
 
+export const updateList = (payload, listId) => async dispatch => {
+  const res = await fetch(`/api/lists/${listId}`, {
+    method: 'PUT',
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(payload),
+  });
+
+  if (res.ok) {
+    const updatedList = await res.json();
+    dispatch(updateOne(updatedList));
+    return updatedList
+  }
+}
+
+export const deleteList = (id) => async dispatch => {
+  const res = await fetch(`/api/lists/${id}`, {
+    method: 'DELETE'
+  });
+
+  if (res.ok) {
+    const deletedList = await res.json();
+    dispatch(deleteOne(deletedList));
+    return deletedList;
+  }
+}
+
 const initialState = {};
 
 export default function listReducer(state = initialState, action) {
@@ -56,6 +96,19 @@ export default function listReducer(state = initialState, action) {
         }
         return newState;
       };
+    case UPDATE_LIST:
+      const updatedState = {
+        ...state,
+        [action.updatedList.id]: {
+          ...state[action.updatedList.id],
+          ...action.updatedList
+        }
+      }
+      return updatedState;
+    case DELETE_LIST:
+      const newState = { ...state };
+      delete newState[action.deletedList.id];
+      return newState;
     default:
       return state;
   }

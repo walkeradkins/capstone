@@ -1,0 +1,8 @@
+.list__delete-container {
+  padding: .25em;
+  border-radius: .25em;
+}
+
+.list__delete-container:hover {
+  background-color: gainsboro
+}
