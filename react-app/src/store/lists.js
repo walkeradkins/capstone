@@ -101,7 +101,7 @@ export default function listReducer(state = initialState, action) {
         ...state,
         [action.updatedList.id]: {
           ...state[action.updatedList.id],
-          ...action.updatedList
+          ...action.updatedList['cards'].map(card => card.id)
         }
       }
       return updatedState;

@@ -22,7 +22,6 @@ const AddList = ({ setShowAdd, workspaceId }) => {
     }
 
     if (newList) {
-      console.log("success!");
       setTitle('')
       setShowAdd(false)
     }
@@ -42,7 +41,7 @@ const AddList = ({ setShowAdd, workspaceId }) => {
             className="add-list__cancel"
             onClick={() => setShowAdd(false)}
           >
-            <span class="material-symbols-outlined">close</span>
+            <span className="material-symbols-outlined">close</span>
           </button>
         </div>
       </form>

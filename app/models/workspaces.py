@@ -13,6 +13,9 @@ class Workspace(db.Model):
     lists = db.relationship('List', back_populates='workspace',
                             passive_deletes=True, cascade='save-update,delete,delete-orphan')
 
+    cards = db.relationship('Card', back_populates='workspace',
+                            passive_deletes=True, cascade='save-update,delete,delete-orphan')
+
     # many-to-one with User
     user = db.relationship("User", back_populates="workspaces")
 

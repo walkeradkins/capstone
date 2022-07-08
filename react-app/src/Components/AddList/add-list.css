@@ -9,6 +9,7 @@
   transition: 0.2s;
   color: white;
   transition: color 85ms ease-in;
+  max-height: 5.5em;
 }
 
 .add-list__input {
@@ -16,7 +17,7 @@
   margin: 0.25em;
   border-radius: .25em;
   border: transparent;
-  width: 100%;
+  min-width: 264px;
   box-shadow: inset 0 0 0 2px #0079bf;
   transition: margin 85ms ease-in,background 85ms ease-in;
 }
@@ -44,6 +45,7 @@
 }
 
 .add-list__cancel {
+  background-color: #ebecf0;
   border: none;
   cursor: pointer;
 }

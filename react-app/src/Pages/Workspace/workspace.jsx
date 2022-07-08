@@ -4,31 +4,26 @@ import { getAllWorkspaces } from "../../store/workspaces";
 import { getAllLists } from "../../store/lists";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router";
+import { getAllCards } from "../../store/cards";
 import whatnext_background from "../../Assets/Images/whatnext_background.jpg";
-
 import { Sidebar, ListItem, WorkspaceHeader, AddList } from "../../Components";
+import { useWorkspace } from "../../context/workspace-context";
 
 const Workspace = ({ user }) => {
+  const { currentWorkspace, setCurrentWorkspace } = useWorkspace()
   const { workspaceId } = useParams();
   const dispatch = useDispatch();
   const workspaces = useSelector((state) => state.workspaces);
   const lists = useSelector((state) => state.lists);
-  const listArary = Object.values(lists);
+  const listArray = Object.values(lists);
+  const length = listArray.length
   const [showAdd, setShowAdd] = useState(false);
-
-  const workspaceBackground = {
-    // backgroundImage = `url( ${whatnext_background} )`
-    // minHeight: '100%',
-    backgroundRepeat: 'no-repeat',
-    backgroundAttachment: 'fixed',
-    backgroundPosition: 'center',
-    backgroundSize: 'cover',
-  }
 
   useEffect(() => {
     dispatch(getAllWorkspaces(user.id));
     dispatch(getAllLists(workspaceId));
-  }, [dispatch, user.id, workspaceId]);
+    setCurrentWorkspace(workspaceId)
+  }, []);
 
   useEffect(() => {
     // document.body.style.backgroundImage = `url( ${whatnext_background} )`;
@@ -50,7 +45,6 @@ const Workspace = ({ user }) => {
 
   const handleToggle = () => {
     setShowAdd(true);
-    console.log(showAdd);
   };
 
   return (
@@ -67,7 +61,7 @@ const Workspace = ({ user }) => {
         <div className="workspace">
           <WorkspaceHeader workspace={workspace} />
           <div className="list__container">
-            {listArary.map((list) => {
+            {listArray.map((list) => {
               return (
                 <div key={list.id}>
                   <ListItem list={list} />
@@ -76,8 +70,9 @@ const Workspace = ({ user }) => {
             })}
             {!showAdd && (
               <div className="workspace__list-add" onClick={handleToggle}>
-                <span class="material-symbols-outlined">add</span>
-                <p>Add another list</p>
+                <span className="material-symbols-outlined">add</span>
+                {!!length && <p>Add another list</p>}
+                {!length && (<p>Start adding lists</p>)}
               </div>
             )}
             {showAdd && (

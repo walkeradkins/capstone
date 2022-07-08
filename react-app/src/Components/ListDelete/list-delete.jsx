@@ -7,11 +7,9 @@ const ListDelete = ({ list }) => {
 
   const handleDelete = async () => {
     let deletedList;
-    console.log('id', list.id)
     try {
       deletedList = await dispatch(deleteList(list.id))
       // if (deletedList.id === +list.id) {
-      //   console.log('ok ok ok')
       // }
     } catch(error) {
       alert(error)
