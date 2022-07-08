@@ -1,0 +1,43 @@
+.input__inactive-list {
+  background-color: transparent;
+  color: black;
+  border-radius: .25em;
+  border: transparent 2px solid;
+  outline: none;
+  transition: 0.2s;
+  cursor: pointer;
+  padding: .25em;
+  margin: .5em;
+  text-align: left;
+  color: rgb(77, 77, 77);
+  font-size: .85em;
+  font-weight: bold;
+  padding: .25em 1em;
+  width: fit-content;
+}
+
+.input__inactive-list:hover {
+  background-color: rgba(235, 235, 235, 0.6);
+}
+
+.input__active-list {
+  margin: .5em;
+  background-color: white;
+  border: 2px solid rgb(0, 81, 255);
+  border-radius: .25em;
+  padding: .25em 1em;
+  text-align: left;
+  cursor: text;
+  font-size: .85em;
+  font-weight: bold;
+  user-select: all;
+}
+
+.input__active-list:focus {
+  outline: none;
+}
+
+.list__header-items {
+  display: flex;
+  align-items: center;
+}

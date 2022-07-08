@@ -1,12 +1,16 @@
+import { ListName } from "../../Components";
 import "./list-item.css";
 
 const ListItem = ({ list }) => {
   return (
     <div className="list__wrapper">
       <div className="list__content">
-        <h3 className="list__header">{list.title}</h3>
-        <div className='list__new-card'>
-          Add a card
+        <div className="list__header">
+          <ListName list={list} />
+        </div>
+        <div className="list__add-card-container">
+          <span className="material-symbols-outlined">add</span>
+          <div className="list__new-card">Add a card</div>
         </div>
       </div>
     </div>

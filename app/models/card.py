@@ -12,7 +12,8 @@ class Card(db.Model):
     due_date = db.Column(db.DateTime(timezone=False), nullable=True)
     created_at = db.Column(db.DateTime(timezone=False), nullable=False)
 
-    list = db.relationship('List', back_populates='cards')
+    list = db.relationship('List', lazy='subquery', back_populates='cards')
+    # list = db.relationship('List', lazy='subquery', cascade='all, delete-orphan', backref=backref('car', cascade='delete'), single_parent=Tru)
 
     def to_dict(self):
         return {

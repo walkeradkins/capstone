@@ -1,0 +1,30 @@
+import "./list-delete.css";
+import { useDispatch } from "react-redux";
+import { deleteList } from "../../store/lists";
+
+const ListDelete = ({ list }) => {
+  const dispatch = useDispatch();
+
+  const handleDelete = async () => {
+    let deletedList;
+    console.log('id', list.id)
+    try {
+      deletedList = await dispatch(deleteList(list.id))
+      // if (deletedList.id === +list.id) {
+      //   console.log('ok ok ok')
+      // }
+    } catch(error) {
+      alert(error)
+    }
+
+  }
+
+
+  return (
+    <div className="list__delete-container" onClick={handleDelete}>
+      <span className="material-symbols-outlined">delete</span>
+    </div>
+  );
+};
+
+export default ListDelete;
