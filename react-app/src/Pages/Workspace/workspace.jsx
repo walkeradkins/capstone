@@ -4,6 +4,7 @@ import { getAllWorkspaces } from "../../store/workspaces";
 import { getAllLists } from "../../store/lists";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router";
+import { getAllCards } from "../../store/cards";
 import whatnext_background from "../../Assets/Images/whatnext_background.jpg";
 
 import { Sidebar, ListItem, WorkspaceHeader, AddList } from "../../Components";
@@ -13,8 +14,15 @@ const Workspace = ({ user }) => {
   const dispatch = useDispatch();
   const workspaces = useSelector((state) => state.workspaces);
   const lists = useSelector((state) => state.lists);
-  const listArary = Object.values(lists);
+  const cards = useSelector((state) => state.cards);
+  const listArray = Object.values(lists);
+  const length = listArray.length
   const [showAdd, setShowAdd] = useState(false);
+
+  useEffect(() => {
+    dispatch(getAllCards(workspaceId))
+    console.log(workspaceId)
+  }, [workspaceId]);
 
   const workspaceBackground = {
     // backgroundImage = `url( ${whatnext_background} )`
@@ -50,7 +58,6 @@ const Workspace = ({ user }) => {
 
   const handleToggle = () => {
     setShowAdd(true);
-    console.log(showAdd);
   };
 
   return (
@@ -67,17 +74,20 @@ const Workspace = ({ user }) => {
         <div className="workspace">
           <WorkspaceHeader workspace={workspace} />
           <div className="list__container">
-            {listArary.map((list) => {
+            {listArray.map((list) => {
               return (
                 <div key={list.id}>
-                  <ListItem list={list} />
+                  <ListItem list={list} cards={
+                    list.cards.map(id =>
+                      cards[id])}/>
                 </div>
               );
             })}
             {!showAdd && (
               <div className="workspace__list-add" onClick={handleToggle}>
-                <span class="material-symbols-outlined">add</span>
-                <p>Add another list</p>
+                <span className="material-symbols-outlined">add</span>
+                {!!length && <p>Add another list</p>}
+                {!length && (<p>Start adding lists</p>)}
               </div>
             )}
             {showAdd && (

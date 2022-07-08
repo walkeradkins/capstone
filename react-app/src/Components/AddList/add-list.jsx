@@ -22,7 +22,6 @@ const AddList = ({ setShowAdd, workspaceId }) => {
     }
 
     if (newList) {
-      console.log("success!");
       setTitle('')
       setShowAdd(false)
     }

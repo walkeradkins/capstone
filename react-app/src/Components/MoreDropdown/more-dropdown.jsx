@@ -34,7 +34,6 @@ const MoreDropdown = ({ board }) => {
       deletedMessage = await dispatch(deleteWorkspace(board.id))
       if (deletedMessage.id === +workspaceId) {
         history.push('/')
-        console.log('ok ok ok')
       }
     } catch(error) {
       alert(error)

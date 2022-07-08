@@ -9,6 +9,7 @@ import WorkspaceHeader from './WorkspaceHeader/workspace-header'
 import AddList from './AddList/add-list'
 import ListName from './ListName/list_name'
 import ListDelete from './ListDelete/list-delete'
+import CardItem from './CardItem/card-item'
 
 export {
   WorkspaceLink,
@@ -22,4 +23,5 @@ export {
   AddList,
   ListName,
   ListDelete,
+  CardItem,
 }

@@ -3,11 +3,13 @@ import thunk from 'redux-thunk';
 import session from './session'
 import workspaceReducer from './workspaces'
 import listReducer from './lists';
+import cardReducer from './cards';
 
 const rootReducer = combineReducers({
   session,
   workspaces: workspaceReducer,
   lists: listReducer,
+  cards: cardReducer,
 });
 
 
