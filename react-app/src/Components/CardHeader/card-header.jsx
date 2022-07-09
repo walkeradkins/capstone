@@ -1,8 +1,9 @@
 import "./card-header.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import EditCardInput from "../EditCardInput/edit-card-input";
 
-const CardHeader = ({ card }) => {
+const CardHeader = ({ props }) => {
+  const { card, setItem } = props
   const [display, setDisplay] = useState(false);
   const [edit, setEdit] = useState(false);
 
@@ -11,6 +12,12 @@ const CardHeader = ({ card }) => {
     setDisplay(false);
     setEdit(true);
   };
+
+  useEffect(() => {
+    return () => setItem('')
+  }, [])
+
+  if (!card) return null;
 
   return (
     <div
@@ -33,7 +40,7 @@ const CardHeader = ({ card }) => {
       {edit && (
         <div className="editcard__input-wrapper">
             <div className="editcard-background" onClick={() => setEdit(false)}/>
-            <EditCardInput card={card} />
+            <EditCardInput props={{card, setEdit, setItem}} />
         </div>
       )}
     </div>

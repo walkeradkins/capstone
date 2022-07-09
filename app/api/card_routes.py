@@ -29,3 +29,24 @@ def createCard(id):
         db.session.add(new_card)
         db.session.commit()
         return new_card.to_dict()
+
+
+@card_routes.route('/<int:cardId>', methods=['PUT'], strict_slashes=False)
+def updateCard(cardId):
+    card = Card.query.get(cardId)
+    new_card = request.json
+    name = card.name
+    name = new_card['name']
+    card.name = name
+    db.session.merge(card)
+    db.session.flush()
+    db.session.commit()
+    return card.to_dict()
+
+
+@card_routes.route('/<int:id>', methods=['DELETE'], strict_slashes=False)
+def deleteCard(id):
+    card = Card.query.get(id)
+    db.session.delete(card)
+    db.session.commit()
+    return card.to_dict()

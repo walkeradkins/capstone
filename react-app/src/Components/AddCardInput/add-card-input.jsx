@@ -51,7 +51,6 @@ const AddCardInput = ({ list, setItem }) => {
       alert(error);
     }
     if (newCard) {
-      console.log('newCard', newCard.id)
       setAdd(true);
       setContent("");
       setItem(newCard.id)

@@ -26,7 +26,7 @@ def createList(id):
         return new_list.to_dict()
 
 @list_routes.route('/<int:listId>', methods=['PUT'], strict_slashes=False)
-def updateWorkspace(listId):
+def updateList(listId):
     list = List.query.get(listId)
     new_list = request.json
     title = list.title

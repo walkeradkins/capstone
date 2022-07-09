@@ -27,7 +27,7 @@ const ListItem = ({ list }) => {
         </div>
         {list.cards[0] && (
           <div className="pl">
-            <CardItem cards={list.cards.map((id) => cards[id])} />
+            <CardItem cards={list.cards.map((id) => cards[id])} setItem={setItem}/>
           </div>
         )}
         <AddCardInput list={list} setItem={setItem} />

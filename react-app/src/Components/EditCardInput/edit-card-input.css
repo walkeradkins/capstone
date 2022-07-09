@@ -20,3 +20,47 @@
 .edit-card__input:focus {
   outline: none;
 }
+
+.edit-card__submit {
+  background-color: #018bdb;
+  color: white;
+  border: none;
+  padding: .75em 1em;
+  margin: .25em 0;
+  border-radius: .25em;
+  transition: 0.2s;
+}
+
+.edit-card__submit:hover {
+  background-color: #0079bf;
+  cursor: pointer
+}
+
+.edit-card__delete-icon {
+  margin-right: .5em;
+}
+
+.edit-card__delete-text {
+  font-size: .90em;
+}
+
+.edit-card__delete {
+  color: white;
+  background-color: rgba(12, 12, 12, 0.5);
+  border: none;
+  padding: .25em 1em;
+  border-radius: .15em;
+  display: flex;
+  align-items: center;
+  position: absolute;
+  top: 0;
+  right: -7.3em;
+  transition: 0.2s;
+}
+
+.edit-card__delete:hover {
+  right: -7.6em;
+  background-color: rgba(12, 12, 12, 0.7);
+  cursor: pointer;
+  margin-left: 1em;
+}
