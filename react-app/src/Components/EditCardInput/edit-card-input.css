@@ -1,0 +1,22 @@
+.edit-card__input-container {
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 3;
+  min-width: 255px;
+  height: 10em;
+  background-color: transparent;
+}
+
+.edit-card__input {
+  width: 100%;
+  overflow-y: hidden;
+  border-radius: 0.25em;
+  resize: none;
+  font-size: 0.9em;
+  padding: 0.4em;
+}
+
+.edit-card__input:focus {
+  outline: none;
+}

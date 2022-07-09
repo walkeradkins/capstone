@@ -11,6 +11,8 @@ import ListName from './ListName/list_name'
 import ListDelete from './ListDelete/list-delete'
 import CardItem from './CardItem/card-item'
 import AddCardInput from './AddCardInput/add-card-input'
+import CardHeader from './CardHeader/card-header'
+import EditCardInput from './EditCardInput/edit-card-input'
 
 export {
   WorkspaceLink,
@@ -26,4 +28,6 @@ export {
   ListDelete,
   CardItem,
   AddCardInput,
+  CardHeader,
+  EditCardInput,
 }

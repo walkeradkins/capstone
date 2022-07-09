@@ -48,10 +48,7 @@ const Workspace = ({ user }) => {
   };
 
   return (
-    <div
-      className="workspace__wrapper"
-      // style={{ backgroundImage: `url(${whatnext_background})` }}
-    >
+    <div className="workspace__wrapper">
       <div className="workspace__main">
         <Sidebar
           workspaces={Object.values(workspaces)}
@@ -76,7 +73,7 @@ const Workspace = ({ user }) => {
               </div>
             )}
             {showAdd && (
-              <AddList setShowAdd={setShowAdd} workspaceId={workspaceId}/>
+              <AddList props={{showAdd, setShowAdd, workspaceId}}/>
             )}
           </div>
         </div>

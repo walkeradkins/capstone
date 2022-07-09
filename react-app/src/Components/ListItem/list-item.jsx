@@ -14,8 +14,6 @@ const ListItem = ({ list }) => {
   const cards = useSelector((state) => state.cards);
   const [item, setItem] = useState("");
 
-  console.log("list:: ", list.cards);
-
   useEffect(() => {
     dispatch(getAllCards(currentWorkspace));
     dispatch(getAllLists(currentWorkspace));

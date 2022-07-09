@@ -1,11 +1,18 @@
 import "./add-list.css";
-import { useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { createList } from "../../store/lists";
 
-const AddList = ({ setShowAdd, workspaceId }) => {
+const AddList = ({ props }) => {
+  const { showAdd, setShowAdd, workspaceId } = props
   const dispatch = useDispatch();
+  const focusRef = useRef(null);
   const [title, setTitle] = useState("");
+
+  useEffect(() => {
+    if (showAdd) focusRef.current.focus();
+    return focusRef.current = null;
+  }, [showAdd]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -34,6 +41,7 @@ const AddList = ({ setShowAdd, workspaceId }) => {
           placeholder="Enter a list title..."
           className="add-list__input"
           onChange={(e) => setTitle(e.target.value)}
+          ref={focusRef}
         />
         <div className="add-list__buttons">
           <button className="add-list__submit">Add list</button>
