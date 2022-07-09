@@ -7,19 +7,22 @@ import configureStore from './store';
 import { ModalProvider } from './context/modal';
 import SidebarProvider from './context/sidebar-context';
 import WorkspaceProvider from './context/workspace-context';
+import { DragDropContext } from 'react-beautiful-dnd';
 
 const store = configureStore();
 
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
-      <WorkspaceProvider>
-        <SidebarProvider>
-          <ModalProvider>
-            <App />
-          </ModalProvider>
-        </SidebarProvider>
-      </WorkspaceProvider>
+      <DragDropContext>
+        <WorkspaceProvider>
+          <SidebarProvider>
+            <ModalProvider>
+              <App />
+            </ModalProvider>
+          </SidebarProvider>
+        </WorkspaceProvider>
+      </DragDropContext>
     </Provider>
   </React.StrictMode>,
   document.getElementById('root')

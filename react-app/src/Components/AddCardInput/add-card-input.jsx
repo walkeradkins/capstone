@@ -36,7 +36,6 @@ const AddCardInput = ({ list, setItem }) => {
   };
 
   const handleSubmit = async (e) => {
-    // e.preventDefault();
     const payload = {
       list_id: list.id,
       workspace_id: currentWorkspace,
