@@ -36,7 +36,7 @@ const AddCardInput = ({ list, setItem }) => {
   };
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
+    // e.preventDefault();
     const payload = {
       list_id: list.id,
       workspace_id: currentWorkspace,
@@ -58,6 +58,12 @@ const AddCardInput = ({ list, setItem }) => {
     }
   };
 
+  const handleKeyPress = (e) => {
+    if(e.key === 'Enter'){
+      handleSubmit()
+    }
+  }
+
   return (
     <>
       {!add && (
@@ -74,6 +80,7 @@ const AddCardInput = ({ list, setItem }) => {
             placeholder="Enter a title for this card..."
             value={content}
             onChange={(e) => setContent(e.target.value)}
+            onKeyPress={handleKeyPress}
             ref={focusRef}
           />
           <div className="add-card__buttons">
