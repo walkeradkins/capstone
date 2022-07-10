@@ -16,6 +16,7 @@ class List(db.Model):
     # many-to-one with Workspace
     workspace = db.relationship('Workspace', back_populates='lists')
 
+
     def to_dict(self):
         return {
             'id': self.id,

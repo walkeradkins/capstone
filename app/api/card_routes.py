@@ -35,13 +35,39 @@ def createCard(id):
 @card_routes.route('/<int:cardId>', methods=['PUT'], strict_slashes=False)
 def updateCard(cardId):
     card = Card.query.get(cardId)
+
     new_card = request.json
-    name = card.name
-    name = new_card['name']
-    card.name = name
+
+    if 'name' in new_card:
+        name = card.name
+        name = new_card['name']
+        card.name = name
+
+    if 'list_id' in new_card:
+        list_id = card.list_id
+        list_id = new_card['list_id']
+        card.list_id = list_id
+
+    if 'index' in new_card:
+        index = card.index
+        index = new_card['index']
+        card.index = index
+
+        cards = Card.query.filter(card.list_id == Card.list_id).all()
+
+        for card in cards:
+            if card.to_dict()['index'] > new_card['source_index'] and card.to_dict()['index'] <= new_card['index'] and card.to_dict()['id'] != cardId:
+                index = card.index
+                index = index - 1
+                card.index = index
+                db.session.merge(card)
+                # db.session.flush()
+                # db.session.commit()
+
     db.session.merge(card)
     db.session.flush()
     db.session.commit()
+
     return card.to_dict()
 
 

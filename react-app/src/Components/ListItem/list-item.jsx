@@ -25,11 +25,10 @@ const ListItem = ({ list }) => {
   useEffect(() => {
     setCardsState(cardsArray)
   }, [editItem])
-  // if (!cardsState.length) return null;
 
   return (
     <div className="list__wrapper">
-      <Droppable droppableId="list">
+      <Droppable droppableId={`${list.id}`}>
         {(provided) => (
           <div className="list__content">
             <div className="list__header">
@@ -41,7 +40,7 @@ const ListItem = ({ list }) => {
               ref={provided.innerRef}
             >
               {list.cards[0] &&
-                cardsState.map((card, index) => (
+                cardsArray.map((card, index) => (
                   <CardHeader props={{ card, setItem, index, setEditItem }} key={index} />
                 ))}
               <AddCardInput props={{list, setItem, setCardsState, cardsState }} />

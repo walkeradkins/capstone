@@ -14,7 +14,7 @@ const store = configureStore();
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
-      <DragDropContext>
+      {/* <DragDropContext> */}
         <WorkspaceProvider>
           <SidebarProvider>
             <ModalProvider>
@@ -22,7 +22,7 @@ ReactDOM.render(
             </ModalProvider>
           </SidebarProvider>
         </WorkspaceProvider>
-      </DragDropContext>
+      {/* </DragDropContext> */}
     </Provider>
   </React.StrictMode>,
   document.getElementById('root')
