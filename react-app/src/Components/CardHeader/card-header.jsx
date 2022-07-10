@@ -4,7 +4,7 @@ import EditCardInput from "../EditCardInput/edit-card-input";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 
 const CardHeader = ({ props }) => {
-  const { card, setItem, index } = props;
+  const { card, setItem, index, setEditItem } = props;
   const [display, setDisplay] = useState(false);
   const [edit, setEdit] = useState(false);
 
@@ -48,7 +48,7 @@ const CardHeader = ({ props }) => {
                 className="editcard-background"
                 onClick={() => setEdit(false)}
               />
-              <EditCardInput props={{ card, setEdit, setItem }} />
+              <EditCardInput props={{ card, setEdit, setItem, setEditItem }} />
             </div>
           )}
         </div>

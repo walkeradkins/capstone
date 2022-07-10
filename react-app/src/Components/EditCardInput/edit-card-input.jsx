@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { updateCard, deleteCard } from "../../store/cards";
 
 const EditCardInput = ({ props }) => {
-  const { card, setEdit, setItem } = props;
+  const { card, setEdit, setItem, setEditItem } = props;
   const dispatch = useDispatch();
   const focusRef = useRef(null);
   const [content, setContent] = useState(card.name);
@@ -33,6 +33,7 @@ const EditCardInput = ({ props }) => {
 
     if (updatedCard) {
       setEdit(false);
+      setEditItem(updatedCard)
     }
   };
 
@@ -52,6 +53,7 @@ const EditCardInput = ({ props }) => {
     if (deletedCard) {
       setItem(deletedCard)
       setEdit(false);
+      setEditItem(deletedCard);
     }
   };
 

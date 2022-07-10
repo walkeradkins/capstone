@@ -14,13 +14,17 @@ const ListItem = ({ list }) => {
   const cards = useSelector((state) => state.cards);
   const cardsArray = list.cards.map((id) => cards[id]);
   const [item, setItem] = useState("");
+  const [editItem, setEditItem] = useState("");
   const [cardsState, setCardsState] = useState(list.cards.map((id) => cards[id]))
-  console.log(cardsState)
+
   useEffect(() => {
     dispatch(getAllCards(currentWorkspace));
     dispatch(getAllLists(currentWorkspace));
   }, [item]);
 
+  useEffect(() => {
+    setCardsState(cardsArray)
+  }, [editItem])
   // if (!cardsState.length) return null;
 
   return (
@@ -38,9 +42,9 @@ const ListItem = ({ list }) => {
             >
               {list.cards[0] &&
                 cardsState.map((card, index) => (
-                  <CardHeader props={{ card, setItem, index }} key={index} />
+                  <CardHeader props={{ card, setItem, index, setEditItem }} key={index} />
                 ))}
-              <AddCardInput props={{list, setItem, setCardsState, cardsState}} />
+              <AddCardInput props={{list, setItem, setCardsState, cardsState }} />
             </div>
           </div>
         )}
