@@ -15,6 +15,7 @@ const Workspace = ({ user }) => {
   const dispatch = useDispatch();
   const workspaces = useSelector((state) => state.workspaces);
   const lists = useSelector((state) => state.lists);
+  const cards = useSelector((state) => state.cards);
   const listArray = Object.values(lists);
   const length = listArray.length
   const [showAdd, setShowAdd] = useState(false);
@@ -22,6 +23,7 @@ const Workspace = ({ user }) => {
   useEffect(() => {
     dispatch(getAllWorkspaces(user.id));
     dispatch(getAllLists(workspaceId));
+    dispatch(getAllCards(workspaceId))
     setCurrentWorkspace(workspaceId)
   }, []);
 

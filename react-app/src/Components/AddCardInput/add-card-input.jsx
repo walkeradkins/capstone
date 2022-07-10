@@ -4,7 +4,8 @@ import { useDispatch } from "react-redux";
 import { useWorkspace } from "../../context/workspace-context";
 import { createCard } from "../../store/cards";
 
-const AddCardInput = ({ list, setItem }) => {
+const AddCardInput = ({ props }) => {
+  const {list, setItem, setCardsState, cardsState} = props;
   const dispatch = useDispatch();
   const { currentWorkspace } = useWorkspace();
   const focusRef = useRef(null);
@@ -40,6 +41,7 @@ const AddCardInput = ({ list, setItem }) => {
       list_id: list.id,
       workspace_id: currentWorkspace,
       name: content,
+      index: list.cards.length + 1,
       created_at: new Date(),
     };
 
@@ -53,6 +55,7 @@ const AddCardInput = ({ list, setItem }) => {
       setAdd(true);
       setContent("");
       setItem(newCard.id)
+      setCardsState([...cardsState, newCard])
     }
   };
 

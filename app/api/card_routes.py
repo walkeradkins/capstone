@@ -21,6 +21,7 @@ def createCard(id):
             name=form.data['name'],
             workspace_id=form.data['workspace_id'],
             list_id=form.data['list_id'],
+            index=form.data['index'],
             description=None,
             due_date=None,
             created_at=form.data['created_at']
