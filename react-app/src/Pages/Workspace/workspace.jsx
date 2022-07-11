@@ -9,7 +9,7 @@ import { getAllCards } from "../../store/cards";
 import whatnext_background from "../../Assets/Images/whatnext_background.jpg";
 import { Sidebar, ListItem, WorkspaceHeader, AddList } from "../../Components";
 import { useWorkspace } from "../../context/workspace-context";
-import { useCardState } from "../../context/cardStateContext";
+import { useCardState } from "../../context/card-state-context";
 import { DragDropContext } from "react-beautiful-dnd";
 
 const Workspace = ({ user }) => {
