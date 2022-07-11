@@ -52,7 +52,10 @@ const WorkspaceName = ({ workspace }) => {
 
     document.addEventListener("click", closeEdit);
     document.addEventListener("keypress", (e) => {
-      if (e.key === "Enter") return closeEdit(e);
+      if (e.key === "Enter") {
+        document.getElementById('input__workspacename').blur();
+        return closeEdit(e);
+      }
     });
     return () => document.removeEventListener("click", closeEdit);
   }, [edit, content]);
@@ -94,6 +97,7 @@ const WorkspaceName = ({ workspace }) => {
     <div className='workspace-input__wrapper'>
       <p>{errors[0]}</p>
       <AutoSizeInput
+        id='input__workspacename'
         className={edit ? "input__active" : "input__inactive"}
         value={content}
         onClick={trueEdit}

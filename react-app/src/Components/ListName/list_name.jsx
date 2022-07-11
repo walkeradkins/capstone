@@ -52,7 +52,11 @@ const ListName = ({ list }) => {
 
     document.addEventListener("click", closeEdit);
     document.addEventListener("keypress", (e) => {
-      if (e.key === "Enter") return closeEdit(e);
+      if (e.key === "Enter") {
+        const listNames = Array.from(document.getElementsByClassName("input__active-list"));
+        listNames.forEach(element => element.blur())
+        return closeEdit(e);
+      }
     });
     return () => document.removeEventListener("click", closeEdit);
   }, [edit, content]);
@@ -64,6 +68,7 @@ const ListName = ({ list }) => {
     <div className='list__header-items'>
       <p>{errors[0]}</p>
       <input
+        id='listname__input'
         className={edit ? "input__active-list" : "input__inactive-list"}
         value={content}
         onClick={trueEdit}
