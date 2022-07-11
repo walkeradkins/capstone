@@ -7,7 +7,7 @@ import { getAllLists } from "../../store/lists";
 import { useEffect, useState } from "react";
 import { useWorkspace } from "../../context/workspace-context";
 import { Droppable } from "react-beautiful-dnd";
-import { useCardState } from "../../context/cardStateContext";
+import { useCardState } from "../../context/card-state-context";
 
 const ListItem = ({ list }) => {
   const dispatch = useDispatch();
