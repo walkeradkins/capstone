@@ -1,0 +1,60 @@
+.card__container {
+  /* overflow: hidden; */
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 6px 8px 2px;
+  border-radius: .25em;
+  background-color: rgb(255, 255, 255);
+  margin: .5em;
+  /* z-index: 1; */
+  box-shadow: 0 2px 1px -1px rgb(189, 189, 189);
+}
+
+.card__container:hover{
+  cursor: pointer;
+  background-color: rgb(240, 240, 240);
+}
+
+.card__title {
+  word-wrap: break-word;
+  clear: both;
+  font-size: .9em;
+  color: #6b6b6b;
+  display: block;
+  margin: 0 0 4px;
+  /* overflow-y: hidden; */
+  text-decoration: none;
+  padding: .15em;
+}
+
+.card__edit-btn {
+  position: absolute;
+  right: .25em;
+  top: .1em;
+  font-size: 1em;
+  font-weight: 500;
+  padding: .4em;
+  display: flex;
+  background-color: rgb(240, 240, 240, 0.6);
+  color:rgba(131, 131, 131);
+  border-radius: .1em;
+}
+
+.card__edit-btn-hidden {
+  display: none
+}
+.card__edit-btn:hover {
+  background-color: rgb(223, 223, 223);
+}
+
+.editcard-background {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 2;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+}

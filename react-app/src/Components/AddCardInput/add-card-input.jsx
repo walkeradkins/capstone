@@ -4,7 +4,8 @@ import { useDispatch } from "react-redux";
 import { useWorkspace } from "../../context/workspace-context";
 import { createCard } from "../../store/cards";
 
-const AddCardInput = ({ list, setItem }) => {
+const AddCardInput = ({ props }) => {
+  const { list, setItem } = props;
   const dispatch = useDispatch();
   const { currentWorkspace } = useWorkspace();
   const focusRef = useRef(null);
@@ -36,11 +37,15 @@ const AddCardInput = ({ list, setItem }) => {
   };
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
+    let cardIndex;
+    if (!list.cards.length) cardIndex = 0
+    else cardIndex = list.cards.length;
+
     const payload = {
       list_id: list.id,
       workspace_id: currentWorkspace,
       name: content,
+      index: cardIndex,
       created_at: new Date(),
     };
 
@@ -51,10 +56,16 @@ const AddCardInput = ({ list, setItem }) => {
       alert(error);
     }
     if (newCard) {
-      console.log('newCard', newCard.id)
       setAdd(true);
       setContent("");
-      setItem(newCard.id)
+      setItem(newCard.id);
+      // setCardState([...cardState, newCard])
+    }
+  };
+
+  const handleKeyPress = (e) => {
+    if (e.key === "Enter") {
+      handleSubmit();
     }
   };
 
@@ -74,6 +85,7 @@ const AddCardInput = ({ list, setItem }) => {
             placeholder="Enter a title for this card..."
             value={content}
             onChange={(e) => setContent(e.target.value)}
+            onKeyPress={handleKeyPress}
             ref={focusRef}
           />
           <div className="add-card__buttons">

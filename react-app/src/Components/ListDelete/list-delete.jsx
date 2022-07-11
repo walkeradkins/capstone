@@ -14,9 +14,7 @@ const ListDelete = ({ list }) => {
     } catch(error) {
       alert(error)
     }
-
   }
-
 
   return (
     <div className="list__delete-container" onClick={handleDelete}>

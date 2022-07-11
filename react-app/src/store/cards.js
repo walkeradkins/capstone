@@ -1,6 +1,7 @@
 const ALL_CARDS = 'cards/ALL_CARDS';
 const CREATE_CARD = 'cards/CREATE_CARD'
-
+const UPDATE_CARD = 'cards/UPDATE_CARD'
+const DELETE_CARD = 'cards/DELETE_CARD'
 
 export const allCards = (cards) => ({
   type: ALL_CARDS,
@@ -10,6 +11,16 @@ export const allCards = (cards) => ({
 export const createOne = (newCard) => ({
   type: CREATE_CARD,
   newCard
+});
+
+export const updateOne = (updatedCard) => ({
+  type: UPDATE_CARD,
+  updatedCard
+});
+
+export const deleteOne = (deletedCard) => ({
+  type: DELETE_CARD,
+  deletedCard
 });
 
 export const getAllCards = (id) => async dispatch => {
@@ -38,6 +49,35 @@ export const createCard = (payload, id) => async dispatch => {
   }
 }
 
+export const updateCard = (payload, cardId) => async dispatch => {
+  const res = await fetch(`/api/cards/${cardId}`, {
+    method: 'PUT',
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(payload),
+  });
+
+  if (res.ok) {
+    const updatedCard = await res.json();
+    dispatch(updateOne(updatedCard));
+    return updatedCard
+  }
+}
+
+
+export const deleteCard = (id) => async dispatch => {
+  const res = await fetch(`/api/cards/${id}`, {
+    method: 'DELETE'
+  });
+
+  if (res.ok) {
+    const deletedCard = await res.json();
+    dispatch(deleteOne(deletedCard));
+    return deletedCard;
+  }
+}
+
 const initialState = {};
 
 export default function cardReducer(state = initialState, action) {
@@ -56,6 +96,19 @@ export default function cardReducer(state = initialState, action) {
         }
         return newState;
       };
+    case UPDATE_CARD:
+      const updatedState = {
+        ...state,
+        [action.updatedCard.id]: {
+          ...state[action.updatedCard.id],
+          ...action.updatedCard
+        }
+      }
+      return updatedState;
+    case DELETE_CARD:
+      const newState = { ...state };
+      delete newState[action.deletedCard.id];
+      return newState;
     default:
       return state;
   }

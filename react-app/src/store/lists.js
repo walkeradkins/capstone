@@ -85,8 +85,9 @@ export default function listReducer(state = initialState, action) {
       const lists = {}
       for (let list of action.lists.lists) {
         lists[list.id] = list;
-        lists[list.id]['cards'] = list.cards.map(card => card.id);
+        lists[list.id]['cards'] = list.cards.sort((a, b) => a.index - b.index).map(card => card.id);
       }
+      console.log({...lists})
       return { ...lists };
     case CREATE_LIST:
       if (!state[action.newList.id]) {
