@@ -11,7 +11,7 @@ const EditCardInput = ({ props }) => {
   const [rowValue, setRowValue] = useState(5);
   const [spaceCheck, setSpaceCheck] = useState(content.trim().length);
   const [rows, setRows] = useState(
-    content.length < 175 ? 5 : content.length / 35
+    content.length < 175 ? 5 : content.length / 30
   );
 
   useEffect(() => {
@@ -86,7 +86,6 @@ const EditCardInput = ({ props }) => {
     <div className="edit-card__input-container">
       <textarea
         className="edit-card__input"
-        placeholder="Enter a title for this card..."
         value={content}
         onChange={handleChange}
         onKeyPress={handleKeyPress}

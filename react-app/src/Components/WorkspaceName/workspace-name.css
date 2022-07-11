@@ -4,6 +4,7 @@
 }
 
 .workspace-input__wrapper {
+
 }
 
 .input__inactive:hover {
@@ -17,4 +18,8 @@
 
 .input__active:focus {
   outline: none;
+}
+
+.error__text-workspace-edit {
+
 }

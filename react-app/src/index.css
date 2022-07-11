@@ -18,3 +18,26 @@ body:not(.pro-sidebar > .pro-sidebar-inner > .pro-sidebar-layout) {
   background-color: gray;
   color: rgb(73, 73, 73)
 }
+
+.error__text {
+  color: rgb(245, 83, 83);
+  font-weight: bold;
+}
+
+.error__container {
+  background-color: rgba(245, 83, 83, .2);
+  padding: .5em;
+  max-width: 100%;
+  border-radius: .25em;
+  display: table;
+  margin: 1 auto;
+}
+
+.disabled__btn{
+  background-color: rgb(158, 158, 158);
+  color: rgb(102, 102, 102);
+  border: none;
+  padding: .75em;
+  margin: .25em;
+  border-radius: .25em;
+}

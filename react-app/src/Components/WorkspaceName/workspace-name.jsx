@@ -20,6 +20,16 @@ const WorkspaceName = ({ workspace }) => {
   };
 
   useEffect(() => {
+    const errors = [];
+    if (content.length >= 49) {
+      errors.push("Board names cannot exceed 50 characters");
+      setErrors(errors);
+    } else {
+      setErrors("");
+    }
+  }, [content]);
+
+  useEffect(() => {
     setContent(name);
   }, [dispatch]);
 
@@ -35,19 +45,7 @@ const WorkspaceName = ({ workspace }) => {
     }
   }, [sent]);
 
-  useEffect(() => {
-    console.log("contentCheck", contentCheck);
-    console.log("content", content);
-  }, [content]);
-
-  const closeEdit = (e) => {
-    const errors = [];
-    if (content.length > 49) {
-      errors.push("Please keep board name to under 50 characters");
-    }
-
-    setErrors(errors);
-
+  const closeEdit = async (e) => {
     const payload = {
       name: content.trim(),
     };
@@ -62,6 +60,7 @@ const WorkspaceName = ({ workspace }) => {
         }
       };
       updateData();
+      setErrors("");
       setEdit(false);
     }
     setSent(!sent);
@@ -69,26 +68,21 @@ const WorkspaceName = ({ workspace }) => {
 
   useEffect(() => {
     if (!edit) return;
+    document.addEventListener("click", closeEdit);
+    document.addEventListener("keypress", (e) => {
+      if (e.key === "Enter") {
+        document.getElementById("input__workspacename").blur();
+        return closeEdit(e);
+      }
+    });
 
-    if (content.length) {
-      document.addEventListener("click", closeEdit);
-
-      document.addEventListener("keypress", (e) => {
-        if (e.key === "Enter") {
-          document.getElementById("input__workspacename").blur();
-          return closeEdit(e);
-        }
-      });
-
-      return () => document.removeEventListener("click", closeEdit);
-    }
-  }, [edit, content]);
+    return () => document.removeEventListener("click", closeEdit);
+  }, [edit, content, errors]);
 
   if (!workspace) return null;
   const { name, id } = workspace;
 
   const inputStylesActive = {
-    // margin: '.5em 2em',
     backgroundColor: "white",
     border: "2px solid rgb(0, 81, 255)",
     borderRadius: ".25em",
@@ -120,19 +114,19 @@ const WorkspaceName = ({ workspace }) => {
 
   return (
     <div className="workspace-input__wrapper">
-      <p>{errors[0]}</p>
       <AutoSizeInput
         id="input__workspacename"
         className={edit ? "input__active" : "input__inactive"}
         value={content}
         onClick={trueEdit}
         minLength={1}
-        maxLength={50}
+        maxLength={49}
         inputStyle={edit ? inputStylesActive : inputStylesInactive}
         onChange={(e) =>
           e.target.value.length > -1 ? setContent(e.target.value) : null
         }
       />
+      {/* <p className="error__text-workspace-edit">{errors[0]}</p> */}
     </div>
   );
 };
