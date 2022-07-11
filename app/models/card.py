@@ -8,7 +8,7 @@ class Card(db.Model):
     list_id = db.Column(db.Integer, db.ForeignKey('lists.id', ondelete='CASCADE'), nullable=False)
     workspace_id = db.Column(db.Integer, db.ForeignKey('workspaces.id', ondelete='CASCADE'), nullable=False)
     name = db.Column(db.String(250), nullable=False)
-    index = db.Column(db.Integer, nullable=True)
+    index = db.Column(db.String(4), nullable=True)
     description = db.Column(db.String(2000), nullable=True)
     due_date = db.Column(db.DateTime(timezone=False), nullable=True)
     created_at = db.Column(db.DateTime(timezone=False), nullable=False)
@@ -20,7 +20,7 @@ class Card(db.Model):
     def to_dict(self):
         return {
             'id': self.id,
-            'listId': self.list_id,
+            'list_id': self.list_id,
             'name': self.name,
             'index': self.index,
             'description': self.description,

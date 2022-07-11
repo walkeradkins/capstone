@@ -9,6 +9,7 @@ import { getAllCards } from "../../store/cards";
 import whatnext_background from "../../Assets/Images/whatnext_background.jpg";
 import { Sidebar, ListItem, WorkspaceHeader, AddList } from "../../Components";
 import { useWorkspace } from "../../context/workspace-context";
+import { useCardState } from "../../context/cardStateContext";
 import { DragDropContext } from "react-beautiful-dnd";
 
 const Workspace = ({ user }) => {
@@ -20,19 +21,20 @@ const Workspace = ({ user }) => {
   const cards = useSelector((state) => state.cards);
   const listArray = Object.values(lists);
   const length = listArray.length;
+  const { cardState, setCardState } = useCardState()
   const [showAdd, setShowAdd] = useState(false);
   const [drag, setDrag] = useState('')
-
 
   useEffect(() => {
     dispatch(getAllWorkspaces(user.id));
     dispatch(getAllLists(workspaceId));
     dispatch(getAllCards(workspaceId));
     setCurrentWorkspace(workspaceId);
+    setCardState(lists)
   }, [drag]);
 
   useEffect(() => {
-    // document.body.style.backgroundImage = `url( ${whatnext_background} )`;
+
     document.body.style.backgroundImage = `url( ${whatnext_background} )`;
     document.body.style.backgroundRepeat = "no-repeat";
     document.body.style.backgroundAttachment = "fixed";
@@ -54,13 +56,22 @@ const Workspace = ({ user }) => {
   };
 
   const handleOnDragEnd = async (result) => {
-    console.log('result:: ', result)
+    const { destination, source, draggableId } = result
+    console.log('res', result)
+    if (!destination) return;
+
+    if (
+      destination.droppableId === source.droppableId &&
+      destination.index === source.index
+    ) {
+      return;
+    }
 
     const payload = {
-      source_list: +result.source.droppableId,
-      list_id: +result.destination.droppableId,
-      source_index: result.source.index + 1,
-      index: result.destination.index + 1
+      start_list: +source.droppableId,
+      finish_list: +destination.droppableId,
+      start_index: source.index,
+      finish_index: destination.index
     }
 
     let updatedCard;
@@ -71,7 +82,6 @@ const Workspace = ({ user }) => {
     }
 
     if (updatedCard){
-      console.log('Success!', updatedCard)
       setDrag(updatedCard)
     }
   }
@@ -84,7 +94,9 @@ const Workspace = ({ user }) => {
           current={workspace}
           user={user}
         />
-        <DragDropContext onDragEnd={handleOnDragEnd}>
+        <DragDropContext
+        onDragEnd={handleOnDragEnd}
+        >
           <div className="workspace">
             <WorkspaceHeader workspace={workspace} />
             <div className="list__container">

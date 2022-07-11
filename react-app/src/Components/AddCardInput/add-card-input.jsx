@@ -5,7 +5,7 @@ import { useWorkspace } from "../../context/workspace-context";
 import { createCard } from "../../store/cards";
 
 const AddCardInput = ({ props }) => {
-  const {list, setItem, setCardsState, cardsState} = props;
+  const { list, setItem } = props;
   const dispatch = useDispatch();
   const { currentWorkspace } = useWorkspace();
   const focusRef = useRef(null);
@@ -37,11 +37,15 @@ const AddCardInput = ({ props }) => {
   };
 
   const handleSubmit = async (e) => {
+    let cardIndex;
+    if (!list.cards.length) cardIndex = 0
+    else cardIndex = list.cards.length;
+
     const payload = {
       list_id: list.id,
       workspace_id: currentWorkspace,
       name: content,
-      index: list.cards.length + 1,
+      index: cardIndex,
       created_at: new Date(),
     };
 
@@ -54,16 +58,16 @@ const AddCardInput = ({ props }) => {
     if (newCard) {
       setAdd(true);
       setContent("");
-      setItem(newCard.id)
-      setCardsState([...cardsState, newCard])
+      setItem(newCard.id);
+      // setCardState([...cardState, newCard])
     }
   };
 
   const handleKeyPress = (e) => {
-    if(e.key === 'Enter'){
-      handleSubmit()
+    if (e.key === "Enter") {
+      handleSubmit();
     }
-  }
+  };
 
   return (
     <>
