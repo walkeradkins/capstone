@@ -10,7 +10,7 @@ const WorkspaceName = ({ workspace }) => {
   const [errors, setErrors] = useState([]);
   const [edit, setEdit] = useState(false);
   const [sent, setSent] = useState(true);
-  const [contentCheck, setContentCheck] = useState('');
+  const [contentCheck, setContentCheck] = useState("");
 
   const trueEdit = (e) => {
     e.stopPropagation();
@@ -25,12 +25,20 @@ const WorkspaceName = ({ workspace }) => {
 
   useEffect(() => {
     if (content.length) {
-      setContentCheck(content)
+      setContentCheck(content);
     }
     if (!content.length && contentCheck) {
-      setContent(contentCheck)
+      setContent(contentCheck);
     }
-  }, [sent])
+    if (!content.length && !contentCheck) {
+      setContent(name);
+    }
+  }, [sent]);
+
+  useEffect(() => {
+    console.log("contentCheck", contentCheck);
+    console.log("content", content);
+  }, [content]);
 
   const closeEdit = (e) => {
     const errors = [];
@@ -39,10 +47,6 @@ const WorkspaceName = ({ workspace }) => {
     }
 
     setErrors(errors);
-
-    if (!content.length) {
-      return
-    }
 
     const payload = {
       name: content.trim(),
@@ -60,22 +64,24 @@ const WorkspaceName = ({ workspace }) => {
       updateData();
       setEdit(false);
     }
-    setSent(!sent)
+    setSent(!sent);
   };
 
   useEffect(() => {
     if (!edit) return;
 
-    document.addEventListener("click", closeEdit);
+    if (content.length) {
+      document.addEventListener("click", closeEdit);
 
-    document.addEventListener("keypress", (e) => {
-      if (e.key === "Enter") {
-        document.getElementById("input__workspacename").blur();
-        return closeEdit(e);
-      }
-    });
+      document.addEventListener("keypress", (e) => {
+        if (e.key === "Enter") {
+          document.getElementById("input__workspacename").blur();
+          return closeEdit(e);
+        }
+      });
 
-    return () => document.removeEventListener("click", closeEdit);
+      return () => document.removeEventListener("click", closeEdit);
+    }
   }, [edit, content]);
 
   if (!workspace) return null;
@@ -123,8 +129,10 @@ const WorkspaceName = ({ workspace }) => {
         minLength={1}
         maxLength={50}
         inputStyle={edit ? inputStylesActive : inputStylesInactive}
-        onChange={(e) => e.target.value.length > -1 ? setContent(e.target.value) : null}
-        />
+        onChange={(e) =>
+          e.target.value.length > -1 ? setContent(e.target.value) : null
+        }
+      />
     </div>
   );
 };
