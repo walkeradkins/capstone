@@ -27,7 +27,7 @@ const WorkspaceName = ({ workspace }) => {
     if (content.length) {
       setContentCheck(content)
     }
-    if (!content.length) {
+    if (!content.length && contentCheck) {
       setContent(contentCheck)
     }
   }, [sent])
@@ -41,7 +41,6 @@ const WorkspaceName = ({ workspace }) => {
     setErrors(errors);
 
     if (!content.length) {
-      console.log('leaving')
       return
     }
 
