@@ -1,7 +1,7 @@
 import "./workspace.css";
 import { useSelector, useDispatch } from "react-redux";
 import { getAllWorkspaces } from "../../store/workspaces";
-import { updateCard } from '../../store/cards'
+import { updateCard } from "../../store/cards";
 import { getAllLists } from "../../store/lists";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router";
@@ -21,20 +21,19 @@ const Workspace = ({ user }) => {
   const cards = useSelector((state) => state.cards);
   const listArray = Object.values(lists);
   const length = listArray.length;
-  const { cardState, setCardState } = useCardState()
+  const { cardState, setCardState } = useCardState();
   const [showAdd, setShowAdd] = useState(false);
-  const [drag, setDrag] = useState('')
+  const [drag, setDrag] = useState("");
 
   useEffect(() => {
     dispatch(getAllWorkspaces(user.id));
     dispatch(getAllLists(workspaceId));
     dispatch(getAllCards(workspaceId));
     setCurrentWorkspace(workspaceId);
-    setCardState(lists)
+    setCardState(lists);
   }, [drag]);
 
   useEffect(() => {
-
     document.body.style.backgroundImage = `url( ${whatnext_background} )`;
     document.body.style.backgroundRepeat = "no-repeat";
     document.body.style.backgroundAttachment = "fixed";
@@ -56,8 +55,8 @@ const Workspace = ({ user }) => {
   };
 
   const handleOnDragEnd = async (result) => {
-    const { destination, source, draggableId } = result
-    console.log('res', result)
+    const { destination, source, draggableId } = result;
+    console.log("res", result);
     if (!destination) return;
 
     if (
@@ -71,20 +70,20 @@ const Workspace = ({ user }) => {
       start_list: +source.droppableId,
       finish_list: +destination.droppableId,
       start_index: source.index,
-      finish_index: destination.index
-    }
+      finish_index: destination.index,
+    };
 
     let updatedCard;
     try {
-      updatedCard = await dispatch(updateCard(payload, result.draggableId))
+      updatedCard = await dispatch(updateCard(payload, result.draggableId));
     } catch (error) {
-      alert(error)
+      alert(error);
     }
 
-    if (updatedCard){
-      setDrag(updatedCard)
+    if (updatedCard) {
+      setDrag(updatedCard);
     }
-  }
+  };
 
   return (
     <div className="workspace__wrapper">
@@ -95,7 +94,8 @@ const Workspace = ({ user }) => {
           user={user}
         />
         <DragDropContext
-        onDragEnd={handleOnDragEnd}
+          onDragEnd={handleOnDragEnd}
+
         >
           <div className="workspace">
             <WorkspaceHeader workspace={workspace} />

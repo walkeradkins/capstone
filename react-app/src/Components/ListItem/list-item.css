@@ -5,6 +5,7 @@
   margin: 0 4px;
   vertical-align: top;
   white-space: nowrap;
+  flex: 2;
   width: 272px;
 }
 
