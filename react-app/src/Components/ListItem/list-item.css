@@ -1,16 +1,22 @@
 .list__wrapper {
   box-sizing: border-box;
   display: inline-block;
-  height: 100%;
+  height: 88%;
   margin: 0 4px;
   vertical-align: top;
   white-space: nowrap;
   flex: 2;
   width: 272px;
+  overflow-x: visible;
 }
 
+.card__wrapper {
+  overflow-y: auto;
+  overflow-x: visible;
+}
 
 .list__content {
+  overflow-x: visible;
   background-color: #ebecf0;
   border-radius: 3px;
   box-sizing: border-box;
@@ -61,4 +67,25 @@
 
 .list__new-card {
   margin: 0 .5em;
+}
+
+.card__wrapper::-webkit-scrollbar {
+  /* position: absolute; */
+  left: 100px;
+  background-color: transparent;
+  width: .6em;
+  border: 1em solid transparent;
+}
+
+.card__wrapper::-webkit-scrollbar-track {
+  width: .5em;
+  background-color: rgba(179, 179, 179, 0.4);
+  border-radius: 20px;
+}
+
+.card__wrapper::-webkit-scrollbar-thumb {
+  background-color: rgba(146, 146, 146, 0.4);
+  border-radius: 20px;
+  background-clip: content-box;
+  width: .5em;
 }

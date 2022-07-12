@@ -20,7 +20,6 @@ const EditCardInput = ({ props }) => {
     };
 
     let updatedCard;
-    console.log("card id", card.id);
     try {
       updatedCard = await dispatch(updateCard(payload, card.id));
     } catch (error) {
@@ -64,6 +63,7 @@ const EditCardInput = ({ props }) => {
         onKeyPress={handleKeyPress}
         onFocus={handleFocus}
         minRows={5}
+        maxLength={250}
         ref={focusRef}
       />
       <div className="edit-card__buttons">

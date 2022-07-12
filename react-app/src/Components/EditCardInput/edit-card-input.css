@@ -38,6 +38,7 @@
 
 .edit-card__delete-icon {
   margin-right: .5em;
+  z-index: 10;
 }
 
 .edit-card__delete-text {
@@ -54,6 +55,7 @@
   align-items: center;
   position: absolute;
   top: 0;
+  z-index: 2;
   right: -7.3em;
   transition: 0.2s;
 }

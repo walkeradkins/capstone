@@ -3,6 +3,7 @@ import { useRef, useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useWorkspace } from "../../context/workspace-context";
 import { createCard } from "../../store/cards";
+import TextareaAutosize from 'react-textarea-autosize'
 
 const AddCardInput = ({ props }) => {
   const { list, setItem } = props;
@@ -11,9 +12,6 @@ const AddCardInput = ({ props }) => {
   const focusRef = useRef(null);
   const [content, setContent] = useState("");
   const [add, setAdd] = useState(false);
-  const [rows, setRows] = useState(2);
-  const [rowValue, setRowValue] = useState(2);
-  const [spaceCheck, setSpaceCheck] = useState(content.trim().length);
   const [errors, setErrors] = useState([]);
 
   const showInput = () => {
@@ -72,7 +70,6 @@ const AddCardInput = ({ props }) => {
       setAdd(true);
       setContent("");
       setItem(newCard.id);
-      setRows(2);
     }
   };
 
@@ -85,33 +82,9 @@ const AddCardInput = ({ props }) => {
     }
   };
 
-  const handleChange = (e) => {
-    setContent(e.target.value);
-    setSpaceCheck(e.target.value.trim().length);
-    let trows;
-    let value = e.target.value.length;
-    if (value < 60) {
-      setRows(2);
-      return;
-    }
-    if (value > 50) {
-      trows = Math.ceil(value / 28);
-      if (trows > rowValue) {
-        setRows(rows + 1);
-        setRowValue(trows);
-      }
-    }
-    if (trows < rowValue) {
-      setRows(Math.ceil(value / 28));
-      setRowValue(trows);
-      if (!trows) trows = 5;
-    }
-  };
-
   const handleCancel = () => {
     setAdd(false);
     setContent("");
-    setRows(2);
   };
 
   return (
@@ -129,14 +102,14 @@ const AddCardInput = ({ props }) => {
               <p className="error__text error__text-add-card">{errors[0]}</p>
             </div>
           )}
-          <textarea
+          <TextareaAutosize
             onClick={handleClick}
             className="addcard__input"
             placeholder="Enter a title for this card..."
             value={content}
-            onChange={handleChange}
+            onChange={(e) => setContent(e.target.value)}
             onKeyPress={handleKeyPress}
-            rows={rows}
+            minRows={2}
             minLength={1}
             maxLength={250}
             ref={focusRef}

@@ -10,7 +10,9 @@ body{
   overflow: overlay;
 }
 
-body:not(.pro-sidebar > .pro-sidebar-inner > .pro-sidebar-layout) {
+body:not(
+  .pro-sidebar > .pro-sidebar-inner > .pro-sidebar-layout
+) {
   overflow-y: hidden;
 }
 

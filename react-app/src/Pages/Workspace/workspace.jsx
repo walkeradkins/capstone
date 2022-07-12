@@ -56,7 +56,6 @@ const Workspace = ({ user }) => {
 
   const handleOnDragEnd = async (result) => {
     const { destination, source, draggableId } = result;
-    console.log("res", result);
     if (!destination) return;
 
     if (

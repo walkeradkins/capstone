@@ -24,7 +24,8 @@ const WorkspaceName = ({ workspace }) => {
     if (content.length >= 49) {
       errors.push("Board names cannot exceed 50 characters");
       setErrors(errors);
-    } else {
+    }
+    else {
       setErrors("");
     }
   }, [content]);
@@ -42,14 +43,15 @@ const WorkspaceName = ({ workspace }) => {
     }
     if (!content.length && !contentCheck) {
       setContent(name);
+      console.log('settttttting')
     }
   }, [sent]);
 
   const closeEdit = async (e) => {
+    if (!content.length) return;
     const payload = {
       name: content.trim(),
     };
-
     let updatedName;
     if (!errors.length) {
       const updateData = async () => {

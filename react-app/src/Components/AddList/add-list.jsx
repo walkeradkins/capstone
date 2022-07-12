@@ -44,7 +44,12 @@ const AddList = ({ props }) => {
           ref={focusRef}
         />
         <div className="add-list__buttons">
-          <button className={title.trim().length ? "add-list__submit" : "disabled__btn"} disabled={!title.trim().length}>
+          <button
+            className={
+              title.trim().length ? "add-list__submit" : "disabled__btn"
+            }
+            disabled={!title.trim().length}
+          >
             Add list
           </button>
           <button
