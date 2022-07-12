@@ -16,6 +16,7 @@ const ListItem = ({ list }) => {
   const cardsArray = list.cards.map((id) => cards[id]);
   const [item, setItem] = useState("");
   const [editItem, setEditItem] = useState("");
+  const [add, setAdd] = useState(false);
 
   useEffect(() => {
     dispatch(getAllCards(currentWorkspace));
@@ -28,14 +29,14 @@ const ListItem = ({ list }) => {
 
   return (
     <div className="list__wrapper">
-      <Droppable droppableId={`${list.id}`}>
-        {(provided, snapshot) => (
-          <div className="list__content">
-            <div className="list__header">
-              <ListName list={list} />
-            </div>
+      <div className="list__content">
+        <div className="list__header">
+          <ListName list={list} />
+        </div>
+        <Droppable droppableId={`${list.id}`}>
+          {(provided, snapshot) => (
             <div
-              className="card__wrapper"
+              className={list.cards[0] ? "card__wrapper" : 'card__wrapper-no-cards'}
               {...provided.droppableProps}
               ref={provided.innerRef}
             >
@@ -46,12 +47,13 @@ const ListItem = ({ list }) => {
                     key={index}
                   />
                 ))}
+              {provided.placeholder}
+              {add && <AddCardInput props={{ list, setItem, add, setAdd }} />}
             </div>
-            {provided.placeholder}
-            <AddCardInput props={{ list, setItem }} />
-          </div>
-        )}
-      </Droppable>
+          )}
+        </Droppable>
+        {!add && <AddCardInput props={{ list, setItem, add, setAdd }} />}
+      </div>
     </div>
   );
 };

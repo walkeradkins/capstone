@@ -55,6 +55,8 @@ const CardHeader = ({ props }) => {
               <EditCardInput props={{ card, setEdit, setItem, setEditItem }} />
             </div>
           )}
+            {provided.placeholder}
+
         </div>
       )}
     </Draggable>

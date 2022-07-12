@@ -13,6 +13,7 @@
 
 .list__container {
   display: flex;
+  max-height: 45em;
 }
 
 .workspace__list-add {

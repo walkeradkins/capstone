@@ -6,12 +6,11 @@ import { createCard } from "../../store/cards";
 import TextareaAutosize from 'react-textarea-autosize'
 
 const AddCardInput = ({ props }) => {
-  const { list, setItem } = props;
+  const { list, setItem, add, setAdd } = props;
   const dispatch = useDispatch();
   const { currentWorkspace } = useWorkspace();
   const focusRef = useRef(null);
   const [content, setContent] = useState("");
-  const [add, setAdd] = useState(false);
   const [errors, setErrors] = useState([]);
 
   const showInput = () => {
@@ -21,8 +20,8 @@ const AddCardInput = ({ props }) => {
 
   useEffect(() => {
     const validationErrors = [];
-    if (content.length > 248)
-      validationErrors.push("Card title cannot exceed 250 characters");
+    if (content.length > 249)
+      validationErrors.push("Please keep card titles to 250 characters or less");
     setErrors(validationErrors);
   }, [content, dispatch]);
 

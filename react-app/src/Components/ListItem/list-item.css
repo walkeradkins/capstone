@@ -1,21 +1,27 @@
 .list__wrapper {
   box-sizing: border-box;
   display: inline-block;
-  height: 88%;
   margin: 0 4px;
   vertical-align: top;
   white-space: nowrap;
   flex: 2;
   width: 272px;
   overflow-x: visible;
+  height: 100%;
 }
 
 .card__wrapper {
+  max-height: 50%;
   overflow-y: auto;
-  overflow-x: visible;
+  overflow-x: hidden;
+}
+
+.card__wrapper-no-cards {
+
 }
 
 .list__content {
+  /* overflow-y: auto; */
   overflow-x: visible;
   background-color: #ebecf0;
   border-radius: 3px;

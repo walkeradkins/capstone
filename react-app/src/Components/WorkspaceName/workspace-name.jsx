@@ -22,7 +22,10 @@ const WorkspaceName = ({ workspace }) => {
   useEffect(() => {
     const errors = [];
     if (content.length >= 49) {
-      errors.push("Board names cannot exceed 50 characters");
+      errors.push("Please keep board names to 50 characters or less");
+      setErrors(errors);
+    } else if (content.length < 1) {
+      errors.push("Board names cannot be empty");
       setErrors(errors);
     }
     else {
@@ -43,7 +46,6 @@ const WorkspaceName = ({ workspace }) => {
     }
     if (!content.length && !contentCheck) {
       setContent(name);
-      console.log('settttttting')
     }
   }, [sent]);
 
@@ -128,7 +130,7 @@ const WorkspaceName = ({ workspace }) => {
           e.target.value.length > -1 ? setContent(e.target.value) : null
         }
       />
-      {/* <p className="error__text-workspace-edit">{errors[0]}</p> */}
+      <p className="error__text-workspace-edit">{errors[0]}</p>
     </div>
   );
 };
