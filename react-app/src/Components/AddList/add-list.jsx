@@ -4,20 +4,20 @@ import { useDispatch } from "react-redux";
 import { createList } from "../../store/lists";
 
 const AddList = ({ props }) => {
-  const { showAdd, setShowAdd, workspaceId } = props
+  const { showAdd, setShowAdd, workspaceId } = props;
   const dispatch = useDispatch();
   const focusRef = useRef(null);
   const [title, setTitle] = useState("");
 
   useEffect(() => {
     if (showAdd) focusRef.current.focus();
-    return focusRef.current = null;
+    // return (focusRef.current = null);
   }, [showAdd]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     const payload = {
-      title,
+      title: title.trim(),
       workspace_id: workspaceId,
     };
 
@@ -29,8 +29,8 @@ const AddList = ({ props }) => {
     }
 
     if (newList) {
-      setTitle('')
-      setShowAdd(false)
+      setTitle("");
+      setShowAdd(false);
     }
   };
 
@@ -44,7 +44,9 @@ const AddList = ({ props }) => {
           ref={focusRef}
         />
         <div className="add-list__buttons">
-          <button className="add-list__submit">Add list</button>
+          <button className={title.trim().length ? "add-list__submit" : "disabled__btn"} disabled={!title.trim().length}>
+            Add list
+          </button>
           <button
             className="add-list__cancel"
             onClick={() => setShowAdd(false)}
