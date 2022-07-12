@@ -5,8 +5,6 @@ import { useState, useCallback } from "react";
 const CardItem = ({ cards, setItem }) => {
   const [allCards, setAllCards] = useState(cards);
 
-  console.log('HERRRRE', allCards)
-
   const moveCard = useCallback(
     (dragIndex, hoverIndex) => {
       const dragItem = cards[dragIndex];

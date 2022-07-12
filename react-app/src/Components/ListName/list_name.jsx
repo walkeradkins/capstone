@@ -9,6 +9,11 @@ const ListName = ({ list }) => {
   const [content, setContent] = useState("");
   const [errors, setErrors] = useState([]);
   const [edit, setEdit] = useState(false);
+  const [rowValue, setRowValue] = useState(5);
+  const [spaceCheck, setSpaceCheck] = useState(content.trim().length);
+  const [rows, setRows] = useState(
+    content.length < 21 ? 1 : Math.ceil(content.length / 21)
+  );
 
   const trueEdit = (e) => {
     e.stopPropagation();
@@ -26,9 +31,9 @@ const ListName = ({ list }) => {
 
     const closeEdit = (e) => {
       const errors = [];
-      if (content.length > 49) {
-        errors.push("Please keep list name to under 50 characters");
-      }
+      // if (content.length > 49) {
+      //   errors.push("Please keep list name to under 50 characters");
+      // }
       setErrors(errors);
 
       const payload = {
@@ -64,16 +69,44 @@ const ListName = ({ list }) => {
   if (!list) return null;
   const { title, id } = list;
 
+  const handleChange = (e) => {
+    setContent(e.target.value);
+    setSpaceCheck(e.target.value.trim().length);
+    // let trows;
+    let value = e.target.value.length;
+    if (value < 21) {
+      console.log('value":: ', value)
+      setRows(1)
+    } else setRows(Math.ceil(value / 21));
+    // if (value < 29) {
+    //   setRows(1);
+    //   return;
+    // }
+    // if (value >= 30) {
+    //   trows = Math.ceil(value / 23);
+    //   if (trows > rowValue) {
+    //     setRows(rows + 1);
+    //     setRowValue(trows);
+    //   }
+    // }
+    // if (trows < rowValue) {
+    //   setRows(Math.ceil(value / 23));
+    //   setRowValue(trows);
+    //   if (!trows) trows = 1;
+    // }
+  };
+
   return (
     <div className='list__header-items'>
       <p>{errors[0]}</p>
-      <input
+      <textarea
         id='listname__input'
         className={edit ? "input__active-list" : "input__inactive-list"}
         value={content}
         onClick={trueEdit}
-        maxLength={50}
-        onChange={(e) => setContent(e.target.value)}
+        rows={rows}
+        maxLength={249}
+        onChange={handleChange}
       />
       <ListDelete list={list} />
     </div>

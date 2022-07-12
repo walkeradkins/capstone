@@ -7,7 +7,7 @@ class List(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     workspace_id = db.Column(db.Integer, db.ForeignKey(
         'workspaces.id', ondelete='CASCADE'), nullable=False)
-    title = db.Column(db.String(50), nullable=False)
+    title = db.Column(db.String(255), nullable=False)
 
     # one-to-many with Card
     cards = db.relationship('Card', back_populates='list',

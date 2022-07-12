@@ -15,7 +15,7 @@
   padding: .25em 1em;
   width: fit-content;
   resize: none;
-  overflow: auto;
+  overflow: hidden;
 	height: auto;
 }
 
@@ -35,8 +35,8 @@
   font-size: .85em;
   font-weight: bold;
   user-select: all;
-  overflow: auto;
-	height: auto;
+  overflow: hidden;
+	/* height: auto; */
 }
 
 .input__active-list:focus {

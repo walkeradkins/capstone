@@ -57,7 +57,7 @@ const AddCardInput = ({ props }) => {
     const payload = {
       list_id: list.id,
       workspace_id: currentWorkspace,
-      name: content,
+      name: content.trim(),
       index: cardIndex,
       created_at: new Date(),
     };
@@ -78,7 +78,10 @@ const AddCardInput = ({ props }) => {
 
   const handleKeyPress = (e) => {
     if (e.key === "Enter" && !e.shiftKey) {
-      handleSubmit();
+      e.preventDefault();
+      if (content.trim().length) {
+        handleSubmit();
+      }
     }
   };
 
@@ -140,11 +143,14 @@ const AddCardInput = ({ props }) => {
           />
           <div className="add-card__buttons">
             <button
-              className={errors[0] || !content.length ? "disabled__btn" : "add-card__submit"}
+              className={
+                errors[0] || !content.trim().length
+                  ? "disabled__btn"
+                  : "add-card__submit"
+              }
               onClick={handleSubmit}
               disabled={errors[0] || !content.length}
             >
-              {console.log(errors[0])}
               Add Card
             </button>
             <button className="add-card__cancel" onClick={handleCancel}>

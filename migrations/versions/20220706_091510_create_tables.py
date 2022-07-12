@@ -1,7 +1,7 @@
 """create tables
 
 Revision ID: 0821e7554ede
-Revises: 
+Revises:
 Create Date: 2022-07-06 09:15:10.198794
 
 """
@@ -38,7 +38,7 @@ def upgrade():
     op.create_table('lists',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('workspace_id', sa.Integer(), nullable=False),
-    sa.Column('title', sa.String(length=50), nullable=False),
+    sa.Column('title', sa.String(length=250), nullable=False),
     sa.ForeignKeyConstraint(['workspace_id'], ['workspaces.id'], ondelete='CASCADE'),
     sa.PrimaryKeyConstraint('id')
     )
