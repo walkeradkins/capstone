@@ -28,6 +28,7 @@
 
 .add-list__buttons {
   display: flex;
+  align-items: center;
 }
 
 .add-list__submit {
@@ -48,4 +49,43 @@
   background-color: #ebecf0;
   border: none;
   cursor: pointer;
+}
+
+.error__container-add-list {
+  background-color: rgba(245, 83, 83, .2);
+  max-width: 60%;
+  border-radius: .25em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  height: 2em;
+}
+
+.error__text-add_list {
+  color: rgb(245, 83, 83);
+  font-weight: bold;
+  font-size: .9em;
+}
+
+.list-transition-enter{
+  max-height: 0;
+  opacity: 0;
+}
+
+.list-transition-enter-active {
+  max-height: 30px;
+  opacity: 1;
+  transition: all 500ms;
+}
+
+.list-transition-exit{
+  max-height: 30px;
+  opacity: 1;
+}
+
+.list-transition-exit-active {
+  max-height: 0;
+  opacity: 0;
+  transition: all 500ms;
 }
