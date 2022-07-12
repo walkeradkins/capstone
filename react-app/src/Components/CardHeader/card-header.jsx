@@ -22,9 +22,13 @@ const CardHeader = ({ props }) => {
 
   return (
     <Draggable key={card.id} draggableId={card.id.toString()} index={index}>
-      {(provided) => (
+      {(provided, snapshot) => (
         <div
-          className="card__container"
+          className={
+            snapshot.isDragging
+              ? "card__container drag__over"
+              : "card__container"
+          }
           onMouseEnter={(e) => setDisplay(true)}
           onMouseLeave={(e) => setDisplay(false)}
           ref={provided.innerRef}

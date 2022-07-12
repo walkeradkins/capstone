@@ -14,6 +14,9 @@
   font-weight: bold;
   padding: .25em 1em;
   width: fit-content;
+  resize: none;
+  overflow: hidden;
+	height: auto;
 }
 
 .input__inactive-list:hover {
@@ -22,6 +25,7 @@
 
 .input__active-list {
   margin: .5em;
+  resize: none;
   background-color: white;
   border: 2px solid rgb(0, 81, 255);
   border-radius: .25em;
@@ -31,6 +35,8 @@
   font-size: .85em;
   font-weight: bold;
   user-select: all;
+  overflow: hidden;
+	/* height: auto; */
 }
 
 .input__active-list:focus {

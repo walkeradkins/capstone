@@ -74,7 +74,8 @@ def updateCard(cardId):
                     db.session.merge(card)
         else:
             # Moving on the different list
-            start_list = Card.query.filter(new_card['start_list'] == Card.list_id).all()
+            start_list = Card.query.filter(
+                new_card['start_list'] == Card.list_id).all()
             index = card.index
             index = new_card['finish_index']
             card.index = index
@@ -87,7 +88,6 @@ def updateCard(cardId):
                     start_card.index = index
                     db.session.merge(start_card)
 
-            print("!!!!!!!!!!!", new_card['finish_index'])
             for card in cards:
                 if card.to_dict()['index'] >= new_card['finish_index'] and card.to_dict()['id'] != cardId:
                     index = card.index
@@ -100,20 +100,18 @@ def updateCard(cardId):
         return card.to_dict()
 
 
-
-
-
-        #           if source_card.to_dict()['index'] > new_card['source_index']:
-        #               index = source_card.index
-        #               print('!!!!!!!!!!!!!', index)
-        #               index = index - 1
-        #               source_card.index = index
-        #               db.session.merge(source_card)
-
-
 @card_routes.route('/<int:id>', methods=['DELETE'], strict_slashes=False)
 def deleteCard(id):
-    card = Card.query.get(id)
-    db.session.delete(card)
+    delete_card = Card.query.get(id)
+    cards = Card.query.filter(delete_card.list_id == Card.list_id).all()
+    for card in cards:
+        # changing indices of cards greater than deleted card
+        if card.to_dict()['index'] > delete_card.to_dict()['index']:
+            index = card.index
+            index = index - 1
+            card.index = index
+            db.session.merge(card)
+
+    db.session.delete(delete_card)
     db.session.commit()
     return card.to_dict()

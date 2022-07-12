@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux";
 import { useState, useEffect } from "react";
 import { updateList } from "../../store/lists";
 import ListDelete from "../ListDelete/list-delete";
+import TextareaAutosize from "react-textarea-autosize";
 
 const ListName = ({ list }) => {
   const dispatch = useDispatch();
@@ -26,9 +27,6 @@ const ListName = ({ list }) => {
 
     const closeEdit = (e) => {
       const errors = [];
-      if (content.length > 49) {
-        errors.push("Please keep list name to under 50 characters");
-      }
       setErrors(errors);
 
       const payload = {
@@ -52,7 +50,13 @@ const ListName = ({ list }) => {
 
     document.addEventListener("click", closeEdit);
     document.addEventListener("keypress", (e) => {
-      if (e.key === "Enter") return closeEdit(e);
+      if (e.key === "Enter") {
+        const listNames = Array.from(
+          document.getElementsByClassName("input__active-list")
+        );
+        listNames.forEach((element) => element.blur());
+        return closeEdit(e);
+      }
     });
     return () => document.removeEventListener("click", closeEdit);
   }, [edit, content]);
@@ -61,13 +65,15 @@ const ListName = ({ list }) => {
   const { title, id } = list;
 
   return (
-    <div className='list__header-items'>
+    <div className="list__header-items">
       <p>{errors[0]}</p>
-      <input
+      <TextareaAutosize
+        id="listname__input"
         className={edit ? "input__active-list" : "input__inactive-list"}
         value={content}
         onClick={trueEdit}
-        maxLength={50}
+        maxLength={249}
+        minRows={1}
         onChange={(e) => setContent(e.target.value)}
       />
       <ListDelete list={list} />

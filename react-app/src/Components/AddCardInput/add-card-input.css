@@ -11,6 +11,7 @@
   display: block;
   line-height: 20px;
   margin-bottom: 12px;
+  line-height: 1.25em;
   outline: none;
   padding: 8px 12px;
   transition-duration: 85ms;
@@ -20,6 +21,7 @@
   font-weight: 400;
   writing-mode: horizontal-tb !important;
   resize: none;
+  overflow: hidden;
 }
 
 .addcard__input:hover {

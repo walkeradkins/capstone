@@ -11,11 +11,22 @@ const AddCardInput = ({ props }) => {
   const focusRef = useRef(null);
   const [content, setContent] = useState("");
   const [add, setAdd] = useState(false);
+  const [rows, setRows] = useState(2);
+  const [rowValue, setRowValue] = useState(2);
+  const [spaceCheck, setSpaceCheck] = useState(content.trim().length);
+  const [errors, setErrors] = useState([]);
 
   const showInput = () => {
     if (add) return;
     setAdd(true);
   };
+
+  useEffect(() => {
+    const validationErrors = [];
+    if (content.length > 248)
+      validationErrors.push("Card title cannot exceed 250 characters");
+    setErrors(validationErrors);
+  }, [content, dispatch]);
 
   useEffect(() => {
     if (!add) return;
@@ -38,13 +49,15 @@ const AddCardInput = ({ props }) => {
 
   const handleSubmit = async (e) => {
     let cardIndex;
-    if (!list.cards.length) cardIndex = 0
+    if (!list.cards.length) cardIndex = 0;
     else cardIndex = list.cards.length;
+
+    if (errors.length) return;
 
     const payload = {
       list_id: list.id,
       workspace_id: currentWorkspace,
-      name: content,
+      name: content.trim(),
       index: cardIndex,
       created_at: new Date(),
     };
@@ -59,14 +72,46 @@ const AddCardInput = ({ props }) => {
       setAdd(true);
       setContent("");
       setItem(newCard.id);
-      // setCardState([...cardState, newCard])
+      setRows(2);
     }
   };
 
   const handleKeyPress = (e) => {
-    if (e.key === "Enter") {
-      handleSubmit();
+    if (e.key === "Enter" && !e.shiftKey) {
+      e.preventDefault();
+      if (content.trim().length) {
+        handleSubmit();
+      }
     }
+  };
+
+  const handleChange = (e) => {
+    setContent(e.target.value);
+    setSpaceCheck(e.target.value.trim().length);
+    let trows;
+    let value = e.target.value.length;
+    if (value < 60) {
+      setRows(2);
+      return;
+    }
+    if (value > 50) {
+      trows = Math.ceil(value / 28);
+      if (trows > rowValue) {
+        setRows(rows + 1);
+        setRowValue(trows);
+      }
+    }
+    if (trows < rowValue) {
+      setRows(Math.ceil(value / 28));
+      setRowValue(trows);
+      if (!trows) trows = 5;
+    }
+  };
+
+  const handleCancel = () => {
+    setAdd(false);
+    setContent("");
+    setRows(2);
   };
 
   return (
@@ -79,20 +124,36 @@ const AddCardInput = ({ props }) => {
       )}
       {add && (
         <div className="addcard__input-container">
+          {errors[0] && (
+            <div className="error__container">
+              <p className="error__text error__text-add-card">{errors[0]}</p>
+            </div>
+          )}
           <textarea
             onClick={handleClick}
             className="addcard__input"
             placeholder="Enter a title for this card..."
             value={content}
-            onChange={(e) => setContent(e.target.value)}
+            onChange={handleChange}
             onKeyPress={handleKeyPress}
+            rows={rows}
+            minLength={1}
+            maxLength={250}
             ref={focusRef}
           />
           <div className="add-card__buttons">
-            <button className="add-card__submit" onClick={handleSubmit}>
+            <button
+              className={
+                errors[0] || !content.trim().length
+                  ? "disabled__btn"
+                  : "add-card__submit"
+              }
+              onClick={handleSubmit}
+              disabled={errors[0] || !content.length}
+            >
               Add Card
             </button>
-            <button className="add-card__cancel" onClick={() => setAdd(false)}>
+            <button className="add-card__cancel" onClick={handleCancel}>
               <span className="material-symbols-outlined add-card__cancel-icon">
                 close
               </span>

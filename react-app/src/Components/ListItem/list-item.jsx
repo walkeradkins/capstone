@@ -28,12 +28,12 @@ const ListItem = ({ list }) => {
 
   return (
     <div className="list__wrapper">
-      <div className="list__content">
-        <div className="list__header">
-          <ListName list={list} />
-        </div>
-        <Droppable droppableId={`${list.id}`}>
-          {(provided) => (
+      <Droppable droppableId={`${list.id}`}>
+        {(provided, snapshot) => (
+          <div className="list__content">
+            <div className="list__header">
+              <ListName list={list} />
+            </div>
             <div
               className="card__wrapper"
               {...provided.droppableProps}
@@ -42,15 +42,16 @@ const ListItem = ({ list }) => {
               {list.cards[0] &&
                 cardsArray.map((card, index) => (
                   <CardHeader
-                    props={{ card, setItem, index, setEditItem }}
+                    props={{ card, setItem, index, setEditItem, snapshot }}
                     key={index}
                   />
                 ))}
             </div>
-          )}
-        </Droppable>
-        <AddCardInput props={{ list, setItem }} />
-      </div>
+            {provided.placeholder}
+            <AddCardInput props={{ list, setItem }} />
+          </div>
+        )}
+      </Droppable>
     </div>
   );
 };
