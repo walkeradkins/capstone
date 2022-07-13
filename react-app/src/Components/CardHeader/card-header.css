@@ -1,5 +1,5 @@
 .card__container {
-  /* overflow: hidden; */
+  overflow-x: visible;
   position: relative;
   display: flex;
   justify-content: space-between;

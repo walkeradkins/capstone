@@ -3,18 +3,17 @@ import { useRef, useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useWorkspace } from "../../context/workspace-context";
 import { createCard } from "../../store/cards";
+import TextareaAutosize from "react-textarea-autosize";
+import { CSSTransition, TransitionGroup } from "react-transition-group";
 
 const AddCardInput = ({ props }) => {
-  const { list, setItem } = props;
+  const { list, setItem, add, setAdd } = props;
   const dispatch = useDispatch();
   const { currentWorkspace } = useWorkspace();
   const focusRef = useRef(null);
   const [content, setContent] = useState("");
-  const [add, setAdd] = useState(false);
-  const [rows, setRows] = useState(2);
-  const [rowValue, setRowValue] = useState(2);
-  const [spaceCheck, setSpaceCheck] = useState(content.trim().length);
   const [errors, setErrors] = useState([]);
+  const [errorCheck, setErrorCheck] = useState(false);
 
   const showInput = () => {
     if (add) return;
@@ -23,8 +22,11 @@ const AddCardInput = ({ props }) => {
 
   useEffect(() => {
     const validationErrors = [];
-    if (content.length > 248)
-      validationErrors.push("Card title cannot exceed 250 characters");
+    if (content.length > 249)
+      validationErrors.push(
+        "Please keep card titles to 250 characters or less"
+      );
+    setErrorCheck(content.length > 249);
     setErrors(validationErrors);
   }, [content, dispatch]);
 
@@ -72,7 +74,6 @@ const AddCardInput = ({ props }) => {
       setAdd(true);
       setContent("");
       setItem(newCard.id);
-      setRows(2);
     }
   };
 
@@ -85,33 +86,9 @@ const AddCardInput = ({ props }) => {
     }
   };
 
-  const handleChange = (e) => {
-    setContent(e.target.value);
-    setSpaceCheck(e.target.value.trim().length);
-    let trows;
-    let value = e.target.value.length;
-    if (value < 60) {
-      setRows(2);
-      return;
-    }
-    if (value > 50) {
-      trows = Math.ceil(value / 28);
-      if (trows > rowValue) {
-        setRows(rows + 1);
-        setRowValue(trows);
-      }
-    }
-    if (trows < rowValue) {
-      setRows(Math.ceil(value / 28));
-      setRowValue(trows);
-      if (!trows) trows = 5;
-    }
-  };
-
   const handleCancel = () => {
     setAdd(false);
     setContent("");
-    setRows(2);
   };
 
   return (
@@ -124,19 +101,26 @@ const AddCardInput = ({ props }) => {
       )}
       {add && (
         <div className="addcard__input-container">
-          {errors[0] && (
+          <CSSTransition
+            in={errorCheck}
+            timeout={500}
+            classNames="list-transition"
+            unmountOnExit
+          >
             <div className="error__container">
-              <p className="error__text error__text-add-card">{errors[0]}</p>
+              <p className="error__text error__text-add-card">
+                Please keep card titles to 250 characters or less
+              </p>
             </div>
-          )}
-          <textarea
+          </CSSTransition>
+          <TextareaAutosize
             onClick={handleClick}
             className="addcard__input"
             placeholder="Enter a title for this card..."
             value={content}
-            onChange={handleChange}
+            onChange={(e) => setContent(e.target.value)}
             onKeyPress={handleKeyPress}
-            rows={rows}
+            minRows={2}
             minLength={1}
             maxLength={250}
             ref={focusRef}

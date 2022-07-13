@@ -2,25 +2,47 @@ import "./edit-card-input.css";
 import { useState, useRef, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { updateCard, deleteCard } from "../../store/cards";
-import TextareaAutosize from 'react-textarea-autosize'
+import TextareaAutosize from "react-textarea-autosize";
+import { CSSTransition } from "react-transition-group";
 
 const EditCardInput = ({ props }) => {
   const { card, setEdit, setItem, setEditItem } = props;
   const dispatch = useDispatch();
   const focusRef = useRef(null);
   const [content, setContent] = useState(card.name);
+  const [errors, setErrors] = useState([]);
+  const [errorCheck, setErrorCheck] = useState(false);
+
+  const errorObj = {
+    err1: "Please keep list titles to 250 characters or less",
+    err2: "Please provide a title for your list",
+  };
+
+  useEffect(() => {
+    const validationErrors = [];
+    if (content.length > 249) {
+      validationErrors.push("err1");
+    }
+
+    if (content.trim().length < 1) {
+      validationErrors.push("err2");
+    }
+
+    setErrorCheck(validationErrors.length > 0);
+    setErrors(validationErrors);
+  }, [content, dispatch]);
 
   useEffect(() => {
     if (card) focusRef.current.focus();
   }, [card]);
 
   const handleSubmit = async () => {
+    if (errors.length) return;
     const payload = {
       name: content.trim(),
     };
 
     let updatedCard;
-    console.log("card id", card.id);
     try {
       updatedCard = await dispatch(updateCard(payload, card.id));
     } catch (error) {
@@ -29,25 +51,28 @@ const EditCardInput = ({ props }) => {
 
     if (updatedCard) {
       setEdit(false);
-      setEditItem(updatedCard)
+      setEditItem(updatedCard);
     }
   };
 
   const handleKeyPress = (e) => {
     if (e.key === "Enter" && !e.shiftKey) {
-      handleSubmit();
+      e.preventDefault();
+      if (content.trim().length) {
+        handleSubmit();
+      }
     }
   };
 
   const handleDelete = async () => {
     let deletedCard;
     try {
-      deletedCard = await dispatch(deleteCard(card.id))
-    } catch(error) {
-      alert(error)
+      deletedCard = await dispatch(deleteCard(card.id));
+    } catch (error) {
+      alert(error);
     }
     if (deletedCard) {
-      setItem(deletedCard)
+      setItem(deletedCard);
       setEdit(false);
       setEditItem(deletedCard);
     }
@@ -57,6 +82,18 @@ const EditCardInput = ({ props }) => {
 
   return (
     <div className="edit-card__input-container">
+      <CSSTransition
+        in={errorCheck}
+        timeout={500}
+        classNames="list-transition"
+        unmountOnExit
+      >
+        <div className="error__container card__name-edit-container">
+          <p className="error__text error__text-add-card">
+            {errors[0] == "err1" ? errorObj.err1 : errorObj.err2}
+          </p>
+        </div>
+      </CSSTransition>
       <TextareaAutosize
         className="edit-card__input"
         value={content}
@@ -64,15 +101,24 @@ const EditCardInput = ({ props }) => {
         onKeyPress={handleKeyPress}
         onFocus={handleFocus}
         minRows={5}
+        maxLength={250}
         ref={focusRef}
       />
       <div className="edit-card__buttons">
-        <button className="edit-card__submit" onClick={handleSubmit}>
+        <button
+          className={!errors[0] ? "edit-card__submit" : "disabled__btn"}
+          onClick={handleSubmit}
+          disabled={
+            errors[0] || !content.trim().length || content.trim().length
+          }
+        >
           Save
         </button>
         <div className="edit-card__delete" onClick={handleDelete}>
-          <span className="material-symbols-outlined edit-card__delete-icon">delete</span>
-          <p className='edit-card__delete-text'>Delete</p>
+          <span className="material-symbols-outlined edit-card__delete-icon">
+            delete
+          </span>
+          <p className="edit-card__delete-text">Delete</p>
         </div>
       </div>
     </div>
