@@ -3,9 +3,14 @@
   left: 0;
   top: 0;
   z-index: 3;
-  min-width: 255px;
   height: 10em;
+  /* min-width: 255px; */
   background-color: transparent;
+}
+.edit-card__input-wrapper {
+  min-width: 255px;
+  max-width: 255px;
+  position: fixed;
 }
 
 .edit-card__input {
@@ -45,29 +50,33 @@
   font-size: .90em;
 }
 
+.edit-card__buttons {
+  display: flex;
+  justify-content: space-between;
+}
+
 .edit-card__delete {
   color: white;
-  background-color: rgba(12, 12, 12, 0.5);
+  background-color: rgba(12, 12, 12, 0.7);
   border: none;
   padding: .25em 1em;
   border-radius: .15em;
   display: flex;
   align-items: center;
   position: absolute;
-  top: 0;
+  top: 0em;
   z-index: 2;
-  right: -7.3em;
+  left: 16.5em;
   transition: 0.2s;
 }
 
 .edit-card__delete:hover {
-  right: -7.6em;
   background-color: rgba(12, 12, 12, 0.7);
   cursor: pointer;
-  margin-left: 1em;
+  margin-left:  .5em;
 }
 
 .card__name-edit-container {
   position: absolute;
-  top: -5em;
+  top: -1;
 }

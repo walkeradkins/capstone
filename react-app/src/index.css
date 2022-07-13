@@ -47,7 +47,7 @@ body:not(
 }
 
 .list-transition-enter{
-  max-height: 30px;
+  /* max-height: 30px; */
   opacity: 0;
 }
 

@@ -21,15 +21,12 @@
 }
 
 .list__content {
-  /* overflow-y: auto; */
-  overflow-x: visible;
   background-color: #ebecf0;
   border-radius: 3px;
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
   max-height: 100%;
-  position: relative;
   white-space: normal;
   width: 100%!important;
 }
@@ -76,7 +73,6 @@
 }
 
 .card__wrapper::-webkit-scrollbar {
-  /* position: absolute; */
   left: 100px;
   background-color: transparent;
   width: .6em;

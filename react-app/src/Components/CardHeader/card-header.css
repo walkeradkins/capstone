@@ -1,6 +1,5 @@
 .card__container {
   overflow-x: visible;
-  position: relative;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -8,7 +7,7 @@
   border-radius: .25em;
   background-color: rgb(255, 255, 255);
   margin: .5em;
-  /* z-index: 1; */
+  position: relative;
   box-shadow: 0 2px 1px -1px rgb(189, 189, 189);
 }
 
@@ -25,7 +24,6 @@
   color: #6b6b6b;
   display: block;
   margin: 0 0 4px;
-  /* overflow-y: hidden; */
   text-decoration: none;
   padding: .15em;
 }
