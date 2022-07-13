@@ -154,7 +154,7 @@ const WorkspaceName = ({ workspace }) => {
         }
       />
       <CSSTransition
-        in={errorCheck}``
+        in={errorCheck}
         timeout={500}
         classNames="list-transition"
         unmountOnExit
