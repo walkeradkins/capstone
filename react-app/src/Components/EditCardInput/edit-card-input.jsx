@@ -82,38 +82,42 @@ const EditCardInput = ({ props }) => {
 
   return (
     <div className="edit-card__input-container">
-      <CSSTransition
-        in={errorCheck}
-        timeout={500}
-        classNames="list-transition"
-        unmountOnExit
-      >
-        <div className="error__container card__name-edit-container">
-          <p className="error__text error__text-add-card">
-            {errors[0] == "err1" ? errorObj.err1 : errorObj.err2}
-          </p>
+      <div className="edit-card__input-wrapper">
+        <TextareaAutosize
+          className="edit-card__input"
+          value={content}
+          onChange={(e) => setContent(e.target.value)}
+          onKeyPress={handleKeyPress}
+          onFocus={handleFocus}
+          minRows={5}
+          maxLength={250}
+          ref={focusRef}
+        />
+        <div className="edit-card__error-wrapper">
+          <CSSTransition
+            in={errorCheck}
+            timeout={500}
+            classNames="list-transition"
+            unmountOnExit
+          >
+            <div className="error__container card__name-edit">
+              <p className="error__text error__text-add-card">
+                {errors[0] === "err1" ? errorObj.err1 : errorObj.err2}
+              </p>
+            </div>
+          </CSSTransition>
         </div>
-      </CSSTransition>
-      <TextareaAutosize
-        className="edit-card__input"
-        value={content}
-        onChange={(e) => setContent(e.target.value)}
-        onKeyPress={handleKeyPress}
-        onFocus={handleFocus}
-        minRows={5}
-        maxLength={250}
-        ref={focusRef}
-      />
-      <div className="edit-card__buttons">
-        <button
-          className={!errors[0] ? "edit-card__submit" : "disabled__btn"}
-          onClick={handleSubmit}
-          disabled={
-            errors[0] || !content.trim().length || content.trim().length
-          }
-        >
-          Save
-        </button>
+        <div className="edit-card__buttons">
+          <button
+            className={!errors[0] ? "edit-card__submit" : "disabled__btn"}
+            onClick={handleSubmit}
+            disabled={
+              errors[0] || !content.trim().length || content.trim().length
+            }
+          >
+            Save
+          </button>
+        </div>
         <div className="edit-card__delete" onClick={handleDelete}>
           <span className="material-symbols-outlined edit-card__delete-icon">
             delete
