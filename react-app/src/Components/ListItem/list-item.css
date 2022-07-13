@@ -12,8 +12,8 @@
 
 .card__wrapper {
   max-height: 50%;
-  /* overflow-y: auto; */
-  /* overflow-x: hidden; */
+  overflow-y: auto;
+  overflow-x: hidden;
 }
 
 .card__wrapper-no-cards {
