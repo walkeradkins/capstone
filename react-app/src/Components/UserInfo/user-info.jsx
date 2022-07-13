@@ -1,11 +1,17 @@
 import "./user-info.css";
-import LogoutButton from "../auth/LogoutButton";
 import { useState, useEffect } from "react";
+import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
+import { logout } from "../../store/session";
 
 const UserInfo = ({ user }) => {
+  const dispatch = useDispatch();
   const { firstName, lastName, email } = user;
   const [showMenu, setShowMenu] = useState(false);
+
+  const onLogout = async (e) => {
+    await dispatch(logout());
+  };
 
   const openMenu = () => {
     if (showMenu) return;
@@ -30,15 +36,16 @@ const UserInfo = ({ user }) => {
       </div>
       {showMenu && (
         <div className="navbar__profile-dropdown">
-          <div className="navbar__dropdown-info navbar__dropdown-info-account">Account</div>
-
-          <div className="navbar__dropdown-info">
-            <div className='navbar__profilebutton'>{initials}</div>
-            <p>{`${firstName} ${lastName}`}</p>
+          <div className="navbar__dropdown-info navbar__dropdown-info-account">
+            Account
           </div>
 
-          <div className="navbar__dropdown-info">
-            {`${email}`}
+          <div className="dropdown__menu-user-container">
+            <div className="navbar__profilebutton-dropdown">{initials}</div>
+            <div className="navbar__dropdown-info dropdown__username">
+              <p>{`${firstName} ${lastName}`}</p>
+              <p className="navbar__dropdown-info dropdown__email">{`${email}`}</p>
+            </div>
           </div>
 
           <div className="navbar__dropdown-links">
@@ -47,10 +54,12 @@ const UserInfo = ({ user }) => {
             </Link>
           </div>
 
-          <div className="navbar__dropdown-links">
-            <LogoutButton />
+          <div
+            className="navbar__dropdown-links navbar__logout"
+            onClick={onLogout}
+          >
+            Log Out
           </div>
-
         </div>
       )}
     </>

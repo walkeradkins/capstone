@@ -9,6 +9,21 @@
   transition: 0.3s;
 }
 
+
+.navbar__profilebutton-dropdown {
+  background-color: #01b3c0;
+  border-radius: 50%;
+  height: 2.5em;
+  width: 2.5em;
+  padding: .25em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: 0.3s;
+  color: black;
+  font-weight: bold;
+}
+
 .navbar__initials {
   font-size: 1.1em;
   color: black;
@@ -24,12 +39,22 @@
   border-radius: .25em;
   box-shadow: 0 3px 7px rgba(33,33,33,.2);
   position: absolute;
-  right: 3em;
+  right: 2em;
   min-width: 15em;
   top: 3em;
+  z-index: 2;
   background-color: white;
 }
 
+.navbar__profile-dropdown > div {
+  padding: 1em;
+}
+
+.dropdown__menu-user-container {
+  display: flex;
+  align-items: center;
+  border-bottom:gainsboro solid 1px
+}
 
 .navbar__dropdown-links {
   font-size: 1em;
@@ -43,10 +68,17 @@
 }
 
 .navbar__dropdown-info, .navbar__dropdown-links {
-  color: rgb(75, 75, 75);
+  color: rgb(107, 107, 107);
   padding: .5em .25em;
+  font-size: .9em;
+
 }
 
 .navbar__dropdown-info-account {
   border-bottom: gainsboro 1px solid;
+}
+
+.dropdown__email {
+  font-size: .85em;
+  color: rgb(156, 156, 156)
 }
