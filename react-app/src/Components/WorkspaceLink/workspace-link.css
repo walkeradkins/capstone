@@ -1,0 +1,24 @@
+.workspace__link {
+  font-weight: bold;
+  background-size: cover;
+  color: #f4f5f7;
+  line-height: 20px;
+  position: relative;
+  text-decoration: none;
+  padding: .5em .5em;
+}
+
+.workspace__link-container {
+  background: linear-gradient(#e66465, #9198e5);  background-position: 50%;
+  min-width: 10em;
+  border-radius: .25em;
+  height: 5.5em;
+  transition: 0.2s;
+}
+.workspace__wrapper {
+  max-width: 17em;
+}
+
+.workspace__link-container:hover {
+  background: linear-gradient(#ce5a5a, #7c81c5);  background-position: 50%;
+}

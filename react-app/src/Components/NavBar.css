@@ -1,8 +1,13 @@
 .navbar {
-  background-color:rgba(116, 78, 116, 1);
+  background-color:#006ead;
   color: white;
   min-height: 3em;
   display: flex;
-  justify-content: flex-end;
+  align-items: center;
+  justify-content: space-between;
   width: 100%;
+}
+
+.navbar__right, .navbar__left {
+  margin: 0 2em;
 }

@@ -11,7 +11,7 @@ body{
 }
 
 body:not(
-  .pro-sidebar > .pro-sidebar-inner > .pro-sidebar-layout
+  .pro-sidebar > .pro-sidebar-inner > .pro-sidebar-layout, .home__main
 ) {
   overflow-y: hidden;
 }
@@ -46,8 +46,20 @@ body:not(
   border-radius: .25em;
 }
 
+ul {
+  list-style-type: none;
+  padding: none;
+  margin: none;
+}
+
+a:hover, a:visited, a:link, a:active
+{
+    text-decoration: none;
+    padding: none;
+    margin: none
+}
+
 .list-transition-enter{
-  /* max-height: 30px; */
   opacity: 0;
 }
 

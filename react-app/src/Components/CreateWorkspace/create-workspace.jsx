@@ -8,9 +8,9 @@ const CreateWorkspace = ({ user }) => {
 
   return (
     <>
-      <button className="create__workspace" onClick={() => setShowModal(true)}>
-        Create new board
-      </button>
+      <div className="create__workspace" onClick={() => setShowModal(true)}>
+        <p className='create__workspace-text'>Create new board</p>
+      </div>
       {showModal && (
         <Modal onClose={() => setShowModal(false)}>
           <CreateWorkspaceForm user={user}/>

@@ -13,6 +13,8 @@ import CardItem from './CardItem/card-item'
 import AddCardInput from './AddCardInput/add-card-input'
 import CardHeader from './CardHeader/card-header'
 import EditCardInput from './EditCardInput/edit-card-input'
+import UserIcon from './UserIcon/user-icon'
+import UserInfo from './UserInfo/user-info'
 
 
 export {
@@ -31,4 +33,6 @@ export {
   AddCardInput,
   CardHeader,
   EditCardInput,
+  UserIcon,
+  UserInfo,
 }

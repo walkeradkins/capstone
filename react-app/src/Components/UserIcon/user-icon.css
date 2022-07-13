@@ -1,0 +1,10 @@
+.user-icon {
+  background: linear-gradient(#403294, #0747a6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: .25em;
+  color: #FFFFFF;
+  font-weight: bold;
+  margin: .5em;
+}

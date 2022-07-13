@@ -39,10 +39,13 @@ const Workspace = ({ user }) => {
     document.body.style.backgroundAttachment = "fixed";
     document.body.style.backgroundPosition = "center";
     document.body.style.backgroundSize = "cover";
+    // console.log(docuement.querySelector('.navabar'))
+    document.querySelector('.navbar').style.backgroundColor = 'rgba(116, 78, 116, 0.8)'
 
     return () => {
       document.body.style.backgroundImage = "";
       document.body.style.backgroundColor = "white";
+      document.querySelector('.navbar').style.backgroundColor = '#006ead';
     };
   }, [workspaceId]);
 

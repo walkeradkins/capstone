@@ -3,8 +3,10 @@ import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { getAllWorkspaces } from "../../store/workspaces";
 import { WorkspaceLink, CreateWorkspace } from "../../Components";
+import { UserIcon } from "../../Components";
 
 const Home = ({ user }) => {
+  const { firstName, lastName, members } = user;
   const dispatch = useDispatch();
   const workspaces = useSelector((state) => state.workspaces);
   const workspaceArray = Object.values(workspaces);
@@ -14,17 +16,26 @@ const Home = ({ user }) => {
   }, []);
 
   return (
-    <>
-      <h2>Home View</h2>
-      <CreateWorkspace user={user} />
-      <ul>
+    <div className="home__main">
+      <div className="home__header">
+        <div className="home__header-inner">
+          <div className="home__user">
+            <UserIcon name={firstName} width={'2em'} height={'2em'} fontSize={'2em'}/>
+            <div className="home__user-name">
+              <p>{`${firstName} ${lastName}'s Workspaces`}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div className="workspace__boards">
+        <CreateWorkspace user={user} />
         {workspaceArray.map((workspace) => (
-          <li key={workspace.id}>
+          <div key={workspace.id}>
             <WorkspaceLink workspace={workspace} user={user} />
-          </li>
+          </div>
         ))}
-      </ul>
-    </>
+      </div>
+    </div>
   );
 };
 
