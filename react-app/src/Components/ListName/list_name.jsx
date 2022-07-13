@@ -45,9 +45,7 @@ const ListName = ({ list }) => {
   }, [dispatch]);
 
   const closeEdit = (e) => {
-    console.log("lengtth", content.length);
     if (errors.length || !content.length || content.length === 250) {
-      console.log("errrors");
       setEdit(true);
       focusRef.current.focus();
       return;
@@ -101,18 +99,6 @@ const ListName = ({ list }) => {
 
   return (
     <div className="list__header-container">
-      <CSSTransition
-        in={errorCheck}
-        timeout={500}
-        classNames="list-transition"
-        unmountOnExit
-      >
-        <div className="error__container">
-          <p className="error__text error__text-add-card">
-            {errors[0] === "err1" ? errorObj.err1 : errorObj.err2}
-          </p>
-        </div>
-      </CSSTransition>
       <div className="list__header-items">
         <TextareaAutosize
           id="listname__input"
@@ -128,6 +114,18 @@ const ListName = ({ list }) => {
         />
         <ListDelete list={list} />
       </div>
+      <CSSTransition
+        in={errorCheck}
+        timeout={500}
+        classNames="list-transition"
+        unmountOnExit
+      >
+        <div className="error__container">
+          <p className="error__text error__text-add-card">
+            {errors[0] === "err1" ? errorObj.err1 : errorObj.err2}
+          </p>
+        </div>
+      </CSSTransition>
     </div>
   );
 };

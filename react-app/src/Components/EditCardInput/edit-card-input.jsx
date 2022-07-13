@@ -3,6 +3,7 @@ import { useState, useRef, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { updateCard, deleteCard } from "../../store/cards";
 import TextareaAutosize from "react-textarea-autosize";
+import { CSSTransition } from "react-transition-group";
 
 const EditCardInput = ({ props }) => {
   const { card, setEdit, setItem, setEditItem } = props;
@@ -10,17 +11,24 @@ const EditCardInput = ({ props }) => {
   const focusRef = useRef(null);
   const [content, setContent] = useState(card.name);
   const [errors, setErrors] = useState([]);
+  const [errorCheck, setErrorCheck] = useState(false);
+
+  const errorObj = {
+    err1: "Please keep list titles to 250 characters or less",
+    err2: "Please provide a title for your list",
+  };
 
   useEffect(() => {
     const validationErrors = [];
-    if (content.length > 249)
-      validationErrors.push(
-        "Please keep card titles to 250 characters or less"
-      );
-    if (content.trim().length < 1)
-      validationErrors.push(
-        "Please provide a title for your card"
-      );
+    if (content.length > 249) {
+      validationErrors.push("err1");
+    }
+
+    if (content.trim().length < 1) {
+      validationErrors.push("err2");
+    }
+
+    setErrorCheck(validationErrors.length > 0);
     setErrors(validationErrors);
   }, [content, dispatch]);
 
@@ -74,11 +82,18 @@ const EditCardInput = ({ props }) => {
 
   return (
     <div className="edit-card__input-container">
-      {errors[0] && (
-        <div className="error__container">
-          <p className="error__text error__text-add-card">{errors}</p>
+      <CSSTransition
+        in={errorCheck}
+        timeout={500}
+        classNames="list-transition"
+        unmountOnExit
+      >
+        <div className="error__container card__name-edit-container">
+          <p className="error__text error__text-add-card">
+            {errors[0] == "err1" ? errorObj.err1 : errorObj.err2}
+          </p>
         </div>
-      )}
+      </CSSTransition>
       <TextareaAutosize
         className="edit-card__input"
         value={content}

@@ -66,3 +66,8 @@
   cursor: pointer;
   margin-left: 1em;
 }
+
+.card__name-edit-container {
+  position: absolute;
+  top: -5em;
+}

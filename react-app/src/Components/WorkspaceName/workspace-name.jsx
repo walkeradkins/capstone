@@ -1,8 +1,9 @@
 import "./workspace-name.css";
 import { useDispatch } from "react-redux";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { updateWorkspace } from "../../store/workspaces";
 import AutoSizeInput from "react-input-autosize";
+import { CSSTransition } from "react-transition-group";
 
 const WorkspaceName = ({ workspace }) => {
   const dispatch = useDispatch();
@@ -10,7 +11,10 @@ const WorkspaceName = ({ workspace }) => {
   const [errors, setErrors] = useState([]);
   const [edit, setEdit] = useState(false);
   const [sent, setSent] = useState(true);
+  const focusRef = useRef(null);
   const [contentCheck, setContentCheck] = useState("");
+  const [errorCheck, setErrorCheck] = useState(false);
+  const [disabled, setDisabled] = useState(true);
 
   const trueEdit = (e) => {
     e.stopPropagation();
@@ -19,19 +23,24 @@ const WorkspaceName = ({ workspace }) => {
     setEdit(true);
   };
 
+  const errorObj = {
+    err1: "Please keep board names to 50 characters or less",
+    err2: "Board names cannot be empty",
+  };
+
   useEffect(() => {
-    const errors = [];
-    if (content.length >= 49) {
-      errors.push("Please keep board names to 50 characters or less");
-      setErrors(errors);
-    } else if (content.length < 1) {
-      errors.push("Board names cannot be empty");
-      setErrors(errors);
+    const validationErrors = [];
+    if (content.length > 49) {
+      validationErrors.push("err1");
     }
-    else {
-      setErrors("");
+
+    if (content.trim().length < 1) {
+      validationErrors.push("err2");
     }
-  }, [content]);
+
+    setErrorCheck(validationErrors.length > 0);
+    setErrors(validationErrors);
+  }, [content, dispatch]);
 
   useEffect(() => {
     setContent(name);
@@ -50,7 +59,10 @@ const WorkspaceName = ({ workspace }) => {
   }, [sent]);
 
   const closeEdit = async (e) => {
-    if (!content.length) return;
+    if (errors.length || !content.length || content.length === 50) {
+      focusRef.current.focus();
+      return;
+    }
     const payload = {
       name: content.trim(),
     };
@@ -73,15 +85,23 @@ const WorkspaceName = ({ workspace }) => {
   useEffect(() => {
     if (!edit) return;
     document.addEventListener("click", closeEdit);
-    document.addEventListener("keypress", (e) => {
-      if (e.key === "Enter") {
+    return () => document.removeEventListener("click", closeEdit);
+  }, [edit, content, errors]);
+
+  const handleKeyPress = (e) => {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      focusRef.current.focus();
+      if (errors.length || !content.length || content.length === 50) {
+        return;
+      }
+
+      if (!errors.length) {
         document.getElementById("input__workspacename").blur();
         return closeEdit(e);
       }
-    });
-
-    return () => document.removeEventListener("click", closeEdit);
-  }, [edit, content, errors]);
+    }
+  };
 
   if (!workspace) return null;
   const { name, id } = workspace;
@@ -124,13 +144,27 @@ const WorkspaceName = ({ workspace }) => {
         value={content}
         onClick={trueEdit}
         minLength={1}
-        maxLength={49}
+        spellCheck={false}
+        onKeyPress={handleKeyPress}
+        maxLength={50}
         inputStyle={edit ? inputStylesActive : inputStylesInactive}
+        ref={focusRef}
         onChange={(e) =>
           e.target.value.length > -1 ? setContent(e.target.value) : null
         }
       />
-      <p className="error__text-workspace-edit">{errors[0]}</p>
+      <CSSTransition
+        in={errorCheck}
+        timeout={500}
+        classNames="list-transition"
+        unmountOnExit
+      >
+        <div className="workspace__name-error-container">
+          <p className="workspace__name-error-text">
+            {errors[0] == "err1" ? errorObj.err1 : errorObj.err2}
+          </p>
+        </div>
+      </CSSTransition>
     </div>
   );
 };

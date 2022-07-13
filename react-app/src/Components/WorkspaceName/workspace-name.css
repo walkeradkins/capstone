@@ -1,25 +1,36 @@
 .input__inactive {
-  margin: .5em 2em;
-  border-radius: .25em;
+  margin: 0.5em 2em;
+  border-radius: 0.25em;
 }
 
 .workspace-input__wrapper {
-
+  display: flex;
+  align-items: center;
 }
 
 .input__inactive:hover {
-  border-radius: .25em;
+  border-radius: 0.25em;
   background-color: rgba(235, 235, 235, 0.6);
 }
 
 .input__active {
-  margin: .5em 2em;
+  margin: 0.5em 2em;
 }
 
 .input__active:focus {
   outline: none;
 }
 
-.error__text-workspace-edit {
+.workspace__name-error-container {
+  border: transparent;
+  border-radius: 0.25em;
+  background-color: rgba(0, 255, 234, 0.7);
+  left: 2em;
+  top: -1.5em;
+}
 
+.workspace__name-error-text {
+  color: white;
+  font-weight: bold;
+  margin: 0.5em;
 }
