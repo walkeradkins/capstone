@@ -3,7 +3,8 @@ import { useRef, useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useWorkspace } from "../../context/workspace-context";
 import { createCard } from "../../store/cards";
-import TextareaAutosize from 'react-textarea-autosize'
+import TextareaAutosize from "react-textarea-autosize";
+import { CSSTransition, TransitionGroup } from "react-transition-group";
 
 const AddCardInput = ({ props }) => {
   const { list, setItem, add, setAdd } = props;
@@ -12,6 +13,7 @@ const AddCardInput = ({ props }) => {
   const focusRef = useRef(null);
   const [content, setContent] = useState("");
   const [errors, setErrors] = useState([]);
+  const [errorCheck, setErrorCheck] = useState(false);
 
   const showInput = () => {
     if (add) return;
@@ -21,7 +23,10 @@ const AddCardInput = ({ props }) => {
   useEffect(() => {
     const validationErrors = [];
     if (content.length > 249)
-      validationErrors.push("Please keep card titles to 250 characters or less");
+      validationErrors.push(
+        "Please keep card titles to 250 characters or less"
+      );
+    setErrorCheck(content.length > 249);
     setErrors(validationErrors);
   }, [content, dispatch]);
 
@@ -96,11 +101,18 @@ const AddCardInput = ({ props }) => {
       )}
       {add && (
         <div className="addcard__input-container">
-          {errors[0] && (
+          <CSSTransition
+            in={errorCheck}
+            timeout={500}
+            classNames="list-transition"
+            unmountOnExit
+          >
             <div className="error__container">
-              <p className="error__text error__text-add-card">{errors[0]}</p>
+              <p className="error__text error__text-add-card">
+                Please keep card titles to 250 characters or less
+              </p>
             </div>
-          )}
+          </CSSTransition>
           <TextareaAutosize
             onClick={handleClick}
             className="addcard__input"

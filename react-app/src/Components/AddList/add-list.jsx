@@ -2,7 +2,7 @@ import "./add-list.css";
 import { useRef, useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { createList } from "../../store/lists";
-import { CSSTransition, TransitionGroup } from "react-transition-group";
+import { CSSTransition } from "react-transition-group";
 
 const AddList = ({ props }) => {
   const { showAdd, setShowAdd, workspaceId } = props;
@@ -10,7 +10,7 @@ const AddList = ({ props }) => {
   const focusRef = useRef(null);
   const [title, setTitle] = useState("");
   const [errors, setErrors] = useState([]);
-  const [titleLength, setTitleLength] = useState(title.length > 249);
+  const [titleLength, setTitleLength] = useState(false);
 
   useEffect(() => {
     if (showAdd) focusRef.current.focus();
@@ -20,8 +20,7 @@ const AddList = ({ props }) => {
     const validationErrors = [];
     if (title.length > 249)
       validationErrors.push("List titles must be 250 characters or less");
-    setTitleLength(title.length > 248);
-    console.log("tititle lenght", titleLength);
+    setTitleLength(title.length > 249);
     setErrors(validationErrors);
   }, [title, dispatch]);
 
@@ -75,11 +74,14 @@ const AddList = ({ props }) => {
             </button>
             <CSSTransition
               in={titleLength}
-              timeout={1000}
+              timeout={500}
               classNames="list-transition"
+              unmountOnExit
             >
               <div className="error__container-add-list">
-                <p className="error__text-add_list">{errors[0]}</p>
+                <p className="error__text-add_list">
+                  List titles must be 250 characters or less
+                </p>
               </div>
             </CSSTransition>
           </div>
