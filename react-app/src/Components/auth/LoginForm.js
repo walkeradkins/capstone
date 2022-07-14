@@ -39,7 +39,15 @@ const LoginForm = () => {
   }, [submitted])
 
   useEffect(() => {
-    setErrors([]);
+    const lengthErrors = []
+    if (email.length === 50) {
+      lengthErrors.push('Please keep email to under 50 characters')
+    }
+    if (password.length === 40) {
+      lengthErrors.push('Please keep password to under 40 characters')
+    }
+    if (lengthErrors.length) setErrors(lengthErrors)
+    else return () => setErrors([]);
   }, [email, password])
 
   const updateEmail = (e) => {
@@ -83,16 +91,18 @@ const LoginForm = () => {
                 name='email'
                 type='text'
                 required
+                maxLength={50}
                 autoComplete="off"
                 placeholder='Enter email'
                 value={email}
                 onChange={updateEmail}
-              />
+                />
             </div>
             <div>
               <input
                 className='login__input'
                 name='password'
+                maxLength={40}
                 required
                 autoComplete="off"
                 type='password'
