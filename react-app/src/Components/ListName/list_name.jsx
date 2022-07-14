@@ -31,7 +31,11 @@ const ListName = ({ list }) => {
   }, [content]);
 
   const trueEdit = (e) => {
-    e.stopPropagation();
+    const idCheck = +e.target.className.split(' ')[0]
+    if (list.id !== idCheck) {
+      e.stopPropagation();
+    }
+    console.log('target', e.target.className)
     e.target.select();
     if (edit) return;
     setEdit(true);
@@ -57,7 +61,6 @@ const ListName = ({ list }) => {
           alert(error);
         }
       };
-
       updateData();
       setEdit(false);
     }
@@ -96,7 +99,7 @@ const ListName = ({ list }) => {
         <div className={!edit ? "tooltip bold" : null}>
           <TextareaAutosize
             id="listname__input"
-            className={edit ? "input__active-list" : "input__inactive-list"}
+            className={edit ?  `input__active-list` : `${list.id} input__inactive-list`}
             value={content}
             spellCheck={false}
             onClick={trueEdit}
