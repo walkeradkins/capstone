@@ -59,6 +59,12 @@ a:hover, a:visited, a:link, a:active
     margin: none
 }
 
+.list-transition-appear {
+  border: 1em aqua solid;
+}
+.list-transition-appear-active {
+  border: 1em aqua solid;
+}
 .list-transition-enter{
   opacity: 0;
 }

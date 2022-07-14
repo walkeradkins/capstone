@@ -11,14 +11,7 @@ const WorkspaceHeader = ({ workspace }) => {
 
   return (
     <div className="workspace__header">
-      {/* {collapsed && (
-        <button
-          onClick={handleToggle}
-          className='workspace__header-toggle'
-          >
-          <span className="material-symbols-outlined">chevron_right</span>
-        </button>
-      )} */}
+
       <WorkspaceName workspace={workspace} />
     </div>
   );

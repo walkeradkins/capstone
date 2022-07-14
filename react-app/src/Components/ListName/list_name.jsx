@@ -8,30 +8,27 @@ import { CSSTransition } from "react-transition-group";
 
 const ListName = ({ list }) => {
   const dispatch = useDispatch();
-  const [content, setContent] = useState("");
+  const [content, setContent] = useState(list.title);
   const [errors, setErrors] = useState([]);
   const [edit, setEdit] = useState(false);
   const focusRef = useRef(null);
-  const [errorCheck, setErrorCheck] = useState(false);
-
-  const errorObj = {
-    err1: "Please keep list titles to 250 characters or less",
-    err2: "Please provide a title for your list",
-  };
+  const [errorOne, setErrorOne] = useState(false);
+  const [errorTwo, setErrorTwo] = useState(false);
 
   useEffect(() => {
-    const validationErrors = [];
+    setContent(title);
+  }, [dispatch]);
+
+  useEffect(() => {
     if (content.length > 249) {
-      validationErrors.push("err1");
+      setErrorOne(true);
+    } else if (content.trim().length < 1) {
+      setErrorTwo(true);
+    } else {
+      setErrorOne(false);
+      setErrorTwo(false);
     }
-
-    if (content.trim().length < 1) {
-      validationErrors.push("err2");
-    }
-
-    setErrorCheck(validationErrors.length > 0);
-    setErrors(validationErrors);
-  }, [content, dispatch]);
+  }, [content]);
 
   const trueEdit = (e) => {
     e.stopPropagation();
@@ -39,10 +36,6 @@ const ListName = ({ list }) => {
     if (edit) return;
     setEdit(true);
   };
-
-  useEffect(() => {
-    setContent(title);
-  }, [dispatch]);
 
   const closeEdit = (e) => {
     if (errors.length || !content.length || content.length === 250) {
@@ -100,29 +93,46 @@ const ListName = ({ list }) => {
   return (
     <div className="list__header-container">
       <div className="list__header-items">
-        <TextareaAutosize
-          id="listname__input"
-          className={edit ? "input__active-list" : "input__inactive-list"}
-          value={content}
-          spellCheck={false}
-          onClick={trueEdit}
-          maxLength={250}
-          onKeyPress={handleKeyPress}
-          minRows={1}
-          ref={focusRef}
-          onChange={(e) => setContent(e.target.value)}
-        />
+        <div className={!edit ? "tooltip bold" : null}>
+          <TextareaAutosize
+            id="listname__input"
+            className={edit ? "input__active-list" : "input__inactive-list"}
+            value={content}
+            spellCheck={false}
+            onClick={trueEdit}
+            maxLength={250}
+            onKeyPress={handleKeyPress}
+            minRows={1}
+            ref={focusRef}
+            onChange={(e) => setContent(e.target.value)}
+          />
+          {!edit && <span class="top">Click to edit list name</span>}
+        </div>
         <ListDelete list={list} />
       </div>
       <CSSTransition
-        in={errorCheck}
+        in={errorOne}
         timeout={500}
+        appear={false}
         classNames="list-transition"
         unmountOnExit
       >
         <div className="error__container">
           <p className="error__text error__text-add-card">
-            {errors[0] === "err1" ? errorObj.err1 : errorObj.err2}
+            Please keep list titles to 250 characters or less.
+          </p>
+        </div>
+      </CSSTransition>
+      <CSSTransition
+        in={errorTwo}
+        timeout={500}
+        classNames="list-transition"
+        unmountOnExit
+        appear={false}
+      >
+        <div className="error__container">
+          <p className="error__text error__text-add-card">
+            Please provide a title for your list.
           </p>
         </div>
       </CSSTransition>

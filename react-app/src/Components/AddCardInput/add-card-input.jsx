@@ -118,7 +118,7 @@ const AddCardInput = ({ props }) => {
             className="addcard__input"
             placeholder="Enter a title for this card..."
             value={content}
-            autoComplete={false}
+            autoComplete='off'
             onChange={(e) => setContent(e.target.value)}
             onKeyPress={handleKeyPress}
             minRows={2}

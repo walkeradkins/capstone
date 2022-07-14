@@ -8,6 +8,10 @@
   max-height: 45em;
 }
 
+.workspace {
+  margin-top: 3.5em;
+}
+
 .workspace__list-add {
   width: 272px;
   background-color: rgba(235, 235, 235, 0.3);

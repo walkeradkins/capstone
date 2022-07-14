@@ -162,7 +162,7 @@ const SignUpForm = () => {
             </div>
             <button className='login__button-submit' type='submit'>Sign Up</button>
             <div className='login__underline' />
-            <NavLink className='login__signup' to='/login' exact={true} activeClassName='active'>
+            <NavLink className='login__signup' to='/login' exact={true}>
               Already have an account? Log in
             </NavLink>
           </form>

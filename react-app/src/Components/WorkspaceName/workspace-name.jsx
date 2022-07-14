@@ -7,14 +7,13 @@ import { CSSTransition } from "react-transition-group";
 
 const WorkspaceName = ({ workspace }) => {
   const dispatch = useDispatch();
-  const [content, setContent] = useState("");
+  const [content, setContent] = useState(workspace.name);
   const [errors, setErrors] = useState([]);
   const [edit, setEdit] = useState(false);
   const [sent, setSent] = useState(true);
   const focusRef = useRef(null);
   const [contentCheck, setContentCheck] = useState("");
   const [errorCheck, setErrorCheck] = useState(false);
-  const [disabled, setDisabled] = useState(true);
 
   const trueEdit = (e) => {
     e.stopPropagation();
@@ -138,22 +137,25 @@ const WorkspaceName = ({ workspace }) => {
 
   return (
     <div className="workspace-input__wrapper">
-      <AutoSizeInput
-        id="input__workspacename"
-        className={edit ? "input__active" : "input__inactive"}
-        value={content}
-        onClick={trueEdit}
-        minLength={1}
-        autoComplete={false}
-        spellCheck={false}
-        onKeyPress={handleKeyPress}
-        maxLength={50}
-        inputStyle={edit ? inputStylesActive : inputStylesInactive}
-        ref={focusRef}
-        onChange={(e) =>
-          e.target.value.length > -1 ? setContent(e.target.value) : null
-        }
-      />
+      <div className={!edit ? "tooltip__workspace bold" : null}>
+        <AutoSizeInput
+          id="input__workspacename"
+          className={edit ? "input__active" : "input__inactive"}
+          value={content}
+          onClick={trueEdit}
+          minLength={1}
+          autoComplete="off"
+          spellCheck={false}
+          onKeyPress={handleKeyPress}
+          maxLength={50}
+          inputStyle={edit ? inputStylesActive : inputStylesInactive}
+          ref={focusRef}
+          onChange={(e) =>
+            e.target.value.length > -1 ? setContent(e.target.value) : null
+          }
+        />
+        <p className="bottom">Click to edit workspace name</p>
+      </div>
       <CSSTransition
         in={errorCheck}
         timeout={500}

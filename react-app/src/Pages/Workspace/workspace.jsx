@@ -20,6 +20,7 @@ const Workspace = ({ user }) => {
   const lists = useSelector((state) => state.lists);
   const cards = useSelector((state) => state.cards);
   const listArray = Object.values(lists);
+  const [item, setItem] = useState("");
   const length = listArray.length;
   const { cardState, setCardState } = useCardState();
   const [showAdd, setShowAdd] = useState(false);
@@ -31,7 +32,7 @@ const Workspace = ({ user }) => {
     dispatch(getAllCards(workspaceId));
     setCurrentWorkspace(workspaceId);
     setCardState(lists);
-  }, [drag]);
+  }, [drag, item]);
 
   useEffect(() => {
     document.body.style.backgroundImage = `url( ${whatnext_background} )`;
@@ -39,13 +40,18 @@ const Workspace = ({ user }) => {
     document.body.style.backgroundAttachment = "fixed";
     document.body.style.backgroundPosition = "center";
     document.body.style.backgroundSize = "cover";
-    // console.log(docuement.querySelector('.navabar'))
-    document.querySelector('.navbar').style.backgroundColor = 'rgba(116, 78, 116, 0.8)'
+    const navbar = document.querySelector(".navbar");
+    if (navbar) {
+      navbar.style.backgroundColor = "rgba(116, 78, 116, 0.8)";
+    }
 
     return () => {
       document.body.style.backgroundImage = "";
       document.body.style.backgroundColor = "white";
-      document.querySelector('.navbar').style.backgroundColor = '#006ead';
+      const navbar = document.querySelector(".navbar");
+      if (navbar) {
+        navbar.style.backgroundColor = "#006ead";
+      }
     };
   }, [workspaceId]);
 
@@ -95,17 +101,14 @@ const Workspace = ({ user }) => {
           current={workspace}
           user={user}
         />
-        <DragDropContext
-          onDragEnd={handleOnDragEnd}
-
-        >
+        <DragDropContext onDragEnd={handleOnDragEnd}>
           <div className="workspace">
             <WorkspaceHeader workspace={workspace} />
             <div className="list__container">
               {listArray.map((list) => {
                 return (
                   <div key={list.id}>
-                    <ListItem list={list} />
+                    <ListItem props={{ list, item, setItem }}/>
                   </div>
                 );
               })}
