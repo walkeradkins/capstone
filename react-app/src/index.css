@@ -11,7 +11,7 @@ body{
 }
 
 body:not(
-  .pro-sidebar > .pro-sidebar-inner > .pro-sidebar-layout
+  .pro-sidebar > .pro-sidebar-inner > .pro-sidebar-layout, .home__main
 ) {
   overflow-y: hidden;
 }
@@ -46,14 +46,26 @@ body:not(
   border-radius: .25em;
 }
 
+ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+a:hover, a:visited, a:link, a:active
+{
+    text-decoration: none;
+    padding: none;
+    margin: none
+}
+
 .list-transition-enter{
-  /* max-height: 30px; */
   opacity: 0;
 }
 
 .list-transition-enter-active {
   opacity: 1;
-  transition: all 500ms;
+  transition: all 500ms ease-in;
 }
 
 .list-transition-exit {
@@ -62,7 +74,8 @@ body:not(
 
 .list-transition-exit-active {
   opacity: 0;
-  transition: all 500ms;
+  min-height: 1.75em;
+  transition: all 500ms ease-out;
 }
 
 .list-transition-exit-done {

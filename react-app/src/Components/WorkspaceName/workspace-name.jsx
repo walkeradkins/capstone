@@ -144,6 +144,7 @@ const WorkspaceName = ({ workspace }) => {
         value={content}
         onClick={trueEdit}
         minLength={1}
+        autoComplete={false}
         spellCheck={false}
         onKeyPress={handleKeyPress}
         maxLength={50}

@@ -1,0 +1,84 @@
+.navbar__profilebutton {
+  background-color: #01b3c0;
+  border-radius: 50%;
+  height: 2em;
+  width: 2em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: 0.3s;
+}
+
+
+.navbar__profilebutton-dropdown {
+  background-color: #01b3c0;
+  border-radius: 50%;
+  height: 2.5em;
+  width: 2.5em;
+  padding: .25em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: 0.3s;
+  color: black;
+  font-weight: bold;
+}
+
+.navbar__initials {
+  font-size: 1.1em;
+  color: black;
+}
+
+.navbar__profilebutton:hover {
+  background-color: #01c8d6;
+  cursor: pointer;
+}
+
+.navbar__profile-dropdown {
+  border: #E2E2E2 1px solid;
+  border-radius: .25em;
+  box-shadow: 0 3px 7px rgba(33,33,33,.2);
+  position: absolute;
+  right: 2em;
+  min-width: 15em;
+  top: 3em;
+  z-index: 2;
+  background-color: white;
+}
+
+.navbar__profile-dropdown > div {
+  padding: 1em;
+}
+
+.dropdown__menu-user-container {
+  display: flex;
+  align-items: center;
+  border-bottom:gainsboro solid 1px
+}
+
+.navbar__dropdown-links {
+  font-size: 1em;
+  text-decoration: none;
+  color: #474747;
+}
+
+.navbar__dropdown-links:hover{
+  background-color: #F6F6F6;
+  cursor: pointer;
+}
+
+.navbar__dropdown-info, .navbar__dropdown-links {
+  color: rgb(107, 107, 107);
+  padding: .5em .25em;
+  font-size: .9em;
+
+}
+
+.navbar__dropdown-info-account {
+  border-bottom: gainsboro 1px solid;
+}
+
+.dropdown__email {
+  font-size: .85em;
+  color: rgb(156, 156, 156)
+}

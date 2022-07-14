@@ -1,0 +1,182 @@
+.login__background {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(208, 222, 230, 0.2);
+  z-index: -1;
+}
+
+.login__container {
+  display: flex;
+  margin: 2.5em 0;
+  flex-direction: column;
+  align-items: center;
+}
+
+
+.login__logo-container {
+  display: flex;
+  align-items: center;
+}
+
+.login__logo {
+  font-size: 4em;
+}
+
+.login__header-text {
+  font-size: 3em;
+  font-family: 'Righteous', cursive;
+}
+
+.login__form-container {
+  background: white;
+  position: relative;
+  box-shadow: 0 3px 7px rgba(33,33,33,.2);
+  margin: 2.5em 0;
+  border: 1px rgba(220, 220, 220, 0.4) solid;
+  display: flex;
+  height: 38em;
+  width: 25em;
+  justify-content: center;
+  text-align: center;
+  padding: 2em;
+  border-radius: .25em;
+}
+
+.error__container-login {
+  background-color: #eb5a46;
+  padding: .5em 0;
+  border-radius: .25em;
+  position: absolute;
+  width: 84%;
+  top: 4.3em;
+}
+
+.error__text-login {
+  color: white;
+  font-size: .85em;
+}
+
+.login__form {
+  width: 100%;
+}
+
+.login__call {
+  width: 100%;
+  margin: 1em 0;
+  font-weight: bold;
+  color: rgb(73, 73, 73)
+}
+
+
+.login__input {
+  font-size: 14px;
+  background-color: #FAFBFC;
+  border: 2px solid #DFE1E6;
+  border-radius: .15em;
+  height: 3.5em;
+  width: 100%;
+  margin: .75em 0;
+  padding: 0 .5em;
+  transition: all 0.2s ease-in-out;
+}
+
+.login__input-top {
+  margin-top: 1.5em;
+}
+
+.login__input:focus {
+  background-color: white;
+  outline: none;
+  border: rgb(0, 153, 255) 2px solid;
+}
+
+.login__button-submit {
+  background-color: #5AAC44;
+  border: transparent;
+  width: 100%;
+  padding: .75em 0;
+  border-radius: .25em;
+  margin: .5em 0 1em;
+  color: white;
+  font-weight: bold;
+  font-size: .85em;
+  outline: none;
+}
+
+.login__button-submit:hover {
+  background-color: #5ebe43;
+  cursor: pointer;
+}
+
+.login__or {
+  font-size: .85em;
+  margin: 1.75em 0;
+}
+
+.login__demo {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 3px 7px rgba(33,33,33,.2);
+  border: 1px rgba(220, 220, 220, 0.4) solid;
+  padding: .25em 0;
+  border-radius: .25em;
+  transition: 0.3s;
+  margin-bottom: 2em;
+}
+
+.login__emoji {
+  font-size: 1.75em;
+}
+
+.login__demo-text {
+  font-size: .95em;
+  font-weight: bold;
+  color:rgb(100, 100, 100);
+}
+
+.login__demo:hover {
+  cursor: pointer;
+  background-color: rgb(245, 244, 244);
+}
+
+.login__signup {
+  color: rgb(0, 153, 255);
+}
+
+.login__underline {
+  border-bottom: 1px solid gainsboro;
+  margin: 2em 0;
+}
+
+.login__signup:hover {
+  border-bottom: 1px solid rgb(0, 153, 255);
+}
+
+.error-transition-enter{
+  opacity: 0;
+}
+
+.error-transition-enter-active {
+  opacity: 1;
+  transition: all 500ms ease-in;
+}
+
+.error-transition-exit {
+  opacity: 1;
+}
+
+.error-transition-exit-active {
+  opacity: 0;
+  min-height: 2em;
+  max-height: 3em;
+  transition: all 500ms ease-out;
+}
+
+.error-transition-exit-done {
+  opacity: 0;
+}

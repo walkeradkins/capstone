@@ -6,7 +6,7 @@ import {
   SidebarHeader,
 } from "react-pro-sidebar";
 import "react-pro-sidebar/dist/css/styles.css";
-import { FaGem, FaHeart } from "react-icons/fa";
+import { FaTable } from "react-icons/fa";
 import "./sidebar.css";
 import MoreDropdown from "../MoreDropdown/more-dropdown";
 import { useSidebar } from "../../context/sidebar-context";
@@ -47,8 +47,7 @@ const Sidebar = ({ workspaces, current, user }) => {
         )}
         {!collapsed && (
           <Menu iconShape="circle">
-            <MenuItem icon={<FaGem />}>Dashboard</MenuItem>
-            <SubMenu title="Your Boards" icon={<FaHeart />}>
+            <SubMenu title="Your Boards" icon={<FaTable />}>
               {workspaces.map((board) => {
                 return (
                   <div key={board.id} className="sidebar__boards">
