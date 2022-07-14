@@ -48,8 +48,8 @@ body:not(
 
 ul {
   list-style-type: none;
-  padding: none;
-  margin: none;
+  padding: 0;
+  margin: 0;
 }
 
 a:hover, a:visited, a:link, a:active
@@ -65,7 +65,7 @@ a:hover, a:visited, a:link, a:active
 
 .list-transition-enter-active {
   opacity: 1;
-  transition: all 500ms;
+  transition: all 500ms ease-in;
 }
 
 .list-transition-exit {
@@ -74,7 +74,8 @@ a:hover, a:visited, a:link, a:active
 
 .list-transition-exit-active {
   opacity: 0;
-  transition: all 500ms;
+  min-height: 1.75em;
+  transition: all 500ms ease-out;
 }
 
 .list-transition-exit-done {

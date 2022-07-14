@@ -14,6 +14,13 @@ def seed_users():
         name='Project 2'
     )
 
+    demo = User(
+        first_name='Demo',
+        last_name='User',
+        email='demo@demo.io',
+        password='password',
+        user_members=[project1]
+    )
     isabella = User(
         first_name='Isabella',
         last_name='Terrell',
@@ -57,6 +64,7 @@ def seed_users():
         user_members=[project2]
     )
 
+    db.session.add(demo)
     db.session.add(isabella)
     db.session.add(oskar)
     db.session.add(faye)

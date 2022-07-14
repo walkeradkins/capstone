@@ -15,6 +15,7 @@
   align-items: center;
 }
 
+
 .login__logo-container {
   display: flex;
   align-items: center;
@@ -31,6 +32,7 @@
 
 .login__form-container {
   background: white;
+  position: relative;
   box-shadow: 0 3px 7px rgba(33,33,33,.2);
   margin: 2.5em 0;
   border: 1px rgba(220, 220, 220, 0.4) solid;
@@ -43,16 +45,31 @@
   border-radius: .25em;
 }
 
+.error__container-login {
+  background-color: #eb5a46;
+  padding: .5em 0;
+  border-radius: .25em;
+  position: absolute;
+  width: 84%;
+  top: 4.3em;
+}
+
+.error__text-login {
+  color: white;
+  font-size: .85em;
+}
+
 .login__form {
   width: 100%;
 }
 
 .login__call {
   width: 100%;
-  margin: 1.5em 0;
+  margin: 1em 0;
   font-weight: bold;
   color: rgb(73, 73, 73)
 }
+
 
 .login__input {
   font-size: 14px;
@@ -64,6 +81,10 @@
   margin: .75em 0;
   padding: 0 .5em;
   transition: all 0.2s ease-in-out;
+}
+
+.login__input-top {
+  margin-top: 1.5em;
 }
 
 .login__input:focus {
@@ -82,6 +103,7 @@
   color: white;
   font-weight: bold;
   font-size: .85em;
+  outline: none;
 }
 
 .login__button-submit:hover {
@@ -133,4 +155,28 @@
 
 .login__signup:hover {
   border-bottom: 1px solid rgb(0, 153, 255);
+}
+
+.error-transition-enter{
+  opacity: 0;
+}
+
+.error-transition-enter-active {
+  opacity: 1;
+  transition: all 500ms ease-in;
+}
+
+.error-transition-exit {
+  opacity: 1;
+}
+
+.error-transition-exit-active {
+  opacity: 0;
+  min-height: 2em;
+  max-height: 3em;
+  transition: all 500ms ease-out;
+}
+
+.error-transition-exit-done {
+  opacity: 0;
 }

@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { useWorkspace } from "../../context/workspace-context";
 import { createCard } from "../../store/cards";
 import TextareaAutosize from "react-textarea-autosize";
-import { CSSTransition, TransitionGroup } from "react-transition-group";
+import { CSSTransition } from "react-transition-group";
 
 const AddCardInput = ({ props }) => {
   const { list, setItem, add, setAdd } = props;
@@ -118,6 +118,7 @@ const AddCardInput = ({ props }) => {
             className="addcard__input"
             placeholder="Enter a title for this card..."
             value={content}
+            autoComplete={false}
             onChange={(e) => setContent(e.target.value)}
             onKeyPress={handleKeyPress}
             minRows={2}
