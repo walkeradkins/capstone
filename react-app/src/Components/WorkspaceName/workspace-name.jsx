@@ -154,7 +154,7 @@ const WorkspaceName = ({ workspace }) => {
             e.target.value.length > -1 ? setContent(e.target.value) : null
           }
         />
-        <p className="bottom">Click to edit workspace name</p>
+        {!edit && <p className="bottom">Click to edit workspace name</p>}
       </div>
       <CSSTransition
         in={errorCheck}
