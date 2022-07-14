@@ -1,0 +1,13 @@
+.home__welcome-container {
+  max-width: 30em;
+  margin: 2em;
+  border: 1px gainsboro solid;
+  padding: 1em;
+  border-radius: .25em;
+  box-shadow: 0 3px 7px rgba(33,33,33,.2);
+}
+
+.home__welcome {
+  font-size: .95em;
+  color:rgb(73, 73, 73)
+}

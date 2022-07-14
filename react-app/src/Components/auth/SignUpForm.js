@@ -4,8 +4,6 @@ import { Redirect, NavLink } from 'react-router-dom';
 import { signUp } from '../../store/session';
 import { CSSTransition } from "react-transition-group";
 
-// import './login.css'
-
 
 const SignUpForm = () => {
   const [backendErrors, setBackendErrors] = useState([]);
@@ -44,11 +42,26 @@ const SignUpForm = () => {
     const valErrors = [];
     if (backendErrors[0]) valErrors.push('There is already an account associated with this email.');
     setErrors(valErrors)
+    console.log(backendErrors)
   }, [submitted])
 
   useEffect(() => {
-    setErrors([]);
-  }, [email, password, repeatPassword])
+    const lengthErrors = []
+    if (email.length === 50) {
+      lengthErrors.push('Please keep email to under 50 characters')
+    }
+    if (firstName.length === 40) {
+      lengthErrors.push('Please keep first name to under 40 characters')
+    }
+    if (lastName.length === 40) {
+      lengthErrors.push('Please keep last name to under 40 characters')
+    }
+    if (password.length === 40) {
+      lengthErrors.push('Please keep password to under 40 characters')
+    }
+    if (lengthErrors.length) setErrors(lengthErrors)
+    else return () => setErrors([]);
+  }, [email, firstName, lastName, password, repeatPassword])
 
   const validateEmail = (elementValue) => {
     var emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
@@ -89,7 +102,6 @@ const SignUpForm = () => {
         </div>
         <div className='login__form-container'>
           <form className='login__form' onSubmit={onSignUp}>
-            <p className='login__call'>Sign up for your account</p>
             <CSSTransition
               in={errors[0]}
               timeout={500}
@@ -102,11 +114,13 @@ const SignUpForm = () => {
                 ))}
               </div>
             </CSSTransition>
+            <p className='login__call'>Sign up for your account</p>
             <div>
               <input
                 type='text'
                 className='login__input login__input-top'
                 name='firstName'
+                maxLength={40}
                 autoComplete='off'
                 required
                 placeholder='Enter first name'
@@ -119,6 +133,7 @@ const SignUpForm = () => {
                 type='text'
                 className='login__input'
                 name='lastName'
+                maxLength={40}
                 required
                 autoComplete='off'
                 placeholder='Enter last name'
@@ -131,6 +146,7 @@ const SignUpForm = () => {
                 type='text'
                 name='email'
                 required
+                maxLength={50}
                 className='login__input'
                 placeholder='Enter email'
                 autoComplete='off'
@@ -143,6 +159,7 @@ const SignUpForm = () => {
                 type='password'
                 className='login__input'
                 name='password'
+                maxLength={40}
                 required
                 placeholder='Enter password'
                 onChange={updatePassword}
@@ -154,13 +171,20 @@ const SignUpForm = () => {
                 type='password'
                 name='repeat_password'
                 className='login__input'
+                maxLength={40}
                 placeholder='Confirm password'
                 onChange={updateRepeatPassword}
                 value={repeatPassword}
                 required={true}
               ></input>
             </div>
-            <button className='login__button-submit' type='submit'>Sign Up</button>
+            <button
+              className={!errors.length ? 'login__button-submit' : 'signup__btn-disabled'}
+              type='submit'
+              disabled={errors.length}
+            >
+              Sign Up
+            </button>
             <div className='login__underline' />
             <NavLink className='login__signup' to='/login' exact={true}>
               Already have an account? Log in

@@ -15,6 +15,7 @@ import CardHeader from './CardHeader/card-header'
 import EditCardInput from './EditCardInput/edit-card-input'
 import UserIcon from './UserIcon/user-icon'
 import UserInfo from './UserInfo/user-info'
+import Welcome from './Welcome/welcome'
 
 
 export {
@@ -35,4 +36,5 @@ export {
   EditCardInput,
   UserIcon,
   UserInfo,
+  Welcome,
 }

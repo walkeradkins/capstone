@@ -37,7 +37,7 @@
   margin: 2.5em 0;
   border: 1px rgba(220, 220, 220, 0.4) solid;
   display: flex;
-  height: 38em;
+  min-height: 38em;
   width: 25em;
   justify-content: center;
   text-align: center;
@@ -49,9 +49,9 @@
   background-color: #eb5a46;
   padding: .5em 0;
   border-radius: .25em;
-  position: absolute;
-  width: 84%;
-  top: 4.3em;
+  /* position: absolute; */
+  width: 100%;
+  top: .5em;
 }
 
 .error__text-login {
@@ -180,4 +180,17 @@
 
 .error-transition-exit-done {
   opacity: 0;
+}
+
+.signup__btn-disabled {
+  background-color: #d7d8d7;
+  border: transparent;
+  width: 100%;
+  padding: .75em 0;
+  border-radius: .25em;
+  margin: .5em 0 1em;
+  color: rgb(194, 194, 194);
+  font-weight: bold;
+  font-size: .85em;
+  outline: none;
 }

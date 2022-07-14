@@ -14,8 +14,8 @@ const EditCardInput = ({ props }) => {
   const [errorCheck, setErrorCheck] = useState(false);
 
   const errorObj = {
-    err1: "Please keep list titles to 250 characters or less",
-    err2: "Please provide a title for your list",
+    err1: "Please keep card names to 250 characters or less",
+    err2: "Please provide a name for your card",
   };
 
   useEffect(() => {
@@ -112,7 +112,7 @@ const EditCardInput = ({ props }) => {
             className={!errors[0] ? "edit-card__submit" : "disabled__btn"}
             onClick={handleSubmit}
             disabled={
-              errors[0] || !content.trim().length || content.trim().length
+              errors[0] || !content.trim().length || content.trim().length === 250
             }
           >
             Save
