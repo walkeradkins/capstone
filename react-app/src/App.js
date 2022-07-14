@@ -8,7 +8,7 @@ import ProtectedRoute from './Components/auth/ProtectedRoute';
 import UsersList from './Components/UsersList';
 import User from './Components/User';
 import { authenticate } from './store/session';
-import { Home, Workspace } from './Pages'
+import { Home, Workspace, PageNotFound } from './Pages'
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -50,7 +50,10 @@ function App() {
         <ProtectedRoute path='/b/:workspaceId' exact={true} >
           <Workspace user={user} />
         </ProtectedRoute>
-        <Route path='/' />
+        {/* <Route path='/' /> */}
+        <Route>
+          <PageNotFound />
+        </Route>
       </Switch>
     </BrowserRouter>
   );

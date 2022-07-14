@@ -11,6 +11,7 @@ import { Sidebar, ListItem, WorkspaceHeader, AddList } from "../../Components";
 import { useWorkspace } from "../../context/workspace-context";
 import { useCardState } from "../../context/card-state-context";
 import { DragDropContext } from "react-beautiful-dnd";
+import { PageNotFound } from '../../Pages'
 
 const Workspace = ({ user }) => {
   const { currentWorkspace, setCurrentWorkspace } = useWorkspace();
@@ -60,6 +61,12 @@ const Workspace = ({ user }) => {
   if (!Object.keys(workspaces).length) return null;
 
   const workspace = workspaces[workspaceId];
+
+  if (!workspace) {
+    return (
+      <PageNotFound />
+    )
+  }
 
   const handleToggle = () => {
     setShowAdd(true);
