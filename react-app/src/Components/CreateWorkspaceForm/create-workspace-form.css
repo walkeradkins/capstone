@@ -1,15 +1,113 @@
 .create__workspace--submit {
-  padding: .5em 2em;
+  padding: .5em;
   background-color: #0079bf;
   border: none;
   cursor: pointer;
   color: white;
   border-radius: .25em;
+  width: 100%;
+  margin: 3em 0;
 }
 
 .create__workspace--submit-disabled {
   border: none;
-  padding: .5em 2em;
+  padding: .5em;
   background-color: rgb(196, 196, 196);
   border-radius: .25em;
+  width: 100%;
+  margin: 3em 0;
+}
+
+.create__board-text {
+  font-size: .85em;
+  color:rgb(92, 92, 92)
+}
+
+.create__board-container {
+  width: 17em;
+  height: 20em;
+  padding: .5em;
+  box-shadow: 0 3px 7px rgba(33,33,33,.2);
+
+}
+
+.create__board-form {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  border-radius: .25em;
+}
+
+.create__board-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: .5em;
+}
+
+.create__board-header-text {
+  padding-left: 5.5em;
+}
+
+.create__board-close {
+  color:rgb(92, 92, 92)
+}
+
+.create__board-close:hover {
+  cursor: pointer;
+  color: black;
+  font-weight: bold;
+}
+
+.create__underline {
+  border-bottom: gainsboro 1px solid;
+  justify-self: center;
+  margin-bottom: 3em;
+}
+
+.create__board-asterisk {
+  color: red;
+}
+
+.create__workspace--input {
+  width: 100%
+}
+
+.create__board-input {
+  font-size: 14px;
+  background-color: #FAFBFC;
+  border: 2px solid #db4011;
+  border-radius: .15em;
+  height: 2.5em;
+  width: 100%;
+  margin:  .5em 0 .75em;
+  padding: 0 .5em;
+  transition: all 0.2s ease-in-out;
+}
+
+.create__board-input:focus {
+  background-color: white;
+  outline: none;
+  border: rgb(0, 153, 255) 2px solid;
+}
+
+.create__board-emoji {
+  font-size: 1.75em;
+}
+
+.error__container-workspace {
+  background-color: #eb5a46;
+  padding: .25em 0;
+  text-align: center;
+  border-radius: .25em;
+  position: absolute;
+  width: 84%;
+  left: 1.4em;
+  top: 3.3em;
+}
+
+.error__text-workspace {
+  color: white;
+  font-size: .85em;
+  font-weight: bold;
 }

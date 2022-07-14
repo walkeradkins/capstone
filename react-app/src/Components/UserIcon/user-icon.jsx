@@ -1,11 +1,11 @@
 import './user-icon.css'
 
-const UserIcon = ({name, width, height, fontSize}) => {
+const UserIcon = ({name, size}) => {
 
   const styles = {
-    width: width,
-    height: height,
-    fontSize: fontSize,
+    width: size,
+    height: size,
+    fontSize: size,
   }
 
   return (
