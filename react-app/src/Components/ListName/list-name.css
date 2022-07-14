@@ -51,7 +51,6 @@
 .tooltip {
   display:inline-block;
   position:relative;
-  /* border-bottom:1px dotted #666; */
   text-align:left;
 }
 
@@ -69,7 +68,7 @@
   font-size:14px;
   border-radius:8px;
   position:absolute;
-  z-index:99999999;
+  z-index:6;
   box-sizing:border-box;
   box-shadow:0 1px 8px rgba(0,0,0,0.5);
   display:none;

@@ -40,6 +40,7 @@ const Workspace = ({ user }) => {
     document.body.style.backgroundAttachment = "fixed";
     document.body.style.backgroundPosition = "center";
     document.body.style.backgroundSize = "cover";
+    document.body.style.overflowY = 'hidden';
     const navbar = document.querySelector(".navbar");
     if (navbar) {
       navbar.style.backgroundColor = "rgba(116, 78, 116, 0.8)";
@@ -48,6 +49,7 @@ const Workspace = ({ user }) => {
     return () => {
       document.body.style.backgroundImage = "";
       document.body.style.backgroundColor = "white";
+      document.body.style.overflowY = 'visible'
       const navbar = document.querySelector(".navbar");
       if (navbar) {
         navbar.style.backgroundColor = "#006ead";
