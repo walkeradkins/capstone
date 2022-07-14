@@ -20,13 +20,10 @@ const ListName = ({ list }) => {
   }, [dispatch]);
 
   useEffect(() => {
-
     if (content.length > 249) {
       setErrorOne(true);
-
     } else if (content.trim().length < 1) {
       setErrorTwo(true);
-
     } else {
       setErrorOne(false);
       setErrorTwo(false);
@@ -39,7 +36,6 @@ const ListName = ({ list }) => {
     if (edit) return;
     setEdit(true);
   };
-
 
   const closeEdit = (e) => {
     if (errors.length || !content.length || content.length === 250) {
@@ -97,18 +93,21 @@ const ListName = ({ list }) => {
   return (
     <div className="list__header-container">
       <div className="list__header-items">
-        <TextareaAutosize
-          id="listname__input"
-          className={edit ? "input__active-list" : "input__inactive-list"}
-          value={content}
-          spellCheck={false}
-          onClick={trueEdit}
-          maxLength={250}
-          onKeyPress={handleKeyPress}
-          minRows={1}
-          ref={focusRef}
-          onChange={(e) => setContent(e.target.value)}
+        <div className={!edit ? "tooltip bold" : null}>
+          <TextareaAutosize
+            id="listname__input"
+            className={edit ? "input__active-list" : "input__inactive-list"}
+            value={content}
+            spellCheck={false}
+            onClick={trueEdit}
+            maxLength={250}
+            onKeyPress={handleKeyPress}
+            minRows={1}
+            ref={focusRef}
+            onChange={(e) => setContent(e.target.value)}
           />
+          {!edit && <span class="top">Click to edit list name</span>}
+        </div>
         <ListDelete list={list} />
       </div>
       <CSSTransition

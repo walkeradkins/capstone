@@ -137,22 +137,25 @@ const WorkspaceName = ({ workspace }) => {
 
   return (
     <div className="workspace-input__wrapper">
-      <AutoSizeInput
-        id="input__workspacename"
-        className={edit ? "input__active" : "input__inactive"}
-        value={content}
-        onClick={trueEdit}
-        minLength={1}
-        autoComplete='off'
-        spellCheck={false}
-        onKeyPress={handleKeyPress}
-        maxLength={50}
-        inputStyle={edit ? inputStylesActive : inputStylesInactive}
-        ref={focusRef}
-        onChange={(e) =>
-          e.target.value.length > -1 ? setContent(e.target.value) : null
-        }
-      />
+      <div className={!edit ? "tooltip__workspace bold" : null}>
+        <AutoSizeInput
+          id="input__workspacename"
+          className={edit ? "input__active" : "input__inactive"}
+          value={content}
+          onClick={trueEdit}
+          minLength={1}
+          autoComplete="off"
+          spellCheck={false}
+          onKeyPress={handleKeyPress}
+          maxLength={50}
+          inputStyle={edit ? inputStylesActive : inputStylesInactive}
+          ref={focusRef}
+          onChange={(e) =>
+            e.target.value.length > -1 ? setContent(e.target.value) : null
+          }
+        />
+        <p className="bottom">Click to edit workspace name</p>
+      </div>
       <CSSTransition
         in={errorCheck}
         timeout={500}

@@ -46,13 +46,13 @@ const Sidebar = ({ workspaces, current, user }) => {
 
   return (
     <div
-      className={collapsed ? "sidebar__wrapper-collapsed" : "sidebar__wrapper"}
+      className={collapsed ? "sidebar__wrapper-collapsed hover" : "sidebar__wrapper"}
       onClick={collapsed ? handleToggle : null}
     >
       {collapsed && (
         <button
           onClick={handleToggle}
-          className="sidebar__button-toggle sidebar__wrapper-collapsed"
+          className="sidebar__button-toggle hover sidebar__wrapper-collapsed"
         >
           <span className="material-symbols-outlined">chevron_right</span>
         </button>
