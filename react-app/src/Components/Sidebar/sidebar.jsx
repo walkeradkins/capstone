@@ -8,16 +8,23 @@ import {
 import "react-pro-sidebar/dist/css/styles.css";
 import { FaTable } from "react-icons/fa";
 import "./sidebar.css";
+import { getAllWorkspaces } from "../../store/workspaces";
+import { getAllLists } from "../../store/lists";
+import { getAllCards } from "../../store/cards";
 import MoreDropdown from "../MoreDropdown/more-dropdown";
-import { useHistory, Redirect, Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { useSidebar } from "../../context/sidebar-context";
+import { useDispatch } from "react-redux";
 import { UserIcon } from "../../Components";
+import { useEffect, useState } from "react";
+import { useWorkspace } from "../../context/workspace-context";
 
 const Sidebar = ({ workspaces, current, user }) => {
   const history = useHistory();
+  const { currentWorkspace, setCurrentWorkspace } = useWorkspace();
   const { collapsed, setCollapsed } = useSidebar();
-
   const { firstName, lastName } = user;
+
   const handleToggle = () => {
     if (collapsed) setCollapsed(false);
     else setCollapsed(true);
@@ -32,9 +39,10 @@ const Sidebar = ({ workspaces, current, user }) => {
     return name;
   };
 
-  const handleClick = (id) => {
-    history.push(`/b/${id}`)
-  }
+  // const handleClick = (board) => {
+  //   setCurrentWorkspace(board.id);
+  //   history.push(`/b/${board.id}`);
+  // };
 
   return (
     <div
@@ -74,9 +82,8 @@ const Sidebar = ({ workspaces, current, user }) => {
               {workspaces.map((board) => {
                 return (
                   <div key={board.id} className="sidebar__boards">
-                    <MenuItem onClick={() => handleClick(board.id)}>
-                      <Link to={`/b/${board.id}`}/>
-                      {getBoardName(board.name)}
+                    <MenuItem>
+                      <a href={`/b/${board.id}`}>{getBoardName(board.name)}</a>
                     </MenuItem>
                     <MoreDropdown board={board} />
                   </div>

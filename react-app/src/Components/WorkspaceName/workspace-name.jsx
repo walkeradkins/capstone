@@ -7,14 +7,13 @@ import { CSSTransition } from "react-transition-group";
 
 const WorkspaceName = ({ workspace }) => {
   const dispatch = useDispatch();
-  const [content, setContent] = useState("");
+  const [content, setContent] = useState(workspace.name);
   const [errors, setErrors] = useState([]);
   const [edit, setEdit] = useState(false);
   const [sent, setSent] = useState(true);
   const focusRef = useRef(null);
   const [contentCheck, setContentCheck] = useState("");
   const [errorCheck, setErrorCheck] = useState(false);
-  const [disabled, setDisabled] = useState(true);
 
   const trueEdit = (e) => {
     e.stopPropagation();
@@ -144,7 +143,7 @@ const WorkspaceName = ({ workspace }) => {
         value={content}
         onClick={trueEdit}
         minLength={1}
-        autoComplete={false}
+        autoComplete='off'
         spellCheck={false}
         onKeyPress={handleKeyPress}
         maxLength={50}
