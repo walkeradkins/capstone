@@ -47,6 +47,12 @@
   display: flex;
   justify-content: space-between;
   padding: 2em 1em;
+
+}
+
+.sidebar__username {
+  font-size: .9em;
+  font-weight: bold;
 }
 
 .sidebar__collapse {
@@ -125,3 +131,13 @@
 .more__container > .material-symbols-outlined:hover {
   background-color: rgb(199, 199, 199);
 }
+
+.sidebar__header{
+   display: flex;
+   align-items: center;
+}
+
+/* .sidebar__username {
+  font-size: .85em;
+  font-weight: bold;
+} */

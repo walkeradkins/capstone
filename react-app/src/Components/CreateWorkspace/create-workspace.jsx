@@ -13,7 +13,7 @@ const CreateWorkspace = ({ user }) => {
       </div>
       {showModal && (
         <Modal onClose={() => setShowModal(false)}>
-          <CreateWorkspaceForm user={user}/>
+          <CreateWorkspaceForm user={user} setShowModal={setShowModal}/>
         </Modal>
       )}
     </>

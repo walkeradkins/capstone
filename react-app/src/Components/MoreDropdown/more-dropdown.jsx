@@ -50,7 +50,7 @@ const MoreDropdown = ({ board }) => {
         className="more__dropdown"
         onClick={handleDelete}
       >
-        Close board...
+        Delete board...
       </div>}
     </>
   );

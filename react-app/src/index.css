@@ -81,3 +81,7 @@ a:hover, a:visited, a:link, a:active
 .list-transition-exit-done {
   opacity: 0;
 }
+
+.bold {
+  font-weight: bold;
+}

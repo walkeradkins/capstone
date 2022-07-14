@@ -57,6 +57,7 @@
 .error__text-login {
   color: white;
   font-size: .85em;
+  font-weight: bold;
 }
 
 .login__form {

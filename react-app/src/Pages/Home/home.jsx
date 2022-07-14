@@ -20,7 +20,7 @@ const Home = ({ user }) => {
       <div className="home__header">
         <div className="home__header-inner">
           <div className="home__user">
-            <UserIcon name={firstName} width={'2em'} height={'2em'} fontSize={'2em'}/>
+            <UserIcon name={firstName} size={'2em'} />
             <div className="home__user-name">
               <p>{`${firstName} ${lastName}'s Workspaces`}</p>
             </div>
