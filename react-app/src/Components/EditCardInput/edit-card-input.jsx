@@ -72,6 +72,7 @@ const EditCardInput = ({ props }) => {
       alert(error);
     }
     if (deletedCard) {
+      console.log('deleted card')
       setItem(deletedCard);
       setEdit(false);
       setEditItem(deletedCard);

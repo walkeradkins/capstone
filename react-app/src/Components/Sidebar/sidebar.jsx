@@ -25,8 +25,8 @@ const Sidebar = ({ workspaces, current, user }) => {
 
   const getBoardName = (name) => {
     let newName;
-    if (name.length > 20) {
-      newName = `${name.slice(0, 20)}...`;
+    if (name.length > 18) {
+      newName = `${name.slice(0, 18)}...`;
       return newName;
     }
     return name;
