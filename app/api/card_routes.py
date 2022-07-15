@@ -46,56 +46,64 @@ def updateCard(cardId):
         return card.to_dict()
 
     else:
-        list_id = card.list_id
-        list_id = new_card['finish_list']
-        card.list_id = list_id
+        if 'list_id' in new_card:
+            card.list_id = new_card['list_id']
+            del new_card['list_id']
 
-        # Moving on the same list
-        cards = Card.query.filter(card.list_id == Card.list_id).all()
-        if new_card['start_list'] == new_card['finish_list']:
-            # set index of moved card
-            index = card.index
-            index = new_card['finish_index']
-            card.index = index
+        for id, index in new_card.items():
+            Card.query.get(id).index = index
 
-            for card in cards:
-                # moving card up and updating other indices
-                if card.to_dict()['index'] > new_card['start_index'] and card.to_dict()['index'] <= new_card['finish_index'] and card.to_dict()['id'] != cardId:
-                    index = card.index
-                    index = index - 1
-                    card.index = index
-                    db.session.merge(card)
 
-                # moving card down and updating other indices
-                if card.to_dict()['index'] < new_card['start_index'] and card.to_dict()['index'] >= new_card['finish_index'] and card.to_dict()['id'] != cardId:
-                    index = card.index
-                    index = index + 1
-                    card.index = index
-                    db.session.merge(card)
-        else:
-            # Moving on the different list
-            start_list = Card.query.filter(
-                new_card['start_list'] == Card.list_id).all()
-            index = card.index
-            index = new_card['finish_index']
-            card.index = index
-            # set new list_id for card
-            # update start list indexes
-            for start_card in start_list:
-                if start_card.to_dict()['index'] > new_card['start_index'] and start_card.to_dict()['id'] != cardId:
-                    index = start_card.index
-                    index = index - 1
-                    start_card.index = index
-                    db.session.merge(start_card)
+        # list_id = card.list_id
+        # list_id = new_card['finish_list']
+        # card.list_id = list_id
 
-            for card in cards:
-                if card.to_dict()['index'] >= new_card['finish_index'] and card.to_dict()['id'] != cardId:
-                    index = card.index
-                    index = index + 1
-                    card.index = index
-                    db.session.merge(card)
+        # # Moving on the same list
+        # cards = Card.query.filter(card.list_id == Card.list_id).all()
+        # if new_card['start_list'] == new_card['finish_list']:
+        #     # set index of moved card
+        #     index = card.index
+        #     index = new_card['finish_index']
+        #     card.index = index
 
-        # db.session.flush()
+        #     for card in cards:
+        #         # moving card up and updating other indices
+        #         if card.to_dict()['index'] > new_card['start_index'] and card.to_dict()['index'] <= new_card['finish_index'] and card.to_dict()['id'] != cardId:
+        #             index = card.index
+        #             index = index - 1
+        #             card.index = index
+        #             db.session.merge(card)
+
+        #         # moving card down and updating other indices
+        #         if card.to_dict()['index'] < new_card['start_index'] and card.to_dict()['index'] >= new_card['finish_index'] and card.to_dict()['id'] != cardId:
+        #             index = card.index
+        #             index = index + 1
+        #             card.index = index
+        #             db.session.merge(card)
+        # else:
+        #     # Moving on the different list
+        #     start_list = Card.query.filter(
+        #         new_card['start_list'] == Card.list_id).all()
+        #     index = card.index
+        #     index = new_card['finish_index']
+        #     card.index = index
+        #     # set new list_id for card
+        #     # update start list indexes
+        #     for start_card in start_list:
+        #         if start_card.to_dict()['index'] > new_card['start_index'] and start_card.to_dict()['id'] != cardId:
+        #             index = start_card.index
+        #             index = index - 1
+        #             start_card.index = index
+        #             db.session.merge(start_card)
+
+        #     for card in cards:
+        #         if card.to_dict()['index'] >= new_card['finish_index'] and card.to_dict()['id'] != cardId:
+        #             index = card.index
+        #             index = index + 1
+        #             card.index = index
+        #             db.session.merge(card)
+
+        # # db.session.flush()
         db.session.commit()
         return card.to_dict()
 

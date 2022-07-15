@@ -50,7 +50,7 @@ const UserInfo = ({ user }) => {
 
           <div className="navbar__dropdown-links">
             <Link to="/" exact={true}>
-              Home
+              <div>Home</div>
             </Link>
           </div>
 
