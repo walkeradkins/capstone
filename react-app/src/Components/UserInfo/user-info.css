@@ -41,6 +41,7 @@
   position: absolute;
   right: 2em;
   max-width: 15em;
+  min-width: 15em;
   top: 3em;
   background-color: white;
 }
