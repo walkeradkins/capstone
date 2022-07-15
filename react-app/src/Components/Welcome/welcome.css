@@ -1,5 +1,8 @@
 .home__welcome-container {
+  background-color: white;;
   max-width: 30em;
+  min-height: 9em;
+  position: relative;
   margin: 2em;
   border: 1px gainsboro solid;
   padding: 1em;
@@ -10,4 +13,31 @@
 .home__welcome {
   font-size: .95em;
   color:rgb(73, 73, 73)
+}
+
+.home__welcome-btn {
+  position: absolute;
+  right: 2em;
+  bottom: 1em;
+  background-color: #5AAC44;
+  color: white;
+  padding: .75em 1.25em;
+  border-radius: .25em;
+  border: none;
+}
+
+.home__welcome-btn:hover {
+  cursor: pointer;
+  background-color: #5ebe43;
+}
+
+.welcome-transition-exit {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.welcome-transition-exit-active {
+  transform: translateY(-100%);
+  opacity: 0;
+  transition: all 300ms linear
 }

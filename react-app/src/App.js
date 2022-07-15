@@ -38,19 +38,12 @@ function App() {
         <Route path='/sign-up' exact={true}>
           <SignUpForm />
         </Route>
-        <ProtectedRoute path='/users' exact={true} >
-          <UsersList />
-        </ProtectedRoute>
-        <ProtectedRoute path='/users/:userId' exact={true} >
-          <User />
+        <ProtectedRoute path='/b/:workspaceId' exact={true} >
+          <Workspace user={user} />
         </ProtectedRoute>
         <ProtectedRoute path='/' exact={true} >
           <Home user={user} />
         </ProtectedRoute>
-        <ProtectedRoute path='/b/:workspaceId' exact={true} >
-          <Workspace user={user} />
-        </ProtectedRoute>
-        {/* <Route path='/' /> */}
         <Route>
           <PageNotFound />
         </Route>

@@ -33,7 +33,7 @@ const Workspace = ({ user }) => {
     dispatch(getAllCards(workspaceId));
     setCurrentWorkspace(workspaceId);
     setCardState(lists);
-  }, [drag, item]);
+  }, [drag, item, workspaceId]);
 
   useEffect(() => {
     document.body.style.backgroundImage = `url( ${whatnext_background} )`;

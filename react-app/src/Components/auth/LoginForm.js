@@ -4,6 +4,7 @@ import { Redirect, NavLink } from 'react-router-dom';
 import { login } from '../../store/session';
 import './login.css'
 import { CSSTransition } from "react-transition-group";
+import { Welcome } from '../../Components'
 
 const LoginForm = () => {
   const [backendErrors, setBackendErrors] = useState([]);
@@ -70,6 +71,7 @@ const LoginForm = () => {
           <div className='login__logo'>💠</div>
           <h3 className='login__header-text'>WhatNext?</h3>
         </div>
+            <Welcome />
         <div className='login__form-container'>
           <form className='login__form' onSubmit={onLogin}>
             <p className='login__call'>Log in to WhatNext</p>
@@ -96,7 +98,7 @@ const LoginForm = () => {
                 placeholder='Enter email'
                 value={email}
                 onChange={updateEmail}
-                />
+              />
             </div>
             <div>
               <input

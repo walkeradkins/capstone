@@ -43,7 +43,7 @@ const WorkspaceName = ({ workspace }) => {
 
   useEffect(() => {
     setContent(name);
-  }, [dispatch]);
+  }, [workspace]);
 
   useEffect(() => {
     if (content.length) {
