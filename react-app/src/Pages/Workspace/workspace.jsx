@@ -83,16 +83,44 @@ const Workspace = ({ user }) => {
       return;
     }
 
-    const payload = {
-      start_list: +source.droppableId,
-      finish_list: +destination.droppableId,
-      start_index: source.index,
-      finish_index: destination.index,
-    };
+    let payload= {};
+
+    if (+source.droppableId === +destination.droppableId) {
+      // if moving card on same list
+      const cardList = lists[+source.droppableId].cards
+      cardList.splice(source.index, 1);
+      cardList.splice(destination.index, 0, +draggableId)
+      cardList.forEach((card, index) => {
+        payload[card] = index
+      })
+    } else {
+      // update old list indices
+      const startCardList = lists[+source.droppableId].cards
+      startCardList.splice(source.index, 1)
+      startCardList.forEach((card, index) => {
+        payload[card] = index
+      })
+      // update new list indices
+      const finishCardList = lists[+destination.droppableId].cards
+      finishCardList.splice(destination.index, 0, +draggableId)
+      finishCardList.forEach((card, index) => {
+        payload[card] = index
+      })
+      payload['list_id'] = +destination.droppableId
+      console.log('payload:: ', payload)
+    }
+
+
+    // const payload = {
+    //   start_list: +source.droppableId,
+    //   finish_list: +destination.droppableId,
+    //   start_index: source.index,
+    //   finish_index: destination.index,
+    // };
 
     let updatedCard;
     try {
-      updatedCard = await dispatch(updateCard(payload, result.draggableId));
+      updatedCard = await dispatch(updateCard(payload, draggableId));
     } catch (error) {
       alert(error);
     }

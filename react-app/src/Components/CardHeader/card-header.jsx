@@ -56,7 +56,6 @@ const CardHeader = ({ props }) => {
             </div>
           )}
             {provided.placeholder}
-
         </div>
       )}
     </Draggable>

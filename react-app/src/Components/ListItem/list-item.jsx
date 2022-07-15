@@ -7,9 +7,8 @@ import { getAllLists } from "../../store/lists";
 import { useEffect, useState } from "react";
 import { Droppable } from "react-beautiful-dnd";
 
-
 const ListItem = ({ props }) => {
-  const { list, setItem } = props
+  const { list, setItem } = props;
   const cards = useSelector((state) => state.cards);
   const cardsArray = list.cards.map((id) => cards[id]);
   const [editItem, setEditItem] = useState("");
@@ -24,12 +23,14 @@ const ListItem = ({ props }) => {
     <div className="list__wrapper">
       <div className="list__content">
         <div className="list__header">
-          <ListName list={list}/>
+          <ListName list={list} />
         </div>
         <Droppable droppableId={`${list.id}`}>
           {(provided, snapshot) => (
             <div
-              className={list.cards[0] ? "card__wrapper" : 'card__wrapper-no-cards'}
+              className={
+                list.cards[0] ? "card__wrapper" : "card__wrapper-no-cards"
+              }
               {...provided.droppableProps}
               ref={provided.innerRef}
             >
