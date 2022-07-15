@@ -22,8 +22,10 @@ const SignUpForm = () => {
     e.preventDefault();
     const emailCheck = validateEmail(email);
     const passwordCheck = (password === repeatPassword)
-    if (passwordCheck && emailCheck) {
-      const data = await dispatch(signUp(firstName, lastName, email, password));
+    const firstNameCheck = firstName.trim().length !== 0;
+    const lastNameCheck = lastName.trim().length !== 0;
+    if (passwordCheck && emailCheck && firstNameCheck && lastNameCheck) {
+      const data = await dispatch(signUp(firstName.trim(), lastName.trim(), email, password));
       if (data) {
         setBackendErrors(data)
         setSubmitted(!submitted)
@@ -35,6 +37,13 @@ const SignUpForm = () => {
       return
     }
     if (!passwordCheck) valErrors.push('Passwords do not match.');
+
+    if (!firstNameCheck) {
+      valErrors.push('Please provide a first name')
+    }
+    if (!lastNameCheck) {
+      valErrors.push('Please provide a last name')
+    }
     setErrors([...valErrors])
   };
 
@@ -60,7 +69,7 @@ const SignUpForm = () => {
       lengthErrors.push('Please keep password to under 40 characters')
     }
     if (lengthErrors.length) setErrors(lengthErrors)
-    else return () => setErrors([]);
+    else setErrors([]);
   }, [email, firstName, lastName, password, repeatPassword])
 
   const validateEmail = (elementValue) => {

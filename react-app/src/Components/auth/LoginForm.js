@@ -13,6 +13,7 @@ const LoginForm = () => {
   const [submitted, setSubmitted] = useState(false)
   const [password, setPassword] = useState('');
   const user = useSelector(state => state.session.user);
+  const [disabled, setDisabled] = useState(false)
   const dispatch = useDispatch();
 
   const onLogin = async (e) => {
@@ -33,22 +34,27 @@ const LoginForm = () => {
     const valErrors = [];
     backendErrors.forEach(err => {
       if (err === 'email : 1') valErrors.push('There is no account for this email.')
-      // if (err === 'password : 2') valErrors.push('Not user with this email address found.')
       if (err === 'password : 3') valErrors.push('Incorrect password and email combination')
     })
+    if (!email.trim().length) valErrors.push('Please provide a valid email address')
     setErrors(valErrors)
   }, [submitted])
 
   useEffect(() => {
     const lengthErrors = []
-    if (email.length === 50) {
+    if (email.length > 49) {
       lengthErrors.push('Please keep email to under 50 characters')
+      setDisabled(true)
     }
     if (password.length === 40) {
       lengthErrors.push('Please keep password to under 40 characters')
+      setDisabled(true)
     }
     if (lengthErrors.length) setErrors(lengthErrors)
-    else return () => setErrors([]);
+    else {
+      setDisabled(false)
+      setErrors([]);
+    }
   }, [email, password])
 
   const updateEmail = (e) => {
@@ -71,7 +77,7 @@ const LoginForm = () => {
           <div className='login__logo'>💠</div>
           <h3 className='login__header-text'>WhatNext?</h3>
         </div>
-            <Welcome />
+        <Welcome />
         <div className='login__form-container'>
           <form className='login__form' onSubmit={onLogin}>
             <p className='login__call'>Log in to WhatNext</p>
@@ -113,7 +119,11 @@ const LoginForm = () => {
                 onChange={updatePassword}
               />
             </div>
-            <button className='login__button-submit' type='submit'>Log in</button>
+            <button
+              className={disabled ? 'signup__btn-disabled' : 'login__button-submit'}
+              type='submit'
+              disabled={disabled}
+            >Log in</button>
             <p className='login__or'>OR</p>
             <div className='login__demo' onClick={handleDemo}>
               <p className='login__emoji'>👍</p>
