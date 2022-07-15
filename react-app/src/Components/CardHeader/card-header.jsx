@@ -21,7 +21,7 @@ const CardHeader = ({ props }) => {
   if (!card) return null;
 
   return (
-    <Draggable key={card.id} draggableId={card.id.toString()} index={index}>
+    <Draggable key={card.id} draggableId={card.id.toString()} index={index} >
       {(provided, snapshot) => (
         <div
           className={

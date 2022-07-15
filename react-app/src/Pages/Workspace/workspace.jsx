@@ -107,7 +107,6 @@ const Workspace = ({ user }) => {
         payload[card] = index
       })
       payload['list_id'] = +destination.droppableId
-      console.log('payload:: ', payload)
     }
 
 

@@ -3,22 +3,11 @@
   font-family: Arial, Helvetica, sans-serif;
   box-sizing: border-box;
   margin: 0;
-  /* padding: 0 */
 }
 
 body{
   overflow: overlay;
 }
-
-/* body:not(
-  .pro-sidebar > .pro-sidebar-inner > .pro-sidebar-layout, .home__main
-) {
-  overflow-y: hidden;
-} */
-
-/* body:not(.workspace) {
-  overflow-y:hidden;
-} */
 
 .btn-hidden {
   background-color: gray;
