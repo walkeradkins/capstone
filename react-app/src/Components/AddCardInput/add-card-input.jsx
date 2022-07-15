@@ -68,7 +68,7 @@ const AddCardInput = ({ props }) => {
     try {
       newCard = await dispatch(createCard(payload, list.id));
     } catch (error) {
-      alert(error);
+      // alert(error);
     }
     if (newCard) {
       setAdd(true);
@@ -138,7 +138,7 @@ const AddCardInput = ({ props }) => {
             >
               Add Card
             </button>
-            <button className="add-card__cancel" onClick={handleCancel}>
+            <button className="add-card__cancel" onClick={handleCancel} type='submit'>
               <span className="material-symbols-outlined add-card__cancel-icon">
                 close
               </span>
