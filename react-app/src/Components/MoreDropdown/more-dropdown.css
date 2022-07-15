@@ -1,17 +1,9 @@
-.more__container {
-  cursor:pointer;
-}
-
-.more__container:hover {
-  background-color: rgb(121, 121, 121);
-}
-
 .more__dropdown {
   position: absolute;
   width: 12em;
   padding: 1em;
-  top: 2em;
-  right: -8.5em;
+  top: 2.2em;
+  right: -11em;
   border-radius: .25em;
   background-color: white;
   border: 1px solid gainsboro;

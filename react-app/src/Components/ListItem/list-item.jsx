@@ -19,6 +19,15 @@ const ListItem = ({ props }) => {
   //   dispatch(getAllLists(currentWorkspace));
   // }, [item]);
 
+  const InnerList = ({ snapshot }) => {
+    return cardsArray.map((card, index) => (
+      <CardHeader
+        props={{ card, setItem, index, setEditItem, snapshot }}
+        key={index}
+      />
+    ));
+  };
+
   return (
     <div className="list__wrapper">
       <div className="list__content">
@@ -34,13 +43,7 @@ const ListItem = ({ props }) => {
               {...provided.droppableProps}
               ref={provided.innerRef}
             >
-              {list.cards[0] &&
-                cardsArray.map((card, index) => (
-                  <CardHeader
-                    props={{ card, setItem, index, setEditItem, snapshot }}
-                    key={index}
-                  />
-                ))}
+              {list.cards[0] && <InnerList cardsArray={cardsArray} snapshot={snapshot}/>}
               {provided.placeholder}
               {add && <AddCardInput props={{ list, setItem, add, setAdd }} />}
             </div>

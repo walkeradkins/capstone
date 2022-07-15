@@ -1,27 +1,11 @@
-import {
-  ProSidebar,
-  Menu,
-  MenuItem,
-  SubMenu,
-  SidebarHeader,
-} from "react-pro-sidebar";
-import "react-pro-sidebar/dist/css/styles.css";
-import { FaTable } from "react-icons/fa";
 import "./sidebar.css";
-import { getAllWorkspaces } from "../../store/workspaces";
-import { getAllLists } from "../../store/lists";
-import { getAllCards } from "../../store/cards";
-import MoreDropdown from "../MoreDropdown/more-dropdown";
-import { useHistory } from "react-router-dom";
+import { FaTable } from "react-icons/fa";
+import { Link } from "react-router-dom";
 import { useSidebar } from "../../context/sidebar-context";
-import { useDispatch } from "react-redux";
-import { UserIcon } from "../../Components";
-import { useEffect, useState } from "react";
-import { useWorkspace } from "../../context/workspace-context";
+import { UserIcon, MoreDropdown } from "../../Components";
+import { CSSTransition } from "react-transition-group";
 
 const Sidebar = ({ workspaces, current, user }) => {
-  const history = useHistory();
-  const { currentWorkspace, setCurrentWorkspace } = useWorkspace();
   const { collapsed, setCollapsed } = useSidebar();
   const { firstName, lastName } = user;
 
@@ -45,55 +29,66 @@ const Sidebar = ({ workspaces, current, user }) => {
   // };
 
   return (
-    <div
-      className={collapsed ? "sidebar__wrapper-collapsed hover" : "sidebar__wrapper"}
-      onClick={collapsed ? handleToggle : null}
-    >
-      {collapsed && (
-        <button
-          onClick={handleToggle}
-          className="sidebar__button-toggle hover sidebar__wrapper-collapsed"
-        >
-          <span className="material-symbols-outlined">chevron_right</span>
-        </button>
-      )}
-      <ProSidebar
-        collapsed={collapsed}
-        collapsedWidth={"1em"}
-        className={collapsed ? "sidebar__collapsed" : "sidebar__open"}
+    <>
+      <CSSTransition
+        in={!collapsed}
+        timeout={300}
+        classNames="sidebar-collapse"
+        unmountOnExit
       >
-        {!collapsed && (
-          <SidebarHeader>
-            <div className="sidebar__header">
-              <UserIcon name={firstName} size={"1.5em"} />
-              <p className="sidebar__username">{`${firstName} ${lastName}'s Workspace`}</p>
-              <span
-                className="sidebar__collapse material-symbols-outlined"
-                onClick={handleToggle}
-              >
-                chevron_left
-              </span>
-            </div>
-          </SidebarHeader>
-        )}
-        {!collapsed && (
-          <Menu iconShape="circle">
-            <SubMenu title="Your Boards" icon={<FaTable />}>
+        <div className="sidebar__collapsed" onClick={handleToggle}>
+          <div className="sidebar__button-open">
+            <span className="material-symbols-outlined">chevron_right</span>
+          </div>
+        </div>
+      </CSSTransition>
+      <CSSTransition
+        in={collapsed}
+        timeout={300}
+        classNames="sidebar-enter"
+        unmountOnExit
+      >
+        <div className="sidebar__open">
+          <div className="sidebar__header">
+            <UserIcon name={firstName} size={"1.5em"} />
+            <p className="sidebar__username">{`${firstName} ${lastName}'s Workspace`}</p>
+            <span
+              className="sidebar__button-collapse material-symbols-outlined"
+              onClick={handleToggle}
+            >
+              chevron_left
+            </span>
+          </div>
+          <div className="sidebar__underline" />
+          <div className="sidebar__boards">
+            <div className="sidebar__board-container">
+              <div className="sidebar__subheader">
+                <FaTable />
+                <p className="sidebar__subheader-text">Your Boards</p>
+              </div>
               {workspaces.map((board) => {
                 return (
-                  <div key={board.id} className="sidebar__boards">
-                    <MenuItem>
-                      <a href={`/b/${board.id}`}>{getBoardName(board.name)}</a>
-                    </MenuItem>
-                    <MoreDropdown board={board} />
+                  <div key={board.id} className="sidebar__board">
+                    <div className="sidebar__board-left">
+                      <p>📅</p>
+                      <Link
+                        to={`/b/${board.id}`}
+                        className="sidebar__board-link"
+                      >
+                        {getBoardName(board.name)}
+                      </Link>
+                    </div>
+                    <div className="sidebar__board-right">
+                      <MoreDropdown board={board} />
+                    </div>
                   </div>
                 );
               })}
-            </SubMenu>
-          </Menu>
-        )}
-      </ProSidebar>
-    </div>
+            </div>
+          </div>
+        </div>
+      </CSSTransition>
+    </>
   );
 };
 
