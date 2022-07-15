@@ -20,7 +20,7 @@ const ListItem = ({ props }) => {
   useEffect(() => {
     dispatch(getAllCards(currentWorkspace));
     dispatch(getAllLists(currentWorkspace));
-  }, [editItem]);
+  }, [editItem, add]);
 
   const InnerList = ({ snapshot }) => {
     return cardsArray.map((card, index) => (

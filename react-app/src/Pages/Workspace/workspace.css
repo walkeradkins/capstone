@@ -5,13 +5,11 @@
 .list__container {
   display: flex;
   margin: 0 2em;
-  max-height: 45em;
+  max-height: 75%;
 }
 
 .workspace {
   margin-top: 3.5em;
-  /* overflow-y: visible;
-  overflow-x: visible; */
 }
 
 .workspace__list-add {
@@ -50,4 +48,28 @@
   border-radius: 20px;
   background-clip: content-box;
   min-height: 2em;
+}
+
+@media screen and (max-height: 800px){
+  .list__container {
+    max-height: 65%;
+  }
+}
+
+@media screen and (max-height: 690px){
+  .list__container {
+    max-height: 50%;
+  }
+}
+
+@media screen and (max-height: 600px){
+  .list__container {
+    max-height: 40%;
+  }
+}
+
+@media screen and (max-height: 500px){
+  .list__container {
+    max-height: 25%;
+  }
 }
