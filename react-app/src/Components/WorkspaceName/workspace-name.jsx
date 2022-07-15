@@ -8,7 +8,6 @@ import { CSSTransition } from "react-transition-group";
 const WorkspaceName = ({ workspace }) => {
   const dispatch = useDispatch();
   const [content, setContent] = useState(workspace.name);
-  console.log('WWWWNNNAME', workspace.name)
   const [errors, setErrors] = useState([]);
   const [edit, setEdit] = useState(false);
   const [sent, setSent] = useState(true);
@@ -105,8 +104,6 @@ const WorkspaceName = ({ workspace }) => {
 
   if (!workspace) return null;
   const { name, id } = workspace;
-
-  console.log('NNNNNNNNAME LATE', content)
 
   const inputStylesActive = {
     backgroundColor: "white",

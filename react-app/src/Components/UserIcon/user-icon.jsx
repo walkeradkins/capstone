@@ -3,8 +3,8 @@ import './user-icon.css'
 const UserIcon = ({name, size}) => {
 
   const styles = {
-    width: size,
-    height: size,
+    minWidth: size,
+    minHeight: size,
     fontSize: size,
   }
 

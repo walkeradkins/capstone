@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { getAllWorkspaces } from "../../store/workspaces";
 import { WorkspaceLink, CreateWorkspace } from "../../Components";
-import { UserIcon, Welcome } from "../../Components";
+import { UserIcon } from "../../Components";
 
 const Home = ({ user }) => {
   const { firstName, lastName, members } = user;
@@ -27,7 +27,6 @@ const Home = ({ user }) => {
           </div>
         </div>
       </div>
-        <Welcome />
       <div className="workspace__boards">
         <CreateWorkspace user={user} />
         {workspaceArray.map((workspace) => (

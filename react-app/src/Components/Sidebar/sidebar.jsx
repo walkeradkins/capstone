@@ -13,6 +13,11 @@ const Sidebar = ({ workspaces, current, user }) => {
   const { collapsed, setCollapsed } = useSidebar();
   const { firstName, lastName } = user;
 
+  let userName;
+  if (firstName.length + lastName.length > 40) {
+    userName = firstName;
+  } else userName = `${firstName} ${lastName}`;
+
   const handleToggle = () => {
     if (collapsed) setCollapsed(false);
     else setCollapsed(true);
@@ -49,8 +54,13 @@ const Sidebar = ({ workspaces, current, user }) => {
       >
         <div className="sidebar__open">
           <div className="sidebar__header">
-            <UserIcon name={firstName} size={"1.5em"} />
-            <p className="sidebar__username">{`${firstName} ${lastName}'s Workspace`}</p>
+            <div className='sidebar__username-icon-container'>
+              <UserIcon name={firstName} size={"1.5em"} />
+              <div className="sidebar__username-container">
+                <p className="sidebar__username">{`${userName}'s`}</p>
+                <p className="sidebar__username">Workspace</p>
+              </div>
+            </div>
             <span
               className="sidebar__button-collapse material-symbols-outlined"
               onClick={handleToggle}

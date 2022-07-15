@@ -58,6 +58,11 @@
   transition: 0.2s;
 }
 
+.sidebar__username-icon-container {
+  display: flex;
+  align-items: center;
+}
+
 .sidebar__button-collapse:hover {
   background-color: gainsboro;
   cursor: pointer;
@@ -67,11 +72,16 @@
   margin: 1em 0.25em;
   display: flex;
   align-items: center;
+  justify-content: space-between;
+  overflow-wrap: break-word;
+  /* max-width: 12em; */
 }
 
 .sidebar__username {
+  max-width: 10em;
   font-size: 0.95em;
   font-weight: bold;
+  white-space: pre-line;
 }
 
 .sidebar__underline {
