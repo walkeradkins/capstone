@@ -11,6 +11,7 @@ const MoreDropdown = ({ board }) => {
   const [toggleDropdown, setToggleDropdown] = useState(false);
 
   const handleToggle = (e) => {
+    e.preventDefault();
     if (toggleDropdown) return
     setToggleDropdown(true)
   }

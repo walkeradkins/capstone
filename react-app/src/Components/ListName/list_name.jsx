@@ -109,7 +109,7 @@ const ListName = ({ list }) => {
             ref={focusRef}
             onChange={(e) => setContent(e.target.value)}
           />
-          {!edit && <span class="top">Click to edit list name</span>}
+          {!edit && <span className="top">Click to edit list name</span>}
         </div>
         <ListDelete list={list} />
       </div>
