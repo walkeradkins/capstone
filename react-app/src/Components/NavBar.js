@@ -32,10 +32,10 @@ const NavBar = ({ loaded }) => {
   } else {
     sessionLinks = (
       <>
-        <NavLink to='/login' exact={true}>
+        <NavLink to='/login' exact='true'>
           Login
         </NavLink>
-        <NavLink to='/sign-up' exact={true}>
+        <NavLink to='/sign-up' exact='true'>
           Sign Up
         </NavLink>
       </>
@@ -44,7 +44,7 @@ const NavBar = ({ loaded }) => {
   return (
     <nav className='navbar'>
       <div className='navbar__left'>
-        <Link to='/' className='navbar__link' exact={true} >
+        <Link to='/' className='navbar__link' exact >
           <div className='navbar__logo-container'>
             <p className='navbar__logo'>💠</p>
             <p className='navbar__logo-text'>WhatNext?</p>

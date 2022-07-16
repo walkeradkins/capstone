@@ -130,7 +130,7 @@ const LoginForm = () => {
               <p className='login__demo-text'>Continue as demo user</p>
             </div>
             <div className='login__underline' />
-            <NavLink className='login__signup' to='/sign-up' exact={true}>
+            <NavLink className='login__signup' to='/sign-up' exact>
               Sign up for an account
             </NavLink>
           </form>
