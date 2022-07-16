@@ -30,16 +30,16 @@ function App() {
         <NavBar loaded={loaded} />
       }
       <Switch>
-        <Route path='/login' exact={true}>
+        <Route path='/login' exact>
           <LoginForm />
         </Route>
-        <Route path='/sign-up' exact={true}>
+        <Route path='/sign-up' exact>
           <SignUpForm />
         </Route>
-        <ProtectedRoute path='/b/:workspaceId' exact={true} >
+        <ProtectedRoute path='/b/:workspaceId' exact >
           <Workspace user={user} />
         </ProtectedRoute>
-        <ProtectedRoute path='/' exact={true} >
+        <ProtectedRoute path='/' exact>
           <Home user={user} />
         </ProtectedRoute>
         <Route>

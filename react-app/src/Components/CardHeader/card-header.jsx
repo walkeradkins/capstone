@@ -70,7 +70,7 @@ const CardHeader = ({ props }) => {
                 onClick={() => setEdit(false)}
               />
               <EditCardInput
-                props={{ card, setEdit, setItem, setEditItem, position, edit }}
+                props={{ card, setEdit, setItem, setEditItem, position }}
               />
             </>
           )}

@@ -5,7 +5,7 @@
 .list__container {
   display: flex;
   margin: 0 2em;
-  max-height: 75vh;
+  max-height: 73vh;
 }
 
 .workspace {
@@ -50,7 +50,7 @@
   min-height: 2em;
 }
 
-@media screen and (max-height: 500px){
+@media screen and (max-height: 600px){
   .list__container {
     max-height: 70vh;
   }

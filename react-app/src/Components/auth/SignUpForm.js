@@ -194,7 +194,7 @@ const SignUpForm = () => {
               Sign Up
             </button>
             <div className='login__underline' />
-            <NavLink className='login__signup' to='/login' exact={true}>
+            <NavLink className='login__signup' to='/login' exact>
               Already have an account? Log in
             </NavLink>
           </form>

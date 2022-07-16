@@ -19,7 +19,6 @@ const ListItem = ({ props }) => {
   // useEffect(() => {
   //   dispatch(getAllCards(currentWorkspace));
   //   dispatch(getAllLists(currentWorkspace));
-  //   console.log('TTTTTTTTHIS')
   // }, [editItem]);
 
   const InnerList = ({ snapshot }) => {
