@@ -25,6 +25,7 @@ const Workspace = ({ user }) => {
   const length = listArray.length;
   const { cardState, setCardState } = useCardState();
   const [showAdd, setShowAdd] = useState(false);
+  const [editItem, setEditItem] = useState("");
   const [drag, setDrag] = useState("");
 
   useEffect(() => {
@@ -33,7 +34,7 @@ const Workspace = ({ user }) => {
     dispatch(getAllCards(workspaceId));
     setCurrentWorkspace(workspaceId);
     setCardState(lists);
-  }, [drag, item, workspaceId]);
+  }, [drag, item, workspaceId, editItem]);
 
   useEffect(() => {
     document.body.style.backgroundImage = `url( ${whatnext_background} )`;
@@ -136,7 +137,7 @@ const Workspace = ({ user }) => {
               {listArray.map((list) => {
                 return (
                   <div key={list.id}>
-                    <ListItem props={{ list, item, setItem }}/>
+                    <ListItem props={{ list, item, setItem, editItem, setEditItem }}/>
                   </div>
                 );
               })}

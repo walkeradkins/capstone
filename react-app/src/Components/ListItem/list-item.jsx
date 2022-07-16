@@ -10,17 +10,17 @@ import { useWorkspace } from "../../context/workspace-context";
 
 const ListItem = ({ props }) => {
   const dispatch = useDispatch();
-  const { list, setItem } = props;
+  const { list, setItem, editItem, setEditItem } = props;
   const { currentWorkspace } = useWorkspace();
   const cards = useSelector((state) => state.cards);
   const cardsArray = list.cards.map((id) => cards[id]);
-  const [editItem, setEditItem] = useState("");
   const [add, setAdd] = useState(false);
 
-  useEffect(() => {
-    dispatch(getAllCards(currentWorkspace));
-    dispatch(getAllLists(currentWorkspace));
-  }, [editItem]);
+  // useEffect(() => {
+  //   dispatch(getAllCards(currentWorkspace));
+  //   dispatch(getAllLists(currentWorkspace));
+  //   console.log('TTTTTTTTHIS')
+  // }, [editItem]);
 
   const InnerList = ({ snapshot }) => {
     return cardsArray.map((card, index) => (

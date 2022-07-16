@@ -97,7 +97,7 @@ const Sidebar = ({ workspaces, current, user }) => {
                     <div key={board.id} className="sidebar__board">
                       <div className="sidebar__board-left">
                         <p>📅</p>
-                        <div className="sidebar__board-link-text">
+                        <div className="sidebar__board-link-text" >
                           {getBoardName(board.name)}
                         </div>
                       </div>
