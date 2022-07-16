@@ -51,7 +51,6 @@ const SignUpForm = () => {
     const valErrors = [];
     if (backendErrors[0]) valErrors.push('There is already an account associated with this email.');
     setErrors(valErrors)
-    console.log(backendErrors)
   }, [submitted])
 
   useEffect(() => {

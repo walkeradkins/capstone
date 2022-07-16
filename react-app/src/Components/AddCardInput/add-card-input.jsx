@@ -36,12 +36,15 @@ const AddCardInput = ({ props }) => {
     const hideInput = () => {
       setAdd(false);
     };
+
     document.addEventListener("click", hideInput);
     return () => document.removeEventListener("click", hideInput);
-  }, [add]);
+  }, [add, setAdd]);
 
   useEffect(() => {
-    if (add) focusRef.current.focus();
+    if (add) {
+      focusRef.current.focus();
+    }
   }, [add]);
 
   const handleClick = (e) => {
@@ -49,11 +52,16 @@ const AddCardInput = ({ props }) => {
     setAdd(true);
   };
 
+  const handleMouseEvent = (e) => {
+    e.stopPropagation();
+    focusRef.current.focus();
+    handleSubmit();
+  };
+
   const handleSubmit = async (e) => {
     let cardIndex;
     if (!list.cards.length) cardIndex = 0;
     else cardIndex = list.cards.length;
-
     if (errors.length) return;
 
     const payload = {
@@ -118,7 +126,7 @@ const AddCardInput = ({ props }) => {
             className="addcard__input"
             placeholder="Enter a title for this card..."
             value={content}
-            autoComplete='off'
+            autoComplete="off"
             onChange={(e) => setContent(e.target.value)}
             onKeyPress={handleKeyPress}
             minRows={2}
@@ -133,12 +141,12 @@ const AddCardInput = ({ props }) => {
                   ? "disabled__btn"
                   : "add-card__submit"
               }
-              onClick={handleSubmit}
+              onClick={handleMouseEvent}
               disabled={errors[0] || !content.length}
             >
               Add Card
             </button>
-            <button className="add-card__cancel" onClick={handleCancel} type='submit'>
+            <button className="add-card__cancel" onClick={handleCancel}>
               <span className="material-symbols-outlined add-card__cancel-icon">
                 close
               </span>

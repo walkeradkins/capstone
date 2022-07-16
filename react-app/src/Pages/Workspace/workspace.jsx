@@ -109,14 +109,6 @@ const Workspace = ({ user }) => {
       payload['list_id'] = +destination.droppableId
     }
 
-
-    // const payload = {
-    //   start_list: +source.droppableId,
-    //   finish_list: +destination.droppableId,
-    //   start_index: source.index,
-    //   finish_index: destination.index,
-    // };
-
     let updatedCard;
     try {
       updatedCard = await dispatch(updateCard(payload, draggableId));

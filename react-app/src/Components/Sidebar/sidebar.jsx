@@ -93,7 +93,7 @@ const Sidebar = ({ workspaces, current, user }) => {
               </div>
               {workspaces.map((board) => {
                 return (
-                  <Link to={`/b/${board.id}`} className="sidebar__board-link">
+                  <Link to={`/b/${board.id}`} className="sidebar__board-link" key={board.id}>
                     <div key={board.id} className="sidebar__board">
                       <div className="sidebar__board-left">
                         <p>📅</p>

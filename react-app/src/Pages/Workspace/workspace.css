@@ -5,7 +5,7 @@
 .list__container {
   display: flex;
   margin: 0 2em;
-  max-height: 75%;
+  max-height: 75vh;
 }
 
 .workspace {
@@ -36,7 +36,6 @@
   max-height: .85em;
 }
 
-
 ::-webkit-scrollbar-track {
   max-height: 1.25em;
   background-color: rgba(22, 22, 22, 0.3);
@@ -44,32 +43,15 @@
 
 
 ::-webkit-scrollbar-thumb {
+  max-width: 30em;
   background-color: rgba(255, 255, 255, 0.4);
   border-radius: 20px;
   background-clip: content-box;
   min-height: 2em;
 }
 
-@media screen and (max-height: 800px){
-  .list__container {
-    max-height: 65%;
-  }
-}
-
-@media screen and (max-height: 690px){
-  .list__container {
-    max-height: 50%;
-  }
-}
-
-@media screen and (max-height: 600px){
-  .list__container {
-    max-height: 40%;
-  }
-}
-
 @media screen and (max-height: 500px){
   .list__container {
-    max-height: 25%;
+    max-height: 70vh;
   }
 }

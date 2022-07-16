@@ -20,7 +20,7 @@ const NavBar = ({ loaded }) => {
           </div>
         </a>
 
-        <a href="https://www.linkedin.com">
+        <a href="https://www.linkedin.com/in/walker-adkins-50173a245/">
           <div className="navbar__outside-links bold">
             <FaLinkedin />
             <p className='navbar__outside-link-text'>LinkedIn</p>

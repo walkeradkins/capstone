@@ -5,8 +5,6 @@ import LoginForm from './Components/auth/LoginForm';
 import SignUpForm from './Components/auth/SignUpForm';
 import NavBar from './Components/NavBar';
 import ProtectedRoute from './Components/auth/ProtectedRoute';
-import UsersList from './Components/UsersList';
-import User from './Components/User';
 import { authenticate } from './store/session';
 import { Home, Workspace, PageNotFound } from './Pages'
 

@@ -5,9 +5,10 @@
   margin: 0;
 }
 
-body{
-  overflow: overlay;
+body > .workspace {
+  overflow-x: overlay;
 }
+
 
 .btn-hidden {
   background-color: gray;

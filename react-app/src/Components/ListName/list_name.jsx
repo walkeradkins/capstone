@@ -35,7 +35,7 @@ const ListName = ({ list }) => {
     if (list.id !== idCheck) {
       e.stopPropagation();
     }
-    console.log('target', e.target.className)
+
     e.target.select();
     if (edit) return;
     setEdit(true);

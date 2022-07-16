@@ -6,7 +6,8 @@ import TextareaAutosize from "react-textarea-autosize";
 import { CSSTransition } from "react-transition-group";
 
 const EditCardInput = ({ props }) => {
-  const { card, setEdit, setItem, setEditItem } = props;
+  const { card, setEdit, setItem, setEditItem, position, edit } = props;
+  const {top, bottom, left, right} = position;
   const dispatch = useDispatch();
   const focusRef = useRef(null);
   const [content, setContent] = useState(card.name);
@@ -17,6 +18,11 @@ const EditCardInput = ({ props }) => {
     err1: "Please keep card names to 250 characters or less",
     err2: "Please provide a name for your card",
   };
+
+  useEffect(() => {
+    console.log('top', top);
+    console.log('left', left);
+  }, [edit]);
 
   useEffect(() => {
     const validationErrors = [];
@@ -72,18 +78,32 @@ const EditCardInput = ({ props }) => {
       alert(error);
     }
     if (deletedCard) {
-      console.log('deleted card')
       setItem(deletedCard);
       setEdit(false);
       setEditItem(deletedCard);
     }
   };
 
-  const handleFocus = (e) => e.target.select();
+  const styles = {
+    minWidth: '255px',
+    maxWidth: '255px',
+    height: '10em',
+    backgroundColor: 'transparent',
+    position: 'fixed',
+    top: `${Math.floor(top) - 7}px`,
+    left: `${left - 9}px`,
+  }
 
+  console.log('styles', styles)
+
+  const handleFocus = (e) => e.target.select();
+  // console.log('posotio', position)
   return (
-    <div className="edit-card__input-container">
-      <div className="edit-card__input-wrapper">
+    <div className="edit-card__input-wrapper">
+      <div
+      className="edit-card__input-container"
+      style={styles}
+      >
         <TextareaAutosize
           className="edit-card__input"
           value={content}
@@ -113,7 +133,9 @@ const EditCardInput = ({ props }) => {
             className={!errors[0] ? "edit-card__submit" : "disabled__btn"}
             onClick={handleSubmit}
             disabled={
-              errors[0] || !content.trim().length || content.trim().length === 250
+              errors[0] ||
+              !content.trim().length ||
+              content.trim().length === 250
             }
           >
             Save

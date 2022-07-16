@@ -1,12 +1,14 @@
 import "./card-header.css";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import EditCardInput from "../EditCardInput/edit-card-input";
-import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
+import { Draggable } from "react-beautiful-dnd";
 
 const CardHeader = ({ props }) => {
   const { card, setItem, index, setEditItem } = props;
   const [display, setDisplay] = useState(false);
   const [edit, setEdit] = useState(false);
+  const [position, setPosition] = useState({});
+  const posRef = useRef();
 
   const handleEdit = (e) => {
     e.stopPropagation();
@@ -15,13 +17,26 @@ const CardHeader = ({ props }) => {
   };
 
   useEffect(() => {
+    if (posRef.current) {
+      const { top, bottom, left, right } =
+        posRef.current.getBoundingClientRect();
+      const positions = { top, bottom, left, right };
+      setPosition(positions);
+    }
+    if (edit) {
+      document.body.style.overflowX = "hidden";
+      return () => (document.body.style.overflowX = "overlay");
+    }
+  }, [edit]);
+
+  useEffect(() => {
     return () => setItem("");
   }, []);
 
   if (!card) return null;
 
   return (
-    <Draggable key={card.id} draggableId={card.id.toString()} index={index} >
+    <Draggable key={card.id} draggableId={card.id.toString()} index={index}>
       {(provided, snapshot) => (
         <div
           className={
@@ -35,7 +50,9 @@ const CardHeader = ({ props }) => {
           {...provided.draggableProps}
           {...provided.dragHandleProps}
         >
-          <div className="card__title">{card.name}</div>
+          <div className="card__title" ref={posRef}>
+            {card.name}
+          </div>
           <span
             className={
               display
@@ -47,15 +64,17 @@ const CardHeader = ({ props }) => {
             edit
           </span>
           {edit && (
-            <div className="editcard__input-wrapper">
+            <>
               <div
                 className="editcard-background"
                 onClick={() => setEdit(false)}
               />
-              <EditCardInput props={{ card, setEdit, setItem, setEditItem }} />
-            </div>
+              <EditCardInput
+                props={{ card, setEdit, setItem, setEditItem, position, edit }}
+              />
+            </>
           )}
-            {provided.placeholder}
+          {provided.placeholder}
         </div>
       )}
     </Draggable>
