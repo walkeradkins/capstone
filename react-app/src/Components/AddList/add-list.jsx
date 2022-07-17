@@ -63,6 +63,7 @@ const AddList = ({ props }) => {
                   : "add-list__submit"
               }
               disabled={errors[0] || !title.length}
+              type='submit'
             >
               Add list
             </button>
