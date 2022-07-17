@@ -22,11 +22,15 @@ const ListName = ({ list }) => {
   useEffect(() => {
     if (content.length > 249) {
       setErrorOne(true);
+      setErrors(['error1'])
     } else if (content.trim().length < 1) {
+      console.log('errors', errors)
       setErrorTwo(true);
+      setErrors(['error2'])
     } else {
       setErrorOne(false);
       setErrorTwo(false);
+      setErrors([])
     }
   }, [content]);
 
