@@ -44,14 +44,24 @@ const AddList = ({ props }) => {
     }
   };
 
+  const handleKeyPress = (e) => {
+    if (e.key === "Enter" && !e.shiftKey) {
+      e.preventDefault();
+      if (title.trim().length && title.trim().length < 250) {
+        handleSubmit(e);
+      }
+    }
+  };
+
   return (
     <>
       <div className="add-list__form">
-        <form onSubmit={handleSubmit}>
+        {/* <form onSubmit={handleSubmit}> */}
           <input
             placeholder="Enter a list title..."
             className="add-list__input"
             onChange={(e) => setTitle(e.target.value)}
+            onKeyPress={handleKeyPress}
             ref={focusRef}
             maxLength={250}
           />
@@ -63,7 +73,7 @@ const AddList = ({ props }) => {
                   : "add-list__submit"
               }
               disabled={errors[0] || !title.length}
-              type='submit'
+              onClick={handleSubmit}
             >
               Add list
             </button>
@@ -86,7 +96,7 @@ const AddList = ({ props }) => {
               </div>
             </CSSTransition>
           </div>
-        </form>
+        {/* </form> */}
       </div>
     </>
   );
