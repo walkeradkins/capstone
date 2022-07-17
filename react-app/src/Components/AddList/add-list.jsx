@@ -25,7 +25,7 @@ const AddList = ({ props }) => {
   }, [title, dispatch]);
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
+    // e.preventDefault();
     const payload = {
       title: title.trim(),
       workspace_id: workspaceId,
