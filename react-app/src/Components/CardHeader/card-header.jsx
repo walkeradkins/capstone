@@ -50,6 +50,12 @@ const CardHeader = ({ props }) => {
           {...provided.draggableProps}
           {...provided.dragHandleProps}
         >
+          {card.image && (
+            <figure
+              className="card__image"
+              style={{ backgroundImage: `url(${card.image})` }}
+            />
+          )}
           <div className="card__title" ref={posRef}>
             {card.name}
           </div>
