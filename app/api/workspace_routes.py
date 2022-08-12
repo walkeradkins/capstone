@@ -30,6 +30,7 @@ def new_workspace(userId):
         workspace = Workspace(
             name=form.data['name'],
             owner_id=form.data['owner_id'],
+            labels=form.data['labels']
         )
 
         workspace.workspace_members.append(user)

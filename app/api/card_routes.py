@@ -21,13 +21,15 @@ def createCard(id):
     url = None
     if 'image' in request.files:
         image = request.files['image']
+        if not allowed_file(image.filename):
+            return {"errors": "file type not permitted"}, 400
         image.filename = get_unique_filename(image.filename)
 
-    upload = upload_file_to_s3(image)
-    if "url" not in upload:
-        return upload, 400
+        upload = upload_file_to_s3(image)
+        if "url" not in upload:
+            return upload, 400
 
-    url = upload["url"]
+        url = upload["url"]
 
     if form.validate_on_submit():
         new_card = Card(
@@ -50,6 +52,16 @@ def createCard(id):
 def updateCard(cardId):
     card = Card.query.get(cardId)
     new_card = request.json
+
+    if 'labels' in new_card:
+        labels = card.labels
+        labels = new_card['labels']
+        card.labels = labels
+        db.session.merge(card)
+        db.session.flush()
+        db.session.commit()
+        return card.to_dict()
+
     if 'name' in new_card:
         name = card.name
         name = new_card['name']

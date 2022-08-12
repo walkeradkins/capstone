@@ -33,6 +33,7 @@ def upgrade():
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('owner_id', sa.Integer(), nullable=False),
     sa.Column('name', sa.String(length=50), nullable=False),
+    sa.Column('labels', sa.String(length=2000), nullable=False),
     sa.PrimaryKeyConstraint('id')
     )
     op.create_table('lists',

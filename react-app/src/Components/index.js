@@ -16,7 +16,8 @@ import EditCardInput from './EditCardInput/edit-card-input'
 import UserIcon from './UserIcon/user-icon'
 import UserInfo from './UserInfo/user-info'
 import Welcome from './Welcome/welcome'
-
+import CardDetails from './CardDetails/card-details'
+import LabelDropDown from './LabelDropDown/label-drowdown'
 
 export {
   WorkspaceLink,
@@ -37,4 +38,6 @@ export {
   UserIcon,
   UserInfo,
   Welcome,
+  CardDetails,
+  LabelDropDown,
 }

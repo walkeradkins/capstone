@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { createNewWorkspace } from "../../store/workspaces";
 import { CSSTransition } from "react-transition-group";
+import { labels } from "../utils";
 
 const CreateWorkspaceModal = ({ user, setShowModal }) => {
   const dispatch = useDispatch();
@@ -24,6 +25,7 @@ const CreateWorkspaceModal = ({ user, setShowModal }) => {
     const payload = {
       name: name.trim(),
       owner_id: user.id,
+      labels: JSON.stringify(labels)
     };
     let newWorkspace;
     try {

@@ -24,7 +24,6 @@ const ListName = ({ list }) => {
       setErrorOne(true);
       setErrors(['error1'])
     } else if (content.trim().length < 1) {
-      console.log('errors', errors)
       setErrorTwo(true);
       setErrors(['error2'])
     } else {

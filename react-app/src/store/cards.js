@@ -39,10 +39,6 @@ export const createCard = (formData, id) => async dispatch => {
     body: formData,
   })
 
-  for (const value of formData.values()) {
-    console.log(value);
-  }
-
   if (res.ok) {
     let newCard = await res.json();
     dispatch(createOne(newCard));

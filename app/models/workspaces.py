@@ -6,6 +6,7 @@ class Workspace(db.Model):
     __tablename__ = 'workspaces'
 
     id = db.Column(db.Integer, primary_key=True)
+    labels = db.Column(db.String(2000), nullable=False)
     owner_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
     name = db.Column(db.String(50), nullable=False)
 
@@ -32,6 +33,7 @@ class Workspace(db.Model):
             'id': self.id,
             'ownerId': self.owner_id,
             'name': self.name,
+            'labels': self.labels,
             'lists': [list.to_dict() for list in self.lists],
             "members": [member.to_dict_no_workspace() for member in self.workspace_members]
         }

@@ -9,6 +9,10 @@ body > .workspace {
   overflow-x: overlay;
 }
 
+.underline {
+  border-bottom: rgb(207, 207, 207) 1px solid;
+  width: 100%;
+}
 
 .btn-hidden {
   background-color: gray;

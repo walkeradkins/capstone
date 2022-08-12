@@ -1,0 +1,71 @@
+.label-select__container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0.5em;
+  position: absolute;
+  border-radius: 0.25em;
+  background-color: rgb(255, 255, 255);
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  height: 30em;
+  width: 20em;
+  top: 2em;
+}
+
+.label-select__header {
+  width: 100%;
+  text-align: center;
+  padding-bottom: 0.5em;
+}
+
+.exit__label {
+  position: absolute;
+  right: 0.5em;
+  cursor: pointer;
+}
+
+.labels__container {
+  margin: 0.5em;
+  width: 100%;
+}
+
+.label__span {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.label__select {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.35em;
+  margin: 0.25em;
+  position: relative;
+  border-radius: 0.15em;
+}
+
+.label__select-text {
+  color: white;
+  font-weight: bold;
+}
+
+.label__select:hover {
+  filter: brightness(1.2);
+}
+
+.label__edit {
+  padding: .15em;
+  border-radius: .15em;
+}
+
+.label__edit:hover {
+  background-color: rgb(202, 202, 202);
+}
+
+.check {
+  position: absolute;
+  top: .15em;
+  right: .15em;
+}

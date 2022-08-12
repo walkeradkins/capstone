@@ -53,6 +53,32 @@
   border-radius: .1em;
 }
 
+.small__label-container {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  margin-bottom: .25em;
+}
+
+.small__label-container:hover {
+  filter:brightness(.8);
+}
+
+.small__label {
+  padding: .1em .5em;
+  min-width: 3em;
+  border-radius: .45em;
+  margin: .1em 0;
+  margin-right: .25em;
+  min-height: .5em;
+}
+
+.small__label-text {
+  color: white;
+  font-size: .85em;
+  font-weight: bold;
+}
+
 .card__edit-btn-hidden {
   display: none
 }

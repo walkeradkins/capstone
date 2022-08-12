@@ -6,6 +6,7 @@ import { createCard } from "../../store/cards";
 import TextareaAutosize from "react-textarea-autosize";
 import { CSSTransition } from "react-transition-group";
 import { SquareLoader } from 'react-spinners'
+import { labels } from "../utils";
 
 const AddCardInput = ({ props }) => {
   const { list, setItem, add, setAdd } = props;
@@ -76,7 +77,7 @@ const AddCardInput = ({ props }) => {
     formData.append("name", content.trim());
     formData.append("index", cardIndex);
     formData.append("created_at", date);
-    formData.append("image", image);
+    if (image) formData.append("image", image);
 
     let newCard;
     try {
