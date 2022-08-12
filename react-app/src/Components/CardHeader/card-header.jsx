@@ -1,21 +1,23 @@
 import "./card-header.css";
 import { useState, useEffect, useRef } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { updateCard } from "../../store/cards";
 import { EditCardInput, CardDetails } from "../../Components";
 import { Draggable } from "react-beautiful-dnd";
 import { Modal } from "../../context/modal";
 import { useWorkspace } from "../../context/workspace-context";
 import { useLabel } from "../../context/label-context";
+import ReactTooltip from "react-tooltip";
 
 const CardHeader = ({ props }) => {
+  const dispatch = useDispatch();
   const { card, setItem, index, setEditItem } = props;
   const { labels } = card;
   const { currentWorkspace } = useWorkspace();
   const { showLabel, setShowLabel } = useLabel();
-  let workspaceLabels = useSelector(
-    (state) => state.workspaces[currentWorkspace]
-  )["labels"];
-  workspaceLabels = JSON.parse(workspaceLabels);
+  const [labelState, setLabelState] = useState(JSON.parse(card?.labels));
+  console.log(useSelector((state) => state.workspaces[currentWorkspace]));
+  let workspace = useSelector((state) => state.workspaces[currentWorkspace]);
   const [display, setDisplay] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [edit, setEdit] = useState(false);
@@ -28,6 +30,19 @@ const CardHeader = ({ props }) => {
     labelsArray = JSON.parse(labels);
   }
 
+  const handleSubmit = async () => {
+    setShowModal(false);
+    let data;
+    if (!labelState?.length) data = null;
+    else data = JSON.stringify(labelState);
+    const payload = {
+      labels: data,
+    };
+    await dispatch(updateCard(payload, card.id)).then((res) =>
+      console.log(res)
+    );
+  };
+
   const handleEdit = (e) => {
     e.stopPropagation();
     setDisplay(false);
@@ -36,8 +51,8 @@ const CardHeader = ({ props }) => {
 
   const toggleText = (e) => {
     e.stopPropagation();
-    setShowLabel(prev => !prev);
-  }
+    setShowLabel((prev) => !prev);
+  };
 
   useEffect(() => {
     if (posRef.current) {
@@ -57,7 +72,9 @@ const CardHeader = ({ props }) => {
   }, []);
 
   if (!card) return null;
-
+  if (!workspace) return null;
+  let workspaceLabels = workspace.labels;
+  workspaceLabels = JSON.parse(workspaceLabels);
   return (
     <>
       <Draggable key={card.id} draggableId={card.id.toString()} index={index}>
@@ -76,7 +93,7 @@ const CardHeader = ({ props }) => {
             {...provided.dragHandleProps}
           >
             {labels && (
-              <div className='small__label-container'>
+              <div className="small__label-container">
                 {labelsArray.map((label) => (
                   <div
                     className="small__label"
@@ -86,9 +103,11 @@ const CardHeader = ({ props }) => {
                     key={workspaceLabels[label].color}
                     onClick={toggleText}
                   >
-                    {showLabel && <p className="small__label-text">
-                      {workspaceLabels[label].text}
-                    </p>}
+                    {showLabel && (
+                      <p className="small__label-text">
+                        {workspaceLabels[label].text}
+                      </p>
+                    )}
                   </div>
                 ))}
               </div>
@@ -102,6 +121,22 @@ const CardHeader = ({ props }) => {
             <div className="card__title" ref={posRef}>
               {card.name}
             </div>
+            {card.description && (
+              <>
+                <ReactTooltip
+                  id="desc__tip"
+                  place="right"
+                  effect="solid"
+                  backgroundColor="rgba(48,48,48,0.2)"
+                  delayShow='500'
+                >
+                  This card has a description
+                </ReactTooltip>
+                <span className="material-symbols-outlined card-desc__icon" data-tip data-for='desc__tip'>
+                  feed
+                </span>
+              </>
+            )}
             <span
               className={
                 display
@@ -128,8 +163,10 @@ const CardHeader = ({ props }) => {
         )}
       </Draggable>
       {showModal && (
-        <Modal onClose={() => setShowModal(false)}>
-          <CardDetails props={{ card, setShowModal }} />
+        <Modal onClose={handleSubmit}>
+          <CardDetails
+            props={{ card, setShowModal, labelState, setLabelState }}
+          />
         </Modal>
       )}
     </>

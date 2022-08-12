@@ -62,6 +62,15 @@ def updateCard(cardId):
         db.session.commit()
         return card.to_dict()
 
+    if 'description' in new_card:
+        description = card.description
+        description = new_card['description']
+        card.description = description
+        db.session.merge(card)
+        db.session.flush()
+        db.session.commit()
+        return card.to_dict()
+
     if 'name' in new_card:
         name = card.name
         name = new_card['name']

@@ -5,8 +5,8 @@ import { useWorkspace } from "../../context/workspace-context";
 import { createCard } from "../../store/cards";
 import TextareaAutosize from "react-textarea-autosize";
 import { CSSTransition } from "react-transition-group";
-import { SquareLoader } from 'react-spinners'
-import { labels } from "../utils";
+import { SquareLoader } from "react-spinners";
+import ReactTooltip from "react-tooltip";
 
 const AddCardInput = ({ props }) => {
   const { list, setItem, add, setAdd } = props;
@@ -169,28 +169,42 @@ const AddCardInput = ({ props }) => {
             </div>
             <div className="add-card__buttons-right">
               {imageLoading && (
-                <SquareLoader
-                color={'rgb(16, 255, 175)'}
-                size={30}
-                />
+                <SquareLoader color={"rgb(16, 255, 175)"} size={30} />
               )}
-              {image && !imageLoading &&(
-                <span className="material-symbols-outlined add-card__buttons-check">check_circle</span>
+              {image && !imageLoading && (
+                <span className="material-symbols-outlined add-card__buttons-check">
+                  check_circle
+                </span>
               )}
-              {!imageLoading && <div className="file__upload-choose">
-                <label htmlFor="file" className="file__upload-choose-text">
-                  <span className="material-symbols-outlined add-card__attach">
-                    image
-                  </span>
-                </label>
-                <input
-                  type="file"
-                  id="file"
-                  style={{ visibility: "hidden" }}
-                  accept="image/*"
-                  onChange={handlePhoto}
-                />
-              </div>}
+              {!imageLoading && (
+                <div className="file__upload-choose">
+                  <label htmlFor="file" className="file__upload-choose-text">
+                    <span
+                      className="material-symbols-outlined add-card__attach"
+                      data-tip
+                      data-for="image__tip"
+                    >
+                      image
+                    </span>
+                    <ReactTooltip
+                      id="image__tip"
+                      place="right"
+                      effect="solid"
+                      backgroundColor="rgba(48,48,48,0.9)"
+                      delayShow="500"
+                    >
+                      Click to attach an image
+                    </ReactTooltip>
+                  </label>
+                  <input
+                    type="file"
+                    id="file"
+                    style={{ visibility: "hidden" }}
+                    accept="image/*"
+                    onChange={handlePhoto}
+                  />
+                </div>
+              )}
             </div>
           </div>
         </div>

@@ -1,8 +1,9 @@
 .card-details__container {
   display: flex;
   flex-direction: column;
-  height: 90vh;
-  width: 35vw;
+  min-height: 30em;
+  padding: 2em;
+  width: 50em;
   background-color: rgb(245, 245, 245);
   border-radius: .25em;
 }
@@ -18,9 +19,23 @@
   color: rgb(73, 73, 73);
 }
 
+.card-details__header-text {
+  margin-left: .6em;
+}
+
+.card-details__subheader  {
+  margin-left: 2.5em;
+}
+
+.card-details__label-text {
+  margin-top: 1em;
+  margin-left: 2.5em;
+}
+
 .card-details__label-container {
   display: flex;
   position: relative;
+  padding-left: 1.6em;
 }
 
 .add__label {
@@ -51,4 +66,8 @@
 .label__text {
   color: white;
   font-weight: bold;
+}
+
+.dropdown__wrapper {
+  position: relative;
 }
