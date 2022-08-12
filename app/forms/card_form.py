@@ -9,6 +9,8 @@ class CardForm(FlaskForm):
     description = StringField('title')
     list_id = IntegerField('list_id', validators=[DataRequired()])
     index = StringField('index')
+    image = StringField('image')
+    labels = StringField('labels')
     workspace_id = IntegerField('workspace_id', validators=[DataRequired()])
     created_at = StringField('created_at', validators=[DataRequired()])
     due_date = StringField('due_date')

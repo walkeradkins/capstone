@@ -1,6 +1,7 @@
 .card__container {
   overflow-x: visible;
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
   align-items: center;
   padding: 6px 8px 2px;
@@ -14,6 +15,17 @@
 .card__container:hover{
   cursor: pointer;
   background-color: rgb(240, 240, 240);
+}
+.card__image {
+  width: 100%;
+  background-position: center;
+  background-size: cover;
+}
+
+.card__image::after {
+  display: block;
+  padding-top: 100%;
+  content: '';
 }
 
 .card__title {
@@ -41,6 +53,32 @@
   border-radius: .1em;
 }
 
+.small__label-container {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  margin-bottom: .25em;
+}
+
+.small__label-container:hover {
+  filter:brightness(.8);
+}
+
+.small__label {
+  padding: .1em .5em;
+  min-width: 3em;
+  border-radius: .45em;
+  margin: .1em 0;
+  margin-right: .25em;
+  min-height: .5em;
+}
+
+.small__label-text {
+  color: white;
+  font-size: .85em;
+  font-weight: bold;
+}
+
 .card__edit-btn-hidden {
   display: none
 }
@@ -60,4 +98,9 @@
 
 .drag__over {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.card-desc__icon {
+  align-self: flex-start;
+  color:#6b6b6b
 }

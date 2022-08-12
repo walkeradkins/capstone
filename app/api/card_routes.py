@@ -1,6 +1,8 @@
 from flask import Blueprint, request
 from app.models import Workspace, User, members, List, db, Card
 from app.forms import CardForm
+from app.s3_utils import (
+    upload_file_to_s3, allowed_file, get_unique_filename)
 
 card_routes = Blueprint('cards', __name__)
 
@@ -11,20 +13,34 @@ def cards(id):
     return {'cards': [card.to_dict() for card in cards]}
 
 
-@card_routes.route('/<int:id>', methods=['POST'])
+@card_routes.route('/<int:id>', methods=['POST'], strict_slashes=False)
 def createCard(id):
-
     form = CardForm()
     form['csrf_token'].data = request.cookies['csrf_token']
+
+    url = None
+    if 'image' in request.files:
+        image = request.files['image']
+        if not allowed_file(image.filename):
+            return {"errors": "file type not permitted"}, 400
+        image.filename = get_unique_filename(image.filename)
+
+        upload = upload_file_to_s3(image)
+        if "url" not in upload:
+            return upload, 400
+
+        url = upload["url"]
+
     if form.validate_on_submit():
         new_card = Card(
             name=form.data['name'],
             workspace_id=form.data['workspace_id'],
             list_id=form.data['list_id'],
             index=form.data['index'],
+            image=url,
+            created_at=form.data['created_at'],
             description=None,
             due_date=None,
-            created_at=form.data['created_at']
         )
 
         db.session.add(new_card)
@@ -36,6 +52,25 @@ def createCard(id):
 def updateCard(cardId):
     card = Card.query.get(cardId)
     new_card = request.json
+
+    if 'labels' in new_card:
+        labels = card.labels
+        labels = new_card['labels']
+        card.labels = labels
+        db.session.merge(card)
+        db.session.flush()
+        db.session.commit()
+        return card.to_dict()
+
+    if 'description' in new_card:
+        description = card.description
+        description = new_card['description']
+        card.description = description
+        db.session.merge(card)
+        db.session.flush()
+        db.session.commit()
+        return card.to_dict()
+
     if 'name' in new_card:
         name = card.name
         name = new_card['name']
@@ -52,7 +87,6 @@ def updateCard(cardId):
 
         for id, index in new_card.items():
             Card.query.get(id).index = index
-
 
         # list_id = card.list_id
         # list_id = new_card['finish_list']

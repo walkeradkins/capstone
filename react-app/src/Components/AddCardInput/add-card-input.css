@@ -1,8 +1,12 @@
+.addcard__input-container {
+  overflow: hidden;
+}
+
 .addcard__input {
-  border-radius: .25em;
+  border-radius: 0.25em;
   border: none;
   width: 95%;
-  margin: 0 .5em;
+  margin: 0 0.5em;
   box-shadow: 0 2px 1px -1px rgb(189 189 189);
   max-height: 162px;
   min-height: 54px;
@@ -15,7 +19,7 @@
   outline: none;
   padding: 8px 12px;
   transition-duration: 85ms;
-  transition-property: background-color,border-color,box-shadow;
+  transition-property: background-color, border-color, box-shadow;
   transition-timing-function: ease;
   font-size: 14px;
   font-weight: 400;
@@ -25,26 +29,42 @@
 }
 
 .addcard__input:hover {
-  outline: none
+  outline: none;
 }
 
 .add-card__buttons {
+  width: 95%;
   display: flex;
-  margin: .25em;
+  align-items: center;
+  margin: 0.25em;
+  justify-content: space-between;
+}
+
+.add-card__buttons-left {
+  display: flex;
+  align-items: center;
+}
+
+.add-card__buttons-right {
+  display: flex;
+  /* width: 4em; */
+  justify-content: space-between;
+  align-items: center;
+  margin-right: .5em;
 }
 
 .add-card__submit {
   background-color: #0079bf;
   color: white;
   border: none;
-  padding: .75em;
-  margin: .25em;
-  border-radius: .25em;
+  padding: 0.75em;
+  margin: 0.25em;
+  border-radius: 0.25em;
 }
 
 .add-card__submit:hover {
   background-color: #018bdb;
-  cursor: pointer
+  cursor: pointer;
 }
 
 .add-card__cancel {
@@ -61,5 +81,32 @@
 }
 
 .add-card__cancel-icon:hover {
+  color: rgb(27, 27, 27);
+}
+
+.add-card__buttons-check {
+  color: rgb(16, 255, 175);
+  font-size: 2.25em;
+  font-weight: bold;
+}
+
+.file__upload-choose {
+  cursor: pointer;
+  width: 2em;
+  height: 2em;
+  font-family: "Montserrat", sans-serif;
+  font-size: 0.85em;
+  color: grey;
+  border-radius: .25em;
+  transition: 0.3s;
+}
+
+.add-card__attach {
+  cursor: pointer;
+  font-size: 2em;
+  font-weight: 600;
+}
+
+.file__upload-choose:hover {
   color: rgb(27, 27, 27);
 }

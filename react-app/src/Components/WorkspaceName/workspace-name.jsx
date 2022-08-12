@@ -4,6 +4,7 @@ import { useState, useEffect, useRef } from "react";
 import { updateWorkspace } from "../../store/workspaces";
 import AutoSizeInput from "react-input-autosize";
 import { CSSTransition } from "react-transition-group";
+import ReactTooltip from "react-tooltip";
 
 const WorkspaceName = ({ workspace }) => {
   const dispatch = useDispatch();
@@ -153,8 +154,13 @@ const WorkspaceName = ({ workspace }) => {
           onChange={(e) =>
             e.target.value.length > -1 ? setContent(e.target.value) : null
           }
+          data-tip data-for="workspace__tip"
         />
-        {!edit && <p className="bottom">Click to edit workspace name</p>}
+        {!edit && (
+            <ReactTooltip id="workspace__tip" place="right" effect="solid" backgroundColor='#0a75ef'>
+              Click to edit workspace name
+            </ReactTooltip>
+          )}
       </div>
       <CSSTransition
         in={errorCheck}

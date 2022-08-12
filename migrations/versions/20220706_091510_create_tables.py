@@ -33,6 +33,7 @@ def upgrade():
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('owner_id', sa.Integer(), nullable=False),
     sa.Column('name', sa.String(length=50), nullable=False),
+    sa.Column('labels', sa.String(length=2000), nullable=False),
     sa.PrimaryKeyConstraint('id')
     )
     op.create_table('lists',
@@ -54,6 +55,8 @@ def upgrade():
     sa.Column('list_id', sa.Integer(), nullable=False),
     sa.Column('name', sa.String(length=250), nullable=False),
     sa.Column('description', sa.String(length=2000), nullable=True),
+    sa.Column('image', sa.String(length=2000), nullable=True),
+    sa.Column('labels', sa.String(length=2000), nullable=True),
     sa.Column('due_date', sa.DateTime(), nullable=True),
     sa.Column('created_at', sa.DateTime(), nullable=False),
     sa.ForeignKeyConstraint(['list_id'], ['lists.id'], ondelete='CASCADE'),

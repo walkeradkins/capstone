@@ -8,6 +8,7 @@ import { ModalProvider } from './context/modal';
 import SidebarProvider from './context/sidebar-context';
 import WorkspaceProvider from './context/workspace-context';
 import CardStateProvider from './context/card-state-context';
+import LabelProvider from './context/label-context';
 
 const store = configureStore();
 
@@ -16,11 +17,13 @@ ReactDOM.render(
     <Provider store={store}>
       <CardStateProvider>
         <WorkspaceProvider>
-          <SidebarProvider>
-            <ModalProvider>
-              <App />
-            </ModalProvider>
-          </SidebarProvider>
+          <LabelProvider>
+            <SidebarProvider>
+              <ModalProvider>
+                <App />
+              </ModalProvider>
+            </SidebarProvider>
+          </LabelProvider>
         </WorkspaceProvider>
       </CardStateProvider>
     </Provider>

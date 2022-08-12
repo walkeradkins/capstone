@@ -5,6 +5,7 @@ import { updateList } from "../../store/lists";
 import ListDelete from "../ListDelete/list-delete";
 import TextareaAutosize from "react-textarea-autosize";
 import { CSSTransition } from "react-transition-group";
+import ReactTooltip from "react-tooltip";
 
 const ListName = ({ list }) => {
   const dispatch = useDispatch();
@@ -22,20 +23,19 @@ const ListName = ({ list }) => {
   useEffect(() => {
     if (content.length > 249) {
       setErrorOne(true);
-      setErrors(['error1'])
+      setErrors(["error1"]);
     } else if (content.trim().length < 1) {
-      console.log('errors', errors)
       setErrorTwo(true);
-      setErrors(['error2'])
+      setErrors(["error2"]);
     } else {
       setErrorOne(false);
       setErrorTwo(false);
-      setErrors([])
+      setErrors([]);
     }
   }, [content]);
 
   const trueEdit = (e) => {
-    const idCheck = +e.target.className.split(' ')[0]
+    const idCheck = +e.target.className.split(" ")[0];
     if (list.id !== idCheck) {
       e.stopPropagation();
     }
@@ -103,7 +103,9 @@ const ListName = ({ list }) => {
         <div className={!edit ? "tooltip bold" : null}>
           <TextareaAutosize
             id="listname__input"
-            className={edit ?  `input__active-list` : `${list.id} input__inactive-list`}
+            className={
+              edit ? `input__active-list` : `${list.id} input__inactive-list`
+            }
             value={content}
             spellCheck={false}
             onClick={trueEdit}
@@ -112,8 +114,13 @@ const ListName = ({ list }) => {
             minRows={1}
             ref={focusRef}
             onChange={(e) => setContent(e.target.value)}
+            data-tip data-for="edit__tip"
           />
-          {!edit && <span className="top">Click to edit list name</span>}
+          {!edit && (
+            <ReactTooltip id="edit__tip" place="top" effect="solid" backgroundColor='#0a75ef'>
+              Click to edit list name
+            </ReactTooltip>
+          )}
         </div>
         <ListDelete list={list} />
       </div>

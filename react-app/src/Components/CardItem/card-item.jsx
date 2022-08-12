@@ -20,6 +20,7 @@ const CardItem = ({ cards, setItem }) => {
     [cards]
   );
 
+
   if (cards[0] === undefined) return null;
 
   return (

@@ -33,13 +33,10 @@ export const getAllCards = (id) => async dispatch => {
   }
 }
 
-export const createCard = (payload, id) => async dispatch => {
+export const createCard = (formData, id) => async dispatch => {
   const res = await fetch(`/api/cards/${id}`, {
     method: 'POST',
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(payload),
+    body: formData,
   })
 
   if (res.ok) {

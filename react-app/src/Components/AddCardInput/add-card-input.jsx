@@ -5,6 +5,8 @@ import { useWorkspace } from "../../context/workspace-context";
 import { createCard } from "../../store/cards";
 import TextareaAutosize from "react-textarea-autosize";
 import { CSSTransition } from "react-transition-group";
+import { SquareLoader } from "react-spinners";
+import ReactTooltip from "react-tooltip";
 
 const AddCardInput = ({ props }) => {
   const { list, setItem, add, setAdd } = props;
@@ -14,6 +16,8 @@ const AddCardInput = ({ props }) => {
   const [content, setContent] = useState("");
   const [errors, setErrors] = useState([]);
   const [errorCheck, setErrorCheck] = useState(false);
+  const [image, setImage] = useState(null);
+  const [imageLoading, setImageLoading] = useState(false);
 
   const showInput = () => {
     if (add) return;
@@ -37,8 +41,8 @@ const AddCardInput = ({ props }) => {
       setAdd(false);
     };
 
-    document.addEventListener("click", hideInput);
-    return () => document.removeEventListener("click", hideInput);
+    // document.addEventListener("click", hideInput);
+    // return () => document.removeEventListener("click", hideInput);
   }, [add, setAdd]);
 
   useEffect(() => {
@@ -64,23 +68,28 @@ const AddCardInput = ({ props }) => {
     else cardIndex = list.cards.length;
     if (errors.length) return;
 
-    const payload = {
-      list_id: list.id,
-      workspace_id: currentWorkspace,
-      name: content.trim(),
-      index: cardIndex,
-      created_at: new Date(),
-    };
+    setImageLoading(true);
+    const date = new Date().toISOString();
+
+    const formData = new FormData();
+    formData.append("list_id", list.id);
+    formData.append("workspace_id", currentWorkspace);
+    formData.append("name", content.trim());
+    formData.append("index", cardIndex);
+    formData.append("created_at", date);
+    if (image) formData.append("image", image);
 
     let newCard;
     try {
-      newCard = await dispatch(createCard(payload, list.id));
+      newCard = await dispatch(createCard(formData, list.id));
     } catch (error) {
       // alert(error);
     }
     if (newCard) {
       setAdd(true);
+      setImageLoading(false);
       setContent("");
+      setImage(null);
       setItem(newCard.id);
     }
   };
@@ -97,6 +106,11 @@ const AddCardInput = ({ props }) => {
   const handleCancel = () => {
     setAdd(false);
     setContent("");
+  };
+
+  const handlePhoto = (e) => {
+    const file = e.target.files[0];
+    setImage(file);
   };
 
   return (
@@ -135,22 +149,63 @@ const AddCardInput = ({ props }) => {
             ref={focusRef}
           />
           <div className="add-card__buttons">
-            <button
-              className={
-                errors[0] || !content.trim().length
-                  ? "disabled__btn"
-                  : "add-card__submit"
-              }
-              onClick={handleMouseEvent}
-              disabled={errors[0] || !content.length}
-            >
-              Add Card
-            </button>
-            <button className="add-card__cancel" onClick={handleCancel}>
-              <span className="material-symbols-outlined add-card__cancel-icon">
-                close
-              </span>
-            </button>
+            <div className="add-card__buttons-left">
+              <button
+                className={
+                  errors[0] || !content.trim().length
+                    ? "disabled__btn"
+                    : "add-card__submit"
+                }
+                onClick={handleMouseEvent}
+                disabled={errors[0] || !content.length}
+              >
+                Add Card
+              </button>
+              <button className="add-card__cancel" onClick={handleCancel}>
+                <span className="material-symbols-outlined add-card__cancel-icon">
+                  close
+                </span>
+              </button>
+            </div>
+            <div className="add-card__buttons-right">
+              {imageLoading && (
+                <SquareLoader color={"rgb(16, 255, 175)"} size={30} />
+              )}
+              {image && !imageLoading && (
+                <span className="material-symbols-outlined add-card__buttons-check">
+                  check_circle
+                </span>
+              )}
+              {!imageLoading && (
+                <div className="file__upload-choose">
+                  <label htmlFor="file" className="file__upload-choose-text">
+                    <span
+                      className="material-symbols-outlined add-card__attach"
+                      data-tip
+                      data-for="image__tip"
+                    >
+                      image
+                    </span>
+                    <ReactTooltip
+                      id="image__tip"
+                      place="right"
+                      effect="solid"
+                      backgroundColor="rgba(48,48,48,0.9)"
+                      delayShow="500"
+                    >
+                      Click to attach an image
+                    </ReactTooltip>
+                  </label>
+                  <input
+                    type="file"
+                    id="file"
+                    style={{ visibility: "hidden" }}
+                    accept="image/*"
+                    onChange={handlePhoto}
+                  />
+                </div>
+              )}
+            </div>
           </div>
         </div>
       )}

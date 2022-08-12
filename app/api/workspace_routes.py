@@ -30,6 +30,7 @@ def new_workspace(userId):
         workspace = Workspace(
             name=form.data['name'],
             owner_id=form.data['owner_id'],
+            labels=form.data['labels']
         )
 
         workspace.workspace_members.append(user)
@@ -45,7 +46,16 @@ def new_workspace(userId):
 def updateWorkspace(workspaceId):
     workspace = Workspace.query.get(workspaceId)
     new_workspace = request.json
-    print('-------', new_workspace)
+
+    if 'labels' in new_workspace:
+        labels = workspace.labels
+        labels = new_workspace['labels']
+        workspace.labels = labels
+        db.session.merge(workspace)
+        db.session.flush()
+        db.session.commit()
+        return workspace.to_dict()
+
     name = workspace.name
     name = new_workspace['name']
     workspace.name = name
