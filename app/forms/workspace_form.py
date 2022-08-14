@@ -7,3 +7,4 @@ class WorkspaceForm(FlaskForm):
     name = StringField('name', validators=[DataRequired()])
     labels = StringField('labels', validators=[DataRequired()])
     owner_id = IntegerField('owner_id', validators=[DataRequired()])
+    background = IntegerField('background', validators=[DataRequired()])

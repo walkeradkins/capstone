@@ -1,18 +1,26 @@
 .workspace__link {
   font-weight: bold;
-  background-size: cover;
-  color: #4e4e4e;
+  color: #ffffff;
   line-height: 20px;
   position: relative;
   text-decoration: none;
   padding: .5em .5em;
+  font-size: 1.25em;
 }
 
 .workspace__link-container {
   min-width: 10em;
+  background-size: cover;
+  background-position: center;
   border-radius: .25em;
   height: 5.5em;
   transition: 0.2s;
+}
+
+.workspace__link-container::after {
+  padding-top: 100%;
+  content: '';
+  display: block
 }
 .workspace__wrapper {
   max-width: 17em;

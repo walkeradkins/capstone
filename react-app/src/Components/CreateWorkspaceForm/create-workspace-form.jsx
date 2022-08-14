@@ -5,12 +5,26 @@ import { useHistory } from "react-router-dom";
 import { createNewWorkspace } from "../../store/workspaces";
 import { CSSTransition } from "react-transition-group";
 import { labels } from "../utils";
+import Select from "react-select";
+import {
+  bookshelf,
+  gradient,
+  jungle,
+  plants,
+  watercolor,
+  whatnext_background,
+  wood,
+} from "../../Assets/Images";
+
+import { backgroundArray, backgroundObject } from "../../Assets/Images/index";
 
 const CreateWorkspaceModal = ({ user, setShowModal }) => {
   const dispatch = useDispatch();
   const history = useHistory();
   const [errors, setErrors] = useState(false);
+  const [index, setIndex] = useState(0);
   const [name, setName] = useState("");
+  const [background, setBackground] = useState(backgroundArray[0].index);
   const errorString = "Board titles must be under 50 characters.";
 
   useEffect(() => {
@@ -19,13 +33,19 @@ const CreateWorkspaceModal = ({ user, setShowModal }) => {
     } else setErrors(false);
   }, [name]);
 
+  // const handleCheck = (i) => {
+  //   setBackground(i);
+  //   setIndex(i);
+  // };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     const payload = {
       name: name.trim(),
       owner_id: user.id,
-      labels: JSON.stringify(labels)
+      labels: JSON.stringify(labels),
+      background
     };
     let newWorkspace;
     try {
@@ -36,7 +56,7 @@ const CreateWorkspaceModal = ({ user, setShowModal }) => {
     if (newWorkspace) {
       setName("");
       history.push(`/b/${newWorkspace.id}`);
-      setShowModal(false)
+      setShowModal(false);
     }
   };
 
@@ -53,8 +73,8 @@ const CreateWorkspaceModal = ({ user, setShowModal }) => {
   };
 
   const handleClose = () => {
-    setShowModal(false)
-  }
+    setShowModal(false);
+  };
 
   return (
     <div className="create__board-container">
@@ -94,9 +114,25 @@ const CreateWorkspaceModal = ({ user, setShowModal }) => {
           onChange={(e) => setName(e.target.value)}
         />
         <span className="create__board-text">
-          <span className="create__board-emoji">👋</span> Board title is
-          required
+          <span className="create__board-emoji">👋</span> Don't forget to choose a background
         </span>
+        <div className="color__container">
+          {backgroundArray.map((item, i) => {
+            return (
+              <figure
+                className={
+                  i === index
+                    ? "background__container background__container-picked"
+                    : "background__container"
+                }
+                style={{ backgroundImage: `url( ${item.type} )` }}
+                value={item.index}
+                key={i}
+                onClick={() => {setBackground(i); setIndex(i)}}
+              />
+            );
+          })}
+        </div>
         <button
           className={
             name.trim().length && name.trim().length < 50

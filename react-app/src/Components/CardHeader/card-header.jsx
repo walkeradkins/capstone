@@ -15,8 +15,7 @@ const CardHeader = ({ props }) => {
   // const { labels } = card;
   const { currentWorkspace } = useWorkspace();
   const { showLabel, setShowLabel } = useLabel();
-  const [labelState, setLabelState] = useState(JSON.parse(card?.labels));
-  console.log(useSelector((state) => state.workspaces[currentWorkspace]));
+  const [labelState, setLabelState] = useState(card && card.labels ? JSON.parse(card.labels) : null);
   let workspace = useSelector((state) => state.workspaces[currentWorkspace]);
   const [display, setDisplay] = useState(false);
   const [showModal, setShowModal] = useState(false);
@@ -34,10 +33,14 @@ const CardHeader = ({ props }) => {
     const payload = {
       labels: data,
     };
-    await dispatch(updateCard(payload, card.id)).then((res) =>
-      console.log(res)
-      );
+    await dispatch(updateCard(payload, card.id))
   };
+
+  const closeEdit = (e) => {
+    e.stopPropagation();
+    setShowModal(false)
+    setEdit(false)
+  }
 
   const handleEdit = (e) => {
     e.stopPropagation();
@@ -153,7 +156,7 @@ const CardHeader = ({ props }) => {
               <>
                 <div
                   className="editcard-background"
-                  onClick={() => setEdit(false)}
+                  onClick={closeEdit}
                 />
                 <EditCardInput
                   props={{ card, setEdit, setItem, setEditItem, position }}
@@ -164,7 +167,7 @@ const CardHeader = ({ props }) => {
           </div>
         )}
       </Draggable>
-      {showModal && (
+      {showModal && !edit &&(
         <Modal onClose={handleSubmit}>
           <CardDetails
             props={{ card, setShowModal, labelState, setLabelState }}
