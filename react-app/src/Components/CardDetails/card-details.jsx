@@ -22,10 +22,10 @@ const CardDetails = ({ props }) => {
   return (
     <div className="card-details__container">
       <div className="card-details__header-container">
-        <p className="card-details__header">
+        <div className="card-details__header">
           <span className="material-symbols-outlined card-details__icon">space_dashboard</span>
           <p className='card-details__header-text'>{name}</p>
-        </p>
+        </div>
         <p className="card-details__subheader">in list {listTitle}</p>
       </div>
       <p className="card-details__label-text">Labels</p>

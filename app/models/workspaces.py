@@ -9,6 +9,7 @@ class Workspace(db.Model):
     labels = db.Column(db.String(2000), nullable=False)
     owner_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
     name = db.Column(db.String(50), nullable=False)
+    background =db.Column(db.String(500), nullable=False)
 
     # one-to-many with List
     lists = db.relationship('List', back_populates='workspace',
