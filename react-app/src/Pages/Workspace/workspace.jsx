@@ -11,7 +11,8 @@ import { Sidebar, ListItem, WorkspaceHeader, AddList } from "../../Components";
 import { useWorkspace } from "../../context/workspace-context";
 import { useCardState } from "../../context/card-state-context";
 import { DragDropContext } from "react-beautiful-dnd";
-import { PageNotFound } from '../../Pages'
+import { PageNotFound } from "../../Pages";
+import { backgroundObject } from "../../Assets/Images";
 
 const Workspace = ({ user }) => {
   const { currentWorkspace, setCurrentWorkspace } = useWorkspace();
@@ -28,6 +29,7 @@ const Workspace = ({ user }) => {
   const [editItem, setEditItem] = useState("");
   const [drag, setDrag] = useState("");
 
+  const workspace = workspaces[workspaceId];
   useEffect(() => {
     dispatch(getAllWorkspaces(user.id));
     dispatch(getAllLists(workspaceId));
@@ -37,12 +39,15 @@ const Workspace = ({ user }) => {
   }, [drag, item, workspaceId, editItem]);
 
   useEffect(() => {
-    document.body.style.backgroundImage = `url( ${whatnext_background} )`;
+    if (!Object.keys(workspaces).length) return;
+    if (!workspaces[workspaceId]) return;
+
+    document.body.style.backgroundImage = `url( ${backgroundObject[workspaces[workspaceId].background]} )`;
     document.body.style.backgroundRepeat = "no-repeat";
     document.body.style.backgroundAttachment = "fixed";
     document.body.style.backgroundPosition = "center";
     document.body.style.backgroundSize = "cover";
-    document.body.style.overflowY = 'hidden';
+    document.body.style.overflowY = "hidden";
     const navbar = document.querySelector(".navbar");
     if (navbar) {
       navbar.style.backgroundColor = "rgba(116, 78, 116, 0.8)";
@@ -51,22 +56,18 @@ const Workspace = ({ user }) => {
     return () => {
       document.body.style.backgroundImage = "";
       document.body.style.backgroundColor = "white";
-      document.body.style.overflowY = 'visible'
+      document.body.style.overflowY = "visible";
       const navbar = document.querySelector(".navbar");
       if (navbar) {
         navbar.style.backgroundColor = "#006ead";
       }
     };
-  }, [workspaceId]);
+  });
 
   if (!Object.keys(workspaces).length) return null;
 
-  const workspace = workspaces[workspaceId];
-
   if (!workspace) {
-    return (
-      <PageNotFound />
-    )
+    return <PageNotFound />;
   }
 
   const handleToggle = () => {
@@ -84,30 +85,30 @@ const Workspace = ({ user }) => {
       return;
     }
 
-    let payload= {};
+    let payload = {};
 
     if (+source.droppableId === +destination.droppableId) {
       // if moving card on same list
-      const cardList = lists[+source.droppableId].cards
+      const cardList = lists[+source.droppableId].cards;
       cardList.splice(source.index, 1);
-      cardList.splice(destination.index, 0, +draggableId)
+      cardList.splice(destination.index, 0, +draggableId);
       cardList.forEach((card, index) => {
-        payload[card] = index
-      })
+        payload[card] = index;
+      });
     } else {
       // update old list indices
-      const startCardList = lists[+source.droppableId].cards
-      startCardList.splice(source.index, 1)
+      const startCardList = lists[+source.droppableId].cards;
+      startCardList.splice(source.index, 1);
       startCardList.forEach((card, index) => {
-        payload[card] = index
-      })
+        payload[card] = index;
+      });
       // update new list indices
-      const finishCardList = lists[+destination.droppableId].cards
-      finishCardList.splice(destination.index, 0, +draggableId)
+      const finishCardList = lists[+destination.droppableId].cards;
+      finishCardList.splice(destination.index, 0, +draggableId);
       finishCardList.forEach((card, index) => {
-        payload[card] = index
-      })
-      payload['list_id'] = +destination.droppableId
+        payload[card] = index;
+      });
+      payload["list_id"] = +destination.droppableId;
     }
 
     let updatedCard;
@@ -137,7 +138,9 @@ const Workspace = ({ user }) => {
               {listArray.map((list) => {
                 return (
                   <div key={list.id}>
-                    <ListItem props={{ list, item, setItem, editItem, setEditItem }}/>
+                    <ListItem
+                      props={{ list, item, setItem, editItem, setEditItem }}
+                    />
                   </div>
                 );
               })}

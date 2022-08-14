@@ -15,8 +15,7 @@ const CardHeader = ({ props }) => {
   // const { labels } = card;
   const { currentWorkspace } = useWorkspace();
   const { showLabel, setShowLabel } = useLabel();
-  const [labelState, setLabelState] = useState(card.labels ? JSON.parse(card?.labels) : null);
-
+  const [labelState, setLabelState] = useState(card && card.labels ? JSON.parse(card.labels) : null);
   let workspace = useSelector((state) => state.workspaces[currentWorkspace]);
   const [display, setDisplay] = useState(false);
   const [showModal, setShowModal] = useState(false);
@@ -34,9 +33,7 @@ const CardHeader = ({ props }) => {
     const payload = {
       labels: data,
     };
-    await dispatch(updateCard(payload, card.id)).then((res) =>
-      console.log(res)
-      );
+    await dispatch(updateCard(payload, card.id))
   };
 
   const closeEdit = (e) => {

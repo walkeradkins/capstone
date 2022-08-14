@@ -51,7 +51,6 @@ const LabelDropDown = ({ props }) => {
   }
 
   const handleLabelEdit = (i) => {
-    console.log(i);
     handleToggle();
     setContent(workspaceLabels[i].text);
     setColor(workspaceLabels[i].color);

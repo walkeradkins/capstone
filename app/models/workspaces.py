@@ -9,7 +9,7 @@ class Workspace(db.Model):
     labels = db.Column(db.String(2000), nullable=False)
     owner_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
     name = db.Column(db.String(50), nullable=False)
-    background =db.Column(db.String(500), nullable=False)
+    background =db.Column(db.Integer, nullable=False)
 
     # one-to-many with List
     lists = db.relationship('List', back_populates='workspace',
@@ -35,6 +35,7 @@ class Workspace(db.Model):
             'ownerId': self.owner_id,
             'name': self.name,
             'labels': self.labels,
+            'background': self.background,
             'lists': [list.to_dict() for list in self.lists],
             "members": [member.to_dict_no_workspace() for member in self.workspace_members]
         }

@@ -16,9 +16,7 @@ const CardDescription = ({ props }) => {
     const payload = {
       description: content,
     };
-    await dispatch(updateCard(payload, card.id)).then((res) =>
-      console.log(res)
-    );
+    await dispatch(updateCard(payload, card.id))
   };
 
   const trueEdit = (e) => {
