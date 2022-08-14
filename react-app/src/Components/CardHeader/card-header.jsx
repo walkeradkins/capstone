@@ -12,7 +12,7 @@ import ReactTooltip from "react-tooltip";
 const CardHeader = ({ props }) => {
   const dispatch = useDispatch();
   const { card, setItem, index, setEditItem } = props;
-  const { labels } = card;
+  // const { labels } = card;
   const { currentWorkspace } = useWorkspace();
   const { showLabel, setShowLabel } = useLabel();
   const [labelState, setLabelState] = useState(JSON.parse(card?.labels));
@@ -25,10 +25,6 @@ const CardHeader = ({ props }) => {
   const [position, setPosition] = useState({});
   const posRef = useRef();
 
-  let labelsArray;
-  if (labels) {
-    labelsArray = JSON.parse(labels);
-  }
 
   const handleSubmit = async () => {
     setShowModal(false);
@@ -40,7 +36,7 @@ const CardHeader = ({ props }) => {
     };
     await dispatch(updateCard(payload, card.id)).then((res) =>
       console.log(res)
-    );
+      );
   };
 
   const handleEdit = (e) => {
@@ -57,7 +53,7 @@ const CardHeader = ({ props }) => {
   useEffect(() => {
     if (posRef.current) {
       const { top, bottom, left, right } =
-        posRef.current.getBoundingClientRect();
+      posRef.current.getBoundingClientRect();
       const positions = { top, bottom, left, right };
       setPosition(positions);
     }
@@ -73,6 +69,12 @@ const CardHeader = ({ props }) => {
 
   if (!card) return null;
   if (!workspace) return null;
+
+  let labelsArray;
+  if (card.labels) {
+    labelsArray = JSON.parse(card.labels);
+  }
+
   let workspaceLabels = workspace.labels;
   workspaceLabels = JSON.parse(workspaceLabels);
   return (
@@ -92,7 +94,7 @@ const CardHeader = ({ props }) => {
             {...provided.draggableProps}
             {...provided.dragHandleProps}
           >
-            {labels && (
+            {card.labels && (
               <div className="small__label-container">
                 {labelsArray.map((label) => (
                   <div
