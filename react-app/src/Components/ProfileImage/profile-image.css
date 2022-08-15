@@ -1,0 +1,21 @@
+.profile__img {
+  background-size: cover;
+  background-position: center;
+  border-radius: .15em;
+}
+
+.profile__img::after {
+  display: block;
+  content: '';
+  padding-top: 100%;
+}
+
+.profile_img-container {
+  background: linear-gradient(#47389b, #0f54bb);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: .25em;
+  color: #FFFFFF;
+  font-weight: bold;
+}

@@ -24,7 +24,7 @@ def seed_users():
         email='demo@demo.io',
         password='password',
         user_members=[project1],
-        profile_image='https://unsplash.com/photos/JoM_lC1WAnE'
+        profile_image='https://images.unsplash.com/photo-1573600073955-f15b3b6caab7?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1915&q=80'
     )
     isabella = User(
         first_name='Isabella',

@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { logout } from "../../store/session";
+import { ProfileImage } from "../../Components";
 
 const UserInfo = ({ user }) => {
   const dispatch = useDispatch();
@@ -27,12 +28,10 @@ const UserInfo = ({ user }) => {
     return () => document.removeEventListener("click", closeMenu);
   }, [showMenu]);
 
-  const initials = `${firstName[0].toUpperCase()}${lastName[0].toUpperCase()}`;
-
   return (
     <>
-      <div className="navbar__profilebutton" onClick={openMenu}>
-        <p className="navbar__initials">{initials}</p>
+      <div className='navbar__icon-user'onClick={openMenu}>
+        <ProfileImage user={user} size={'2.5em'}/>
       </div>
       {showMenu && (
         <div className="navbar__profile-dropdown">
@@ -41,7 +40,7 @@ const UserInfo = ({ user }) => {
           </div>
 
           <div className="dropdown__menu-user-container">
-            <div className="navbar__profilebutton-dropdown">{initials}</div>
+            <ProfileImage user={user} size={'4.5em'}/>
             <div className="navbar__dropdown-info dropdown__username">
               <p>{`${firstName} ${lastName}`}</p>
               <p className="navbar__dropdown-info dropdown__email">{`${email}`}</p>
