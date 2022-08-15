@@ -15,7 +15,7 @@
 }
 
 .sidebar__collapsed {
-  margin-top: 3.3em;
+  /* margin-top: 3.3em; */
   height: 100vh;
   position: relative;
   display: flex;
@@ -39,7 +39,7 @@
 }
 
 .sidebar__open {
-  margin-top: 3.3em;
+  /* margin-top: 3.3em; */
   color: white;
   height: 100vh;
   position: relative;

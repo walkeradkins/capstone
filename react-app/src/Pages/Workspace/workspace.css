@@ -1,5 +1,6 @@
 .workspace__main {
   display: flex;
+  margin-top: 3.35em;
 }
 
 .list__container {
@@ -9,7 +10,6 @@
 }
 
 .workspace {
-  margin-top: 3.5em;
 }
 
 .workspace__list-add {

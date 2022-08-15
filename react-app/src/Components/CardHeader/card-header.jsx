@@ -132,7 +132,7 @@ const CardHeader = ({ props }) => {
                   id="desc__tip"
                   place="right"
                   effect="solid"
-                  backgroundColor="rgba(48,48,48,0.2)"
+                  backgroundColor="rgba(48,48,48,0.75)"
                   delayShow='500'
                 >
                   This card has a description
