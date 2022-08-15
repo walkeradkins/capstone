@@ -5,6 +5,8 @@ import plants from '../Images/plants.jpg'
 import watercolor from '../Images/watercolor.jpg'
 import whatnext_background from '../Images/whatnext_background.jpg'
 import wood from '../Images/wood.jpg'
+import trello_left from '../Images/trello_left.png'
+import trello_right from '../Images/trello_right.png'
 
 
 export const backgroundArray = [
@@ -33,4 +35,6 @@ export {
   watercolor,
   whatnext_background,
   wood,
+  trello_left,
+  trello_right,
 }

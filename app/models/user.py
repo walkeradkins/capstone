@@ -12,6 +12,7 @@ class User(db.Model, UserMixin):
     last_name = db.Column(db.String(40), nullable=False)
     email = db.Column(db.String(255), nullable=False, unique=True)
     hashed_password = db.Column(db.String(255), nullable=False)
+    profile_image = db.Column(db.string(), nullable=True)
 
     # one to many with Workspace
     workspaces = db.relationship('Workspace', back_populates='user')
@@ -41,6 +42,7 @@ class User(db.Model, UserMixin):
             'firstName': self.first_name,
             'lastName': self.last_name,
             'email': self.email,
+            'profile_image': self.profile_image,
             'members': [member.to_dict_no_user() for member in self.user_members]
         }
 

@@ -1,10 +1,12 @@
+
+
 .login__background {
   position: fixed;
   top: 0;
   bottom: 0;
   left: 0;
   right: 0;
-  background-color: rgba(208, 222, 230, 0.2);
+  background-color: #fafbfc;
   z-index: -1;
 }
 
@@ -37,11 +39,12 @@
   margin: 2.5em 0;
   border: 1px rgba(220, 220, 220, 0.4) solid;
   display: flex;
-  min-height: 38em;
   width: 25em;
+  /* min-height: 38em; */
   justify-content: center;
   text-align: center;
   padding: 2em;
+  z-index: 10;
   border-radius: .25em;
 }
 
@@ -193,4 +196,26 @@
   font-weight: bold;
   font-size: .85em;
   outline: none;
+}
+
+.landing__photo-container {
+  display: flex;
+  justify-content: space-between;
+  height: 60%;
+  width: 100%;
+  position: fixed;
+  bottom: 0;
+}
+
+.landing__image {
+  width: 33%;
+  z-index: 0;
+  background-size: cover;
+  background-position: center;
+}
+
+.landing__image::after {
+  display: block;
+  content: '';
+  padding-top: 100%;
 }
