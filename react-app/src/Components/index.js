@@ -21,6 +21,7 @@ import LabelDropDown from './LabelDropDown/label-drowdown'
 import CardDescription from './CardDescription/card-description'
 import LoginFooter from './LoginFooter/login-footer'
 import ProfileImage from './ProfileImage/profile-image'
+import AddMembers from './AddMembers/add-members'
 
 export {
   WorkspaceLink,
@@ -46,4 +47,5 @@ export {
   CardDescription,
   LoginFooter,
   ProfileImage,
+  AddMembers,
 }

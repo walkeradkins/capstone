@@ -1,0 +1,39 @@
+.add-members__container {
+  height: 80vh;
+  width: 35em;
+  padding: .5em;
+}
+
+.add-members__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: .5em 0;
+}
+
+.add-members__current {
+  margin: 1em 0;
+  border: rgb(201, 201, 201) 1px solid;
+  padding: .75em;
+  max-height: 12em;
+  overflow: auto;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  border-radius: .25em;
+}
+
+.current__member {
+  display: flex;
+  padding: .25em 0;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.current_member-user {
+  display: flex;
+  align-items: center;
+}
+
+.current__member-name {
+  margin-left: .5em;
+}

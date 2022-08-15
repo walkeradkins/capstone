@@ -32,10 +32,10 @@ const NavBar = ({ loaded }) => {
   } else {
     sessionLinks = (
       <>
-        <NavLink to='/login' exact={true}>
+        <NavLink to='/login' exact>
           Login
         </NavLink>
-        <NavLink to='/sign-up' exact={true}>
+        <NavLink to='/sign-up' exact>
           Sign Up
         </NavLink>
       </>

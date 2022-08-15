@@ -38,7 +38,6 @@ const SignUpForm = () => {
       formData.append("email", email);
       formData.append("password", password);
       if (image) formData.append("profile_image", image)
-      console.log(...formData)
       const data = await dispatch(signUp(formData));
 
       if (data) {
@@ -66,7 +65,6 @@ const SignUpForm = () => {
   useEffect(() => {
     const valErrors = [];
     if (backendErrors[0]) valErrors.push('There is already an account associated with this email.');
-    console.log(backendErrors);
     setErrors(valErrors)
   }, [submitted])
 

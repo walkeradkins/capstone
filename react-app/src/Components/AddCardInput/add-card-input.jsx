@@ -191,7 +191,7 @@ const AddCardInput = ({ props }) => {
                       place="right"
                       effect="solid"
                       backgroundColor="rgba(48,48,48,0.9)"
-                      delayShow="500"
+                      delayShow={500}
                     >
                       Click to attach an image
                     </ReactTooltip>

@@ -133,7 +133,7 @@ const CardHeader = ({ props }) => {
                   place="right"
                   effect="solid"
                   backgroundColor="rgba(48,48,48,0.75)"
-                  delayShow='500'
+                  delayShow={500}
                 >
                   This card has a description
                 </ReactTooltip>

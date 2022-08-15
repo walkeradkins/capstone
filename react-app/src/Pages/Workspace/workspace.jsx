@@ -133,7 +133,7 @@ const Workspace = ({ user }) => {
         />
         <DragDropContext onDragEnd={handleOnDragEnd}>
           <div className="workspace">
-            <WorkspaceHeader workspace={workspace} />
+            <WorkspaceHeader workspace={workspace} user={user}/>
             <div className="list__container">
               {listArray.map((list) => {
                 return (

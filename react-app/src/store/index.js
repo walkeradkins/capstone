@@ -4,12 +4,14 @@ import session from './session'
 import workspaceReducer from './workspaces'
 import listReducer from './lists';
 import cardReducer from './cards';
+import usersReducer from './users';
 
 const rootReducer = combineReducers({
   session,
   workspaces: workspaceReducer,
   lists: listReducer,
   cards: cardReducer,
+  users: usersReducer,
 });
 
 
