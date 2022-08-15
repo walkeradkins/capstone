@@ -12,7 +12,7 @@ class User(db.Model, UserMixin):
     last_name = db.Column(db.String(40), nullable=False)
     email = db.Column(db.String(255), nullable=False, unique=True)
     hashed_password = db.Column(db.String(255), nullable=False)
-    profile_image = db.Column(db.string(), nullable=True)
+    profile_image = db.Column(db.String(), nullable=True)
 
     # one to many with Workspace
     workspaces = db.relationship('Workspace', back_populates='user')
@@ -51,5 +51,6 @@ class User(db.Model, UserMixin):
             'id': self.id,
             'first_name': self.first_name,
             'last_name': self.last_name,
+            'profile_image': self.profile_image,
             'email': self.email,
         }

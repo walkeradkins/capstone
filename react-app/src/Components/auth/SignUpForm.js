@@ -13,6 +13,8 @@ const SignUpForm = () => {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
+  const [image, setImage] = useState('')
+  const [loading, setLoading] = useState(false);
   const [password, setPassword] = useState('');
   const [repeatPassword, setRepeatPassword] = useState('');
   const [submitted, setSubmitted] = useState(false);
@@ -26,13 +28,25 @@ const SignUpForm = () => {
     const passwordCheck = (password === repeatPassword)
     const firstNameCheck = firstName.trim().length !== 0;
     const lastNameCheck = lastName.trim().length !== 0;
+
     if (passwordCheck && emailCheck && firstNameCheck && lastNameCheck) {
-      const data = await dispatch(signUp(firstName.trim(), lastName.trim(), email, password));
+      setLoading(true);
+      const formData = new FormData();
+
+      formData.append("firstName", firstName.trim());
+      formData.append("lastName", lastName.trim());
+      formData.append("email", email);
+      formData.append("password", password);
+      if (image) formData.append("profile_image", image)
+      console.log(...formData)
+      const data = await dispatch(signUp(formData));
+
       if (data) {
         setBackendErrors(data)
         setSubmitted(!submitted)
       }
     }
+
     if (!emailCheck) {
       valErrors.push('Please provide a valid email address.')
       setErrors([...valErrors])
@@ -52,6 +66,7 @@ const SignUpForm = () => {
   useEffect(() => {
     const valErrors = [];
     if (backendErrors[0]) valErrors.push('There is already an account associated with this email.');
+    console.log(backendErrors);
     setErrors(valErrors)
   }, [submitted])
 
@@ -92,6 +107,11 @@ const SignUpForm = () => {
 
   const updatePassword = (e) => {
     setPassword(e.target.value);
+  };
+
+  const updateImage = (e) => {
+    const file = e.target.files[0];
+    setImage(file);
   };
 
   const updateRepeatPassword = (e) => {
@@ -190,6 +210,31 @@ const SignUpForm = () => {
                   required={true}
                 ></input>
               </div>
+              <div className='login__input'>
+                <label className=''>
+                  <div className='photo__upload-login'>
+                    <input
+                      type="file"
+                      accept="image/*"
+                      onChange={updateImage}
+                      hidden
+                    />
+                    {!image && <span className='upload-profile-img'>Upload profile image (optional)</span>}
+                    {image && <span className='upload-profile-img'>Change profile image</span>}
+                  </div>
+                </label>
+              </div>
+              {image &&
+                <div className='file__name-container'>
+                  <span className='file__name'>{image.name} 👍
+                  </span>
+                  <span
+                    className="material-symbols-outlined file__trashcan"
+                    onClick={() => setImage('')}
+                  >
+                    delete
+                  </span>
+                </div>}
               <button
                 className={!errors.length ? 'login__button-submit' : 'signup__btn-disabled'}
                 type='submit'
