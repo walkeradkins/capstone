@@ -27,7 +27,6 @@ export default function usersReducer(state = initialState, action) {
     case GET_USERS:
       const users = {};
       for (let user of action.users.users) {
-        console.log(user)
         users[user.id] = user;
       }
       return { ...users};
