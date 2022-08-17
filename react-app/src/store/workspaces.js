@@ -102,6 +102,9 @@ export default function workspaceReducer(state = initialState, action) {
           ...action.updatedWorkspace
         }
       }
+      const id = action.updatedWorkspace.id
+      updatedState[id].lists = updatedState[id].lists.map(list => list.id)
+      updatedState[id].members = updatedState[id].members.map(member => member.id)
       return updatedState;
     case DELETE_WORKSPACE:
       const newState = { ...state };

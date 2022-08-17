@@ -13,14 +13,14 @@ const NavBar = ({ loaded }) => {
   if (user) {
     sessionLinks = (
       <div className='navbar__session-container'>
-        <a href="https://github.com/walkeradkins">
+        <a href="https://github.com/walkeradkins" target='#'>
           <div className="navbar__outside-links bold">
             <FaGithubSquare />
             <p className='navbar__outside-link-text'>Github</p>
           </div>
         </a>
 
-        <a href="https://www.linkedin.com/in/walker-adkins-50173a245/">
+        <a href="https://www.linkedin.com/in/walker-adkins-50173a245/" target='#'>
           <div className="navbar__outside-links bold">
             <FaLinkedin />
             <p className='navbar__outside-link-text'>LinkedIn</p>
@@ -32,10 +32,10 @@ const NavBar = ({ loaded }) => {
   } else {
     sessionLinks = (
       <>
-        <NavLink to='/login' exact={true}>
+        <NavLink to='/login' exact>
           Login
         </NavLink>
-        <NavLink to='/sign-up' exact={true}>
+        <NavLink to='/sign-up' exact>
           Sign Up
         </NavLink>
       </>

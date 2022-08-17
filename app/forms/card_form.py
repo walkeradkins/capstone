@@ -11,6 +11,7 @@ class CardForm(FlaskForm):
     index = StringField('index')
     image = StringField('image')
     labels = StringField('labels')
+    members = StringField('members')
     workspace_id = IntegerField('workspace_id', validators=[DataRequired()])
     created_at = StringField('created_at', validators=[DataRequired()])
     due_date = StringField('due_date')

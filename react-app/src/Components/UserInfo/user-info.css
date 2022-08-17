@@ -24,6 +24,9 @@
   font-weight: bold;
 }
 
+.navbar__icon-user {
+  cursor: pointer;
+}
 .navbar__initials {
   font-size: 1.1em;
   color: black;

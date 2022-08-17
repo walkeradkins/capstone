@@ -6,7 +6,7 @@
 .workspace-input__wrapper {
   display: flex;
   align-items: center;
-  min-width: 100vw;
+  /* min-width: 100vw; */
 }
 
 .input__inactive:hover {

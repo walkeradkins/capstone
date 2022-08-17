@@ -57,6 +57,11 @@ def updateCard(cardId):
         labels = card.labels
         labels = new_card['labels']
         card.labels = labels
+
+        members = card.members
+        members = new_card['members']
+        card.members = members
+
         db.session.merge(card)
         db.session.flush()
         db.session.commit()

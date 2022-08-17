@@ -1,0 +1,79 @@
+.add-members__container {
+  height: 80vh;
+  width: 35em;
+  padding: .5em;
+}
+
+.add-members__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: .5em 0;
+}
+
+.add-members__current {
+  margin: 1em 0;
+  border: rgb(201, 201, 201) 1px solid;
+  padding: .75em .25em .75em .75em;
+  max-height: 12em;
+  overflow: auto;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  border-radius: .25em;
+}
+
+.current__member {
+  display: flex;
+  padding: .25em 0;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.current_member-user {
+  display: flex;
+  align-items: center;
+}
+
+.current__member-name {
+  margin-left: .5em;
+}
+
+.add-members__current::-webkit-scrollbar {
+  background-color: transparent;
+  width: .85em;
+}
+
+.add-members__current::-webkit-scrollbar-track {
+  background-color: rgba(255, 255, 255, 0.3);
+}
+
+
+.add-members__current::-webkit-scrollbar-thumb {
+  background-clip: content-box;
+  width: .85em;
+  background-color: rgba(164, 164, 164, 0.4);
+  border-radius: .5em;
+}
+
+.remove__member {
+  border-radius: .15em;
+  padding: .15em;
+  transition: .2s;
+  cursor: pointer;
+}
+
+.remove__member:hover {
+  background-color:rgb(220, 220, 220)
+}
+
+.add-members__sub {
+  margin: .5em 0;
+}
+
+.add-members__drop {
+  margin: 1em 0;
+}
+
+.add-members__submit {
+  margin: 1em;
+}

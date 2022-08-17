@@ -124,7 +124,7 @@ const Workspace = ({ user }) => {
   };
 
   return (
-    <div className="workspace__wrapper">
+    <div className="workspace__wrapper" style={{ backgroundImage: `url( ${backgroundObject[workspaces[workspaceId].background]} )` }}>
       <div className="workspace__main">
         <Sidebar
           workspaces={Object.values(workspaces)}
@@ -133,7 +133,7 @@ const Workspace = ({ user }) => {
         />
         <DragDropContext onDragEnd={handleOnDragEnd}>
           <div className="workspace">
-            <WorkspaceHeader workspace={workspace} />
+            <WorkspaceHeader workspace={workspace} user={user}/>
             <div className="list__container">
               {listArray.map((list) => {
                 return (

@@ -3,6 +3,8 @@ import { useSelector, useDispatch } from 'react-redux'
 import { Redirect, NavLink } from 'react-router-dom';
 import { signUp } from '../../store/session';
 import { CSSTransition } from "react-transition-group";
+import { trello_left, trello_right } from '../../Assets/Images';
+import { LoginFooter } from '../../Components'
 
 
 const SignUpForm = () => {
@@ -11,6 +13,8 @@ const SignUpForm = () => {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
+  const [image, setImage] = useState('')
+  const [loading, setLoading] = useState(false);
   const [password, setPassword] = useState('');
   const [repeatPassword, setRepeatPassword] = useState('');
   const [submitted, setSubmitted] = useState(false);
@@ -24,13 +28,24 @@ const SignUpForm = () => {
     const passwordCheck = (password === repeatPassword)
     const firstNameCheck = firstName.trim().length !== 0;
     const lastNameCheck = lastName.trim().length !== 0;
+
     if (passwordCheck && emailCheck && firstNameCheck && lastNameCheck) {
-      const data = await dispatch(signUp(firstName.trim(), lastName.trim(), email, password));
+      setLoading(true);
+      const formData = new FormData();
+
+      formData.append("firstName", firstName.trim());
+      formData.append("lastName", lastName.trim());
+      formData.append("email", email);
+      formData.append("password", password);
+      if (image) formData.append("profile_image", image)
+      const data = await dispatch(signUp(formData));
+
       if (data) {
         setBackendErrors(data)
         setSubmitted(!submitted)
       }
     }
+
     if (!emailCheck) {
       valErrors.push('Please provide a valid email address.')
       setErrors([...valErrors])
@@ -92,6 +107,11 @@ const SignUpForm = () => {
     setPassword(e.target.value);
   };
 
+  const updateImage = (e) => {
+    const file = e.target.files[0];
+    setImage(file);
+  };
+
   const updateRepeatPassword = (e) => {
     setRepeatPassword(e.target.value);
   };
@@ -108,97 +128,130 @@ const SignUpForm = () => {
           <div className='login__logo'>💠</div>
           <h3 className='login__header-text'>WhatNext?</h3>
         </div>
-        <div className='login__form-container'>
-          <form className='login__form' onSubmit={onSignUp}>
-            <CSSTransition
-              in={errors[0]}
-              timeout={500}
-              classNames="error-transition"
-              unmountOnExit
-            >
-              <div className='error__container-login'>
-                {errors.map((error, ind) => (
-                  <div className='error__text-login' key={ind}>{error}</div>
-                ))}
+        <div className='login__form-wrapper'>
+
+          <div className='login__form-container'>
+            <form className='login__form' onSubmit={onSignUp}>
+              <CSSTransition
+                in={errors[0]}
+                timeout={500}
+                classNames="error-transition"
+                unmountOnExit
+              >
+                <div className='error__container-login'>
+                  {errors.map((error, ind) => (
+                    <div className='error__text-login' key={ind}>{error}</div>
+                  ))}
+                </div>
+              </CSSTransition>
+              <p className='login__call'>Sign up for your account</p>
+              <div>
+                <input
+                  type='text'
+                  className='login__input login__input-top'
+                  name='firstName'
+                  maxLength={40}
+                  autoComplete='off'
+                  required
+                  placeholder='Enter first name'
+                  onChange={updateFirstName}
+                  value={firstName}
+                ></input>
               </div>
-            </CSSTransition>
-            <p className='login__call'>Sign up for your account</p>
-            <div>
-              <input
-                type='text'
-                className='login__input login__input-top'
-                name='firstName'
-                maxLength={40}
-                autoComplete='off'
-                required
-                placeholder='Enter first name'
-                onChange={updateFirstName}
-                value={firstName}
-              ></input>
-            </div>
-            <div>
-              <input
-                type='text'
-                className='login__input'
-                name='lastName'
-                maxLength={40}
-                required
-                autoComplete='off'
-                placeholder='Enter last name'
-                onChange={updateLastName}
-                value={lastName}
-              ></input>
-            </div>
-            <div>
-              <input
-                type='text'
-                name='email'
-                required
-                maxLength={50}
-                className='login__input'
-                placeholder='Enter email'
-                autoComplete='off'
-                onChange={updateEmail}
-                value={email}
-              ></input>
-            </div>
-            <div>
-              <input
-                type='password'
-                className='login__input'
-                name='password'
-                maxLength={40}
-                required
-                placeholder='Enter password'
-                onChange={updatePassword}
-                value={password}
-              ></input>
-            </div>
-            <div>
-              <input
-                type='password'
-                name='repeat_password'
-                className='login__input'
-                maxLength={40}
-                placeholder='Confirm password'
-                onChange={updateRepeatPassword}
-                value={repeatPassword}
-                required={true}
-              ></input>
-            </div>
-            <button
-              className={!errors.length ? 'login__button-submit' : 'signup__btn-disabled'}
-              type='submit'
-              disabled={errors.length}
-            >
-              Sign Up
-            </button>
-            <div className='login__underline' />
-            <NavLink className='login__signup' to='/login' exact>
-              Already have an account? Log in
-            </NavLink>
-          </form>
+              <div>
+                <input
+                  type='text'
+                  className='login__input'
+                  name='lastName'
+                  maxLength={40}
+                  required
+                  autoComplete='off'
+                  placeholder='Enter last name'
+                  onChange={updateLastName}
+                  value={lastName}
+                ></input>
+              </div>
+              <div>
+                <input
+                  type='text'
+                  name='email'
+                  required
+                  maxLength={50}
+                  className='login__input'
+                  placeholder='Enter email'
+                  autoComplete='off'
+                  onChange={updateEmail}
+                  value={email}
+                ></input>
+              </div>
+              <div>
+                <input
+                  type='password'
+                  className='login__input'
+                  name='password'
+                  maxLength={40}
+                  required
+                  placeholder='Enter password'
+                  onChange={updatePassword}
+                  value={password}
+                ></input>
+              </div>
+              <div>
+                <input
+                  type='password'
+                  name='repeat_password'
+                  className='login__input'
+                  maxLength={40}
+                  placeholder='Confirm password'
+                  onChange={updateRepeatPassword}
+                  value={repeatPassword}
+                  required={true}
+                ></input>
+              </div>
+              <div className='login__input'>
+                <label className=''>
+                  <div className='photo__upload-login'>
+                    <input
+                      type="file"
+                      accept="image/*"
+                      onChange={updateImage}
+                      hidden
+                    />
+                    {!image && <span className='upload-profile-img'>Upload profile image (optional)</span>}
+                    {image && <span className='upload-profile-img'>Change profile image</span>}
+                  </div>
+                </label>
+              </div>
+              {image &&
+                <div className='file__name-container'>
+                  <span className='file__name'>{image.name} 👍
+                  </span>
+                  <span
+                    className="material-symbols-outlined file__trashcan"
+                    onClick={() => setImage('')}
+                  >
+                    delete
+                  </span>
+                </div>}
+              <button
+                className={!errors.length ? 'login__button-submit' : 'signup__btn-disabled'}
+                type='submit'
+                disabled={errors.length}
+              >
+                Sign Up
+              </button>
+              <div className='login__underline' />
+              <NavLink className='login__signup' to='/login' exact>
+                Already have an account? Log in
+              </NavLink>
+            </form>
+          </div>
+          <LoginFooter />
         </div>
+      </div>
+      <div className='landing__photo-container'>
+        <figure className='landing__image landing__image-left' style={{ backgroundImage: `url(${trello_left})` }} />
+        <figure className='landing__image image landing__image-left' style={{ backgroundImage: `url(${trello_right})` }} />
       </div>
     </>
   );

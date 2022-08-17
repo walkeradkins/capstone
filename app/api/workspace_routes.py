@@ -57,6 +57,30 @@ def updateWorkspace(workspaceId):
         db.session.commit()
         return workspace.to_dict()
 
+    if 'members' in new_workspace:
+        #add members
+        members = request.json['members']
+        for mem in members:
+            member = User.query.filter_by(id=mem).first()
+            if member not in workspace.workspace_members:
+                workspace.workspace_members.append(member)
+            else:
+                continue
+
+        #remove members
+        removed = request.json['removed']
+        for rem in removed:
+            removed = User.query.filter_by(id=rem).first()
+            if removed in workspace.workspace_members:
+                workspace.workspace_members.remove(removed)
+            else:
+                continue
+
+        db.session.merge(workspace)
+        db.session.flush()
+        db.session.commit()
+        return workspace.to_dict()
+
     name = workspace.name
     name = new_workspace['name']
     workspace.name = name
@@ -69,7 +93,6 @@ def updateWorkspace(workspaceId):
 @workspace_routes.route('/<int:id>', methods=['DELETE'], strict_slashes=False)
 def deleteWorkspace(id):
     workspace = Workspace.query.get(id)
-    print('--------', workspace.to_dict())
     db.session.delete(workspace)
     db.session.commit()
     return workspace.to_dict()
