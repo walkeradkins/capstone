@@ -1,11 +1,11 @@
 .card-details__container {
-  display: flex;
-  flex-direction: column;
-  min-height: 30em;
+  display: block;
+  max-height: 90vh;
   padding: 2em;
   width: 50em;
   background-color: rgb(245, 245, 245);
   border-radius: .25em;
+  overflow-y: auto;
 }
 
 .card-details__header {
@@ -34,6 +34,7 @@
 
 .card-details__label-container {
   display: flex;
+  align-items: center;
   position: relative;
   padding-left: 1.6em;
 }
@@ -41,6 +42,7 @@
 .add__label {
   padding: .15em;
   margin: 0.25em;
+  /* max-height: 1.25em; */
   border-radius: .15em;
   cursor: pointer;
   transition: .2s;

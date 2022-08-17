@@ -47,7 +47,8 @@ const AddMembers = ({ props }) => {
 
   const otherUsersArray = Object.values(usersCopy).map((user) => {
     return {
-      value: user.id,
+      value: `${user.firstName} ${user.lastName}`,
+      id: user.id,
       label: (
         <div className="current_member-user">
           <ProfileImage user={user} size={"2em"} />
@@ -74,6 +75,7 @@ const AddMembers = ({ props }) => {
         </span>
       </div>
       <div className="underline" />
+      <p className='add-members__sub'>Current Members</p>
       <ul className="add-members__current">
         {membersCopy.map((i) => (
           <li key={i}>
@@ -104,14 +106,16 @@ const AddMembers = ({ props }) => {
           </li>
         ))}
       </ul>
+      <p className='add-members__sub'>Add members to your workspace</p>
       <Select
         closeMenuOnSelect={false}
+        className='add-members__drop'
         components={animatedComponents}
-        onChange={(choice) => setMemberList(choice.map((ele) => ele.value))}
+        onChange={(choice) => setMemberList(choice.map((ele) => ele.id))}
         isMulti
         options={otherUsersArray}
       />
-      <button className="add-card__submit" onClick={handleSubmit}>
+      <button className="add-card__submit add-members__submit" onClick={handleSubmit}>
         Save Changes
       </button>
     </div>

@@ -1,8 +1,9 @@
 import "./profile-image.css";
 
-const ProfileImage = ({ user, size }) => {
+const ProfileImage = ({ user, size, circle }) => {
   const { profileImage, firstName, lastName } = user;
   const initials = `${firstName[0].toUpperCase()}${lastName[0].toUpperCase()}`;
+  const radius = circle ? '50%' : '.15em';
 
   if (profileImage) {
     return (
@@ -12,6 +13,7 @@ const ProfileImage = ({ user, size }) => {
           backgroundImage: `url(${profileImage})`,
           width: size,
           height: size,
+          borderRadius: radius
         }}
       />
     );

@@ -101,6 +101,23 @@
 }
 
 .card-desc__icon {
-  align-self: flex-start;
+  /* align-self: flex-start; */
   color:#6b6b6b
+}
+
+.card__header-bottom {
+  display: flex;
+  width: 100%;
+  /* justify-content: ; */
+  align-items: center;
+}
+
+.card__members {
+  margin: .5em 0;
+  margin-left: auto;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  align-items: end;
+  gap: 2%;
+  align-self: flex-end;
 }

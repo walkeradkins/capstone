@@ -124,7 +124,7 @@ const Workspace = ({ user }) => {
   };
 
   return (
-    <div className="workspace__wrapper">
+    <div className="workspace__wrapper" style={{ backgroundImage: `url( ${backgroundObject[workspaces[workspaceId].background]} )` }}>
       <div className="workspace__main">
         <Sidebar
           workspaces={Object.values(workspaces)}

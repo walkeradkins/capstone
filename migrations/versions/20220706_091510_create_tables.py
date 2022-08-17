@@ -59,6 +59,7 @@ def upgrade():
     sa.Column('description', sa.String(length=2000), nullable=True),
     sa.Column('image', sa.String(length=2000), nullable=True),
     sa.Column('labels', sa.String(length=2000), nullable=True),
+    sa.Column('members', sa.String(length=2000), nullable=True),
     sa.Column('due_date', sa.DateTime(), nullable=True),
     sa.Column('created_at', sa.DateTime(), nullable=False),
     sa.ForeignKeyConstraint(['list_id'], ['lists.id'], ondelete='CASCADE'),

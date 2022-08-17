@@ -11,6 +11,7 @@ class Card(db.Model):
     index = db.Column(db.String(4), nullable=True)
     image = db.Column(db.String(2000), nullable=True)
     labels = db.Column(db.String(2000), nullable=True)
+    members = db.Column(db.String(2000), nullable=True)
     description = db.Column(db.String(2000), nullable=True)
     due_date = db.Column(db.DateTime(timezone=False), nullable=True)
     created_at = db.Column(db.DateTime(timezone=False), nullable=False)
@@ -26,6 +27,7 @@ class Card(db.Model):
             'name': self.name,
             'index': self.index,
             'image': self.image,
+            'members': self.members,
             'labels': self.labels,
             'description': self.description,
             'due_date': self.due_date,

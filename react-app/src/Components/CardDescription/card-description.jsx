@@ -33,7 +33,7 @@ const CardDescription = ({ props }) => {
   return (
     <>
       <div className="card-desc__header-container">
-        <span className="material-symbols-outlined card-details__icon">edit_note</span>
+        <span className="material-symbols-outlined card-details__icon">description</span>
         <p className="card-desc__header-text">Description</p>
         {content && (
           <button className="edit-card__cancel" onClick={() => setEdit(true)}>
