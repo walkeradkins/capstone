@@ -67,6 +67,7 @@ def updateWorkspace(workspaceId):
             else:
                 continue
 
+    if 'removed' in new_workspace:
         #remove members
         removed = request.json['removed']
         for rem in removed:
@@ -93,6 +94,7 @@ def updateWorkspace(workspaceId):
 @workspace_routes.route('/<int:id>', methods=['DELETE'], strict_slashes=False)
 def deleteWorkspace(id):
     workspace = Workspace.query.get(id)
+    deletedId = workspace.to_dict()['id']
     db.session.delete(workspace)
     db.session.commit()
-    return workspace.to_dict()
+    return {'id': deletedId}

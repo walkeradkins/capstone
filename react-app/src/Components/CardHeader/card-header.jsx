@@ -19,7 +19,6 @@ const CardHeader = ({ props }) => {
     card && card.labels ? JSON.parse(card.labels) : null
   );
   let workspace = useSelector((state) => state.workspaces[currentWorkspace]);
-  const { members } = workspace;
   const [memberState, setMemberState] = useState(
     card && card.members ? JSON.parse(card.members) : null
   );
@@ -86,6 +85,7 @@ const CardHeader = ({ props }) => {
   if (!workspace) return null;
   if (!Object.keys(users).length) return null;
 
+  const { members } = workspace;
   let labelsArray;
   let membersArray;
 
