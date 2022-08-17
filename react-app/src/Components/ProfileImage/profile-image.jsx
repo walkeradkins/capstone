@@ -3,7 +3,7 @@ import "./profile-image.css";
 const ProfileImage = ({ user, size, circle }) => {
   const { profileImage, firstName, lastName } = user;
   const initials = `${firstName[0].toUpperCase()}${lastName[0].toUpperCase()}`;
-  const radius = circle ? '50%' : '.15em';
+  const radius = circle ? '50%' : '.25em';
 
   if (profileImage) {
     return (
@@ -21,7 +21,7 @@ const ProfileImage = ({ user, size, circle }) => {
   return (
     <div
       className="profile_img-container"
-      style={{ width: size, height: size }}
+      style={{ width: size, height: size, borderRadius: radius}}
     >
       <p>{initials}</p>
     </div>

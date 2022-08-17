@@ -8,7 +8,7 @@ import { Modal } from "../../context/modal";
 import { useState } from "react";
 import { CreateWorkspaceForm } from "../../Components";
 
-const Sidebar = ({ workspaces, current, user }) => {
+const Sidebar = ({ workspaces, current, user, setLeaveBoard }) => {
   const [showModal, setShowModal] = useState(false);
   const { collapsed, setCollapsed } = useSidebar();
   const { firstName, lastName } = user;
@@ -54,7 +54,7 @@ const Sidebar = ({ workspaces, current, user }) => {
       >
         <div className="sidebar__open">
           <div className="sidebar__header">
-            <div className='sidebar__username-icon-container'>
+            <div className="sidebar__username-icon-container">
               <UserIcon name={firstName} size={"1.5em"} />
               <div className="sidebar__username-container">
                 <p className="sidebar__username">{`${userName}'s`}</p>
@@ -93,17 +93,28 @@ const Sidebar = ({ workspaces, current, user }) => {
               </div>
               {workspaces.map((board) => {
                 return (
-                  <Link to={`/b/${board.id}`} className="sidebar__board-link" key={board.id}>
+                  <Link
+                    to={`/b/${board.id}`}
+                    className="sidebar__board-link"
+                    key={board.id}
+                  >
                     <div key={board.id} className="sidebar__board">
                       <div className="sidebar__board-left">
                         <p>📅</p>
-                        <div className="sidebar__board-link-text" >
+                        <div className="sidebar__board-link-text">
                           {getBoardName(board.name)}
                         </div>
                       </div>
-                      <div className="sidebar__board-right">
-                        <MoreDropdown board={board} />
-                      </div>
+                      {
+                        <div className="sidebar__board-right">
+                          <MoreDropdown
+                            board={board}
+                            user={user}
+                            workspaces={workspaces}
+                            setLeaveBoard={setLeaveBoard}
+                          />
+                        </div>
+                      }
                     </div>
                   </Link>
                 );

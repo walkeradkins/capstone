@@ -27,6 +27,7 @@ const Workspace = ({ user }) => {
   const { cardState, setCardState } = useCardState();
   const [showAdd, setShowAdd] = useState(false);
   const [editItem, setEditItem] = useState("");
+  const [leaveBoard, setLeaveBoard] = useState('');
   const [drag, setDrag] = useState("");
 
   const workspace = workspaces[workspaceId];
@@ -36,7 +37,7 @@ const Workspace = ({ user }) => {
     dispatch(getAllCards(workspaceId));
     setCurrentWorkspace(workspaceId);
     setCardState(lists);
-  }, [drag, item, workspaceId, editItem]);
+  }, [drag, item, workspaceId, editItem, leaveBoard]);
 
   useEffect(() => {
     if (!Object.keys(workspaces).length) return;
@@ -130,6 +131,7 @@ const Workspace = ({ user }) => {
           workspaces={Object.values(workspaces)}
           current={workspace}
           user={user}
+          setLeaveBoard={setLeaveBoard}
         />
         <DragDropContext onDragEnd={handleOnDragEnd}>
           <div className="workspace">

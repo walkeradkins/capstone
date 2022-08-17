@@ -21,15 +21,14 @@ const AddMembers = ({ props }) => {
   }
 
   const handleSubmit = async () => {
-
     const payload = {
       members: memberList,
-      removed
+      removed,
     };
 
-    await dispatch(updateWorkspace(payload, workspace.id)).then(data => {
-      if (data) return setShowModal(false)
-    })
+    await dispatch(updateWorkspace(payload, workspace.id)).then((data) => {
+      if (data) return setShowModal(false);
+    });
   };
 
   const handleRemove = (id) => {
@@ -42,7 +41,7 @@ const AddMembers = ({ props }) => {
     const copy = [...membersCopy];
     const index = copy.indexOf(id);
     copy.splice(index, 1);
-    setMembersCopy(copy)
+    setMembersCopy(copy);
   };
 
   const otherUsersArray = Object.values(usersCopy).map((user) => {
@@ -75,7 +74,16 @@ const AddMembers = ({ props }) => {
         </span>
       </div>
       <div className="underline" />
-      <p className='add-members__sub'>Current Members</p>
+      <p className="add-members__sub">Add members to your workspace</p>
+      <Select
+        closeMenuOnSelect={false}
+        className="add-members__drop"
+        components={animatedComponents}
+        onChange={(choice) => setMemberList(choice.map((ele) => ele.id))}
+        isMulti
+        options={otherUsersArray}
+      />
+      <p className="add-members__sub">Current Members</p>
       <ul className="add-members__current">
         {membersCopy.map((i) => (
           <li key={i}>
@@ -106,16 +114,10 @@ const AddMembers = ({ props }) => {
           </li>
         ))}
       </ul>
-      <p className='add-members__sub'>Add members to your workspace</p>
-      <Select
-        closeMenuOnSelect={false}
-        className='add-members__drop'
-        components={animatedComponents}
-        onChange={(choice) => setMemberList(choice.map((ele) => ele.id))}
-        isMulti
-        options={otherUsersArray}
-      />
-      <button className="add-card__submit add-members__submit" onClick={handleSubmit}>
+      <button
+        className="add-card__submit add-members__submit"
+        onClick={handleSubmit}
+      >
         Save Changes
       </button>
     </div>

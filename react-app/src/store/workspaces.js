@@ -70,6 +70,7 @@ export const deleteWorkspace = (id) => async dispatch => {
   if (res.ok) {
     const deletedWorkspace = await res.json();
     dispatch(deleteOne(deletedWorkspace));
+    console.log('dekeeted workspace', deletedWorkspace)
     return deletedWorkspace;
   }
 }
